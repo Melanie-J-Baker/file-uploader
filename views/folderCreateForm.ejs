@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create new folder</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Create new folder</h1>
+    <form id="createFolder" action="/uploads/user/<%= user_id %>/folder/create" method="post">
+        <label class="createFolderLabel" for="name">Name</label>
+        <input id="name" name="name" type="text" class="createFolderInput">
+        <button type="submit" class="createFolderBtn">Create Folder</button>
+    </form>
+  </body>
+</html>

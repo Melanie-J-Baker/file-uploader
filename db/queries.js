@@ -38,8 +38,8 @@ async function getFolder(id) {
     return folder;
 } 
 
-async function createFolder(name, user_id) {
-    await pool.query("INSERT INTO folders (name, user_id) VALUES ($1, $2)", [name, user_id]);
+async function createFolder(folder) {
+    await pool.query("INSERT INTO folders (name, user_id) VALUES ($1, $2)", [folder.name, folder.user_id]);
 }
 
 async function updateFolder(id, name) {

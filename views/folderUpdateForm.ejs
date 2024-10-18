@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update folder</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Update folder</h1>
+    <form id="updateFolder" action="/uploads/folder/<%= folder %>/update" method="post">
+        <label class="updateFolderLabel" for="name">Name</label>
+        <input id="name" name="name" type="text" class="updateFolderInput">
+        <button type="submit" class="updateFolderBtn">Update Folder</button>
+    </form>
+  </body>
+</html>

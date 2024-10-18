@@ -48,7 +48,7 @@ router.get("/user/:id/folders", folder_controller.folders_list);
 router.get("/folder/:id", folder_controller.folder_detail);
 
 // GET Folder create form
-router.get("/folder/create", folder_controller.folder_create_get);
+router.get("/user/:id/folder/create", folder_controller.folder_create_get);
 
 // Handle Folder create on POST
 router.post("/folder/create", folder_controller.folder_create_post);

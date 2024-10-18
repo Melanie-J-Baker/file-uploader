@@ -20,7 +20,6 @@ exports.user_list = asyncHandler(async(req, res, next) => {
             error: err,
         })
     }
-
 });
 
 // Details of a single user
@@ -34,7 +33,6 @@ exports.user_detail = asyncHandler(async(req, res, next) => {
             error: err,
           });
     }
-
 });
 
 // GET User create form
@@ -47,7 +45,7 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
     try {
         const { user } = req.body;
         await db.createUser(user)
-        res.json({message: "User created: ${user.username"});
+        res.json({message: `User created: ${user.username}`});
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -80,7 +78,10 @@ exports.user_update_post = asyncHandler(async(req, res, next) => {
         const { user } = req.body;
         user.id = req.params.id;
         await db.updateUser(user)
-        res.json({message: "User updated"});
+        res.json({
+            message: "User updated",
+            user: user
+        });
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete folder</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Delete folder</h1>
+    <%= folder %>
+    <form id="deleteFolder" action="/uploads/folder/<%=folder%>/delete" method="post">
+        <button type="submit" class="deleteFolderBtn">Delete Folder</button>
+    </form>
+    <a href="/uploads/folder/<%=folder%>" class="goBack">Go back to folder</a>
+  </body>
+</html>
