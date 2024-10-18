@@ -3,7 +3,9 @@ const asyncHandler = require("express-async-handler");
 
 // Welcome Page
 exports.index = asyncHandler(async(req, res, next) => {    
-    res.send("NOT IMPLEMENTED: Welcome page");
+    res.render("index", {
+        title: "File Uploader"
+    });
 });
 
 // List of all users
@@ -53,6 +55,16 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
         });
     }
 });
+
+// GET User login form
+exports.user_login_get = asyncHandler(async(req, res, next) => {
+    res.render("userLoginForm");
+})
+
+// Handle User login on POST
+exports.user_login_post = asyncHandler(async(req, res, next) => {
+    // IMPLEMENT USER LOGIN
+}) 
 
 // GET User update form
 exports.user_update_get = asyncHandler(async(req, res, next) => {

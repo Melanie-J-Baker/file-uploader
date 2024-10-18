@@ -21,6 +21,12 @@ router.get("/user/create", user_controller.user_create_get);
 // Handle User create on POST
 router.post("/user/create", user_controller.user_create_post);
 
+// GET Login form
+router.get('user/login', user_controller.user_login_get);
+
+// Handle User login on POST
+router.post('user/login', user_controller.user_login_post);
+
 // GET User update form
 router.get("/user/:id/update", user_controller.user_update_get);
 
