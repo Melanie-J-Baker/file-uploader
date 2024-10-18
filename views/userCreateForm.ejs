@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create new user</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Create new user</h1>
+    <form id="createUser" action="/uploads/user/create" method="post">
+        <label class="createUserLabel" for="username">Username</label>
+        <input id="username" name="username" type="text" class="createUserInput">
+        <label class="createUserLabel" for="password">Password</label>
+        <input id="password" name="password" type="password" class="createUserInput">
+        <label class="createUserLabel" for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" class="createUserInput">
+        <button type="submit" class="createUserBtn">Create User</button>
+    </form>
+  </body>
+</html>
