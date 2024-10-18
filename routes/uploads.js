@@ -67,8 +67,8 @@ router.post("/folder/:id/delete", folder_controller.folder_delete_post);
 
 // FILE ROUTES
 
-// List of all files for a user
-router.get("/user/:id/files", file_controller.files_list);
+// List of all files for a folder
+router.get("/folder/:id/files", file_controller.files_list);
 
 // Details of a single file
 router.get("/file/:id", file_controller.file_detail);

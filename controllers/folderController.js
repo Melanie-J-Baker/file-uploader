@@ -88,7 +88,7 @@ exports.folder_delete_get = asyncHandler(async(req, res, next) => {
 exports.folder_delete_post = asyncHandler(async(req, res, next) => {
     try {
         const folder_id = req.params.id;
-        await db.deleteFolder(folder_id);
+        await db.deleteFolder(req.params.id);
         res.json({
             message: "Folder deleted",
             folder_id: folder_id
