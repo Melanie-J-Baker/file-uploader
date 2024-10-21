@@ -27,6 +27,9 @@ router.get('user/login', user_controller.user_login_get);
 // Handle User login on POST
 router.post('user/login', user_controller.user_login_post);
 
+// Get User Home Page
+router.get("/user/:id/home", user_controller.user_home_get);
+
 // GET User update form
 router.get("/user/:id/update", user_controller.user_update_get);
 
@@ -51,7 +54,7 @@ router.get("/folder/:id", folder_controller.folder_detail);
 router.get("/user/:id/folder/create", folder_controller.folder_create_get);
 
 // Handle Folder create on POST
-router.post("/folder/create", folder_controller.folder_create_post);
+router.post("/user/:id/folder/create", folder_controller.folder_create_post);
 
 // GET Folder update form
 router.get("/folder/:id/update", folder_controller.folder_update_get);
@@ -73,11 +76,11 @@ router.get("/folder/:id/files", file_controller.files_list);
 // Details of a single file
 router.get("/file/:id", file_controller.file_detail);
 
-// GET File create form
-router.get("/file/create", file_controller.file_create_get);
+// GET File upload form
+router.get("/user/:id/file/create", file_controller.file_create_get);
 
-// Handle File create on POST
-router.post("/file/create", file_controller.file_create_post);
+// Handle File upload on POST
+router.post("/user/:id/file/create", file_controller.file_create_post);
 
 // GET File update form
 router.get("/file/:id/update", file_controller.file_update_get);

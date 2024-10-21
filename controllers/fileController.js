@@ -1,4 +1,4 @@
-//const File = require("../models/file");
+const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 
 // List of all files for a folder
@@ -19,7 +19,13 @@ exports.files_list = asyncHandler(async(req, res, next) => {
 exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
         const file = await db.getFile(req.params.id);
-        res.json(file);
+        const folder = await db.getFolder(file.folder_id);
+        const user_id = folder.user_id;
+        res.render("fileDetails", {
+            file: file,
+            user_id: user_id
+
+        });
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -30,9 +36,19 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
 
 // GET File upload form
 exports.file_create_get = asyncHandler(async(req, res, next) => {
-    res.render("fileUploadForm", {
-        folder_id: req.params.id
-    });
+    try {
+        const folders = await db.getAllFolders(req.params.id);
+        res.render("fileUploadForm", {
+            user: req.params.id,
+            folders: folders
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
+
 });
 
 // Handle File create on POST
@@ -44,11 +60,8 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
         //file.size =
         file.upload_time = Date.now();
         file.folder_id = req.params.id;
-        await db.createFile(file)
-        res.json({ 
-            message: `File uploaded: ${file.name}`,
-            file: file
-        });
+        const newFile = await db.createFile(file);
+        res.redirect(`/uploads/file/${newFile.id}`);
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -59,9 +72,17 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
 
 // GET File update form
 exports.file_update_get = asyncHandler(async(req, res, next) => {
-    res.render("fileUpdateForm", {
-        file_id: req.params.id
-    });
+    try {
+        const file = await db.getFile(req.params.id);
+        res.render("fileUpdateForm", {
+            file: file,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
 });
 
 // Handle File update on POST
@@ -90,9 +111,17 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
 
 // GET File delete form
 exports.file_delete_get = asyncHandler(async(req, res, next) => {
-    res.render("fileDeleteForm", {
-        file_id: req.params.id
-    });
+    try {
+        const file = await db.getFile(req.params.id);
+        res.render("fileDeleteForm", {
+            file: file,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
 });
 
 // Handle File delete on POST

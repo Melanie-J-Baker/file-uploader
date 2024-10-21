@@ -6,10 +6,10 @@
   </head>
   <body>
     <h1>Delete user</h1>
-    <%= user %>
-    <form id="deleteUser" action="/uploads/user/<%=user%>/delete" method="post">
+    <%= user.username %>
+    <form id="deleteUser" action="/uploads/user/<%= user.id %>/delete" method="post">
         <button type="submit" class="deleteUserBtn">Delete User</button>
     </form>
-    <a href="/uploads/user/<%=user%>" class="goBack">Go back to profile</a>
+    <a href="/uploads/user/<%= user.id %>/home" class="cancel">Cancel</a>
   </body>
 </html>

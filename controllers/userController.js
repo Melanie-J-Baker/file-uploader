@@ -44,8 +44,8 @@ exports.user_create_get = asyncHandler(async(req, res, next) => {
 exports.user_create_post = asyncHandler(async(req, res, next) => {
     try {
         const { user } = req.body;
-        await db.createUser(user)
-        res.json({message: `User created: ${user.username}`});
+        const newUser = await db.createUser(user)
+        res.redirect(`/uploads/user/${newUser.id}`)
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -57,19 +57,45 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
 // GET User login form
 exports.user_login_get = asyncHandler(async(req, res, next) => {
     res.render("userLoginForm");
-})
+});
 
 // Handle User login on POST
 exports.user_login_post = asyncHandler(async(req, res, next) => {
     // IMPLEMENT USER LOGIN
-}) 
+});
+
+// GET User Home Page
+exports.user_home_get = asyncHandler(async(req, res, next) => {
+    try {
+        const user = await db.getUser(req.params.id);
+        const folders = await db.getAllFolders(req.params.id);
+        const files = await db.getAllFiles(req.params.id);
+        res.render("userHomePage", {
+            user: user,
+            folders: folders,
+            files: files
+        })
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
+});
 
 // GET User update form
 exports.user_update_get = asyncHandler(async(req, res, next) => {
-    const user = req.params.id;
-    res.render("userUpdateForm", {
-        user: user
-    });
+    try {
+        const user = await db.getUser(req.params.id);
+        res.render("userUpdateForm", {
+            user: user
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        }); 
+    }
 });
 
 // Handle User update on POST
@@ -77,11 +103,8 @@ exports.user_update_post = asyncHandler(async(req, res, next) => {
     try {
         const { user } = req.body;
         user.id = req.params.id;
-        await db.updateUser(user)
-        res.json({
-            message: "User updated",
-            user: user
-        });
+        const newUser = await db.updateUser(user)
+        res.redirect(`/uploads/user/${newUser.id}`);
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -92,21 +115,24 @@ exports.user_update_post = asyncHandler(async(req, res, next) => {
 
 // GET User delete form
 exports.user_delete_get = asyncHandler(async(req, res, next) => {
-    const user = req.params.id;
-    res.render("userDeleteForm", {
-        user: user
-    });
+    try {
+        const user = await db.getUser(req.params.id);
+        res.render("userDeleteForm", {
+            user: user
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
 });
 
 // Handle User delete on POST
 exports.user_delete_post = asyncHandler(async(req, res, next) => {
     try {
-        const user_id = req.params.id;
         await db.deleteUser(user_id);
-        res.json({
-            message: "User deleted",
-            user_id: user_id
-        });
+        res.render('accountDeleted')
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {

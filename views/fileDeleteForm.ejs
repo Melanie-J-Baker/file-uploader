@@ -7,9 +7,9 @@
   <body>
     <h1>Delete file</h1>
     <%= file_id %>
-    <form id="deleteFile" action="/uploads/file/<%=file_id%>/delete" method="post">
+    <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
         <button type="submit" class="deleteFileBtn">Delete File</button>
     </form>
-    <a href="/uploads/file/<%=file_id%>" class="goBack">Go back to file details</a>
+    <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
   </body>
 </html>

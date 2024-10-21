@@ -6,8 +6,8 @@
   </head>
   <body>
     <h1>Update user</h1>
-    <%= user %>
-    <form id="updateUser" action="/uploads/user/<%=user%>/update" method="post">
+    <%= user.name %>
+    <form id="updateUser" action="/uploads/user/<%= user.id %>/update" method="post">
         <label class="updateUserLabel" for="newUsername">New Username</label>
         <input id="newUsername" name="newUsername" type="text" class="updateUserInput">
         <label class="updateUserLabel" for="newPassword">New Password</label>
@@ -16,5 +16,7 @@
         <input id="confirmNewPassword" name="confirmNewPassword" type="password" class="updateUserInput">
         <button type="submit" class="updateUserBtn">Update User</button>
     </form>
+    <a href="/uploads/user/<%= user.id %>/delete" class="deleteUserLink">Delete Account</a>
+    <a href="/uploads/user/<%= user.id %>/home" class="cancel">Cancel</a>
   </body>
 </html>

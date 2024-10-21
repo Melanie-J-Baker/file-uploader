@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= user.username %>'s Home Page</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= user.username %>'s Home Page</h1>
+    <a href="/uploads/user/<%= user.id %>/update" class="accountDetailsLink">Account Details</a>
+    <h3>All folders</h3>
+    <a href="/uploads/user/<%= user.id %>/folder/create" class="createFolder">Create a new folder</a>
+    <% folders.map((folder) => { %>
+      <div class="folder" id="<%= folder.id %>">
+        <a href="/uploads/folder/<%= folder.id %>" class="folderLink"><%= folder.name %></a>
+      </div>
+    <% }) %>
+    <h3>All files</h3>
+    <a href="/uploads/user/<%= user.id %>/file/create" class="createFile">Upload a new file</a>
+    <% files.map((file) => { %>
+      <div class="file" id="<%= file.id %>">
+        <a href="/uploads/files/<%= file.id %>" class="fileLink"><%= file.name %></a>
+      </div>
+    <% }) %>
+  </body>
+</html>

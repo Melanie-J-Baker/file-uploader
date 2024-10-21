@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= file.name %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= file.name %></h1>
+    <p class="fileDetails"><%= file.id %></p>
+    <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
+    <p class="fileDetail">Upload time: <%= file.upload_time %></p>
+    <button type="button">Download file</button>
+    <% file.folder_id ? <a href="/uploads/user/<%= file.folder_id %>" class="folderLink">Go back to folder</a> : <a href="/uploads/user/<%= user_id %>/home" class="homeLink">Go back to home</a> %>
+  </body>
+</html>

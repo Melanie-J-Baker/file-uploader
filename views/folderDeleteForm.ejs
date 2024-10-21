@@ -5,11 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Delete folder</h1>
-    <%= folder %>
-    <form id="deleteFolder" action="/uploads/folder/<%=folder%>/delete" method="post">
+    <h1>Delete folder: <%= folder.name %></h1>
+    <form id="deleteFolder" action="/uploads/folder/<%= folder.id %>/delete" method="post">
         <button type="submit" class="deleteFolderBtn">Delete Folder</button>
     </form>
-    <a href="/uploads/folder/<%=folder%>" class="goBack">Go back to folder</a>
+    <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
   </body>
 </html>

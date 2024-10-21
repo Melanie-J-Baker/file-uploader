@@ -1,35 +1,36 @@
 const pool = require("./pool");
 
 async function getAllUsers() {
-    const { rows } = await pool.query("SELECT username FROM users;");
+    const { rows } = await pool.query("SELECT id, username FROM users;");
     return rows;
 }
 
 async function getUser(id) {
-    const { rows } = await pool.query("SELECT * FROM users WHERE user_id = $1", [id]);
+    const { rows } = await pool.query("SELECT id, username FROM users WHERE id = $1", [id]);
     return rows[0];
 } 
 
 async function createUser(user) {
     await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [user.username, user.password]);
+    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [user.username]);
+    return rows[0];
 }
 
 async function updateUser(user) {
-    user.username && await pool.query("UPDATE users SET username=$1 WHERE user_id=$2;", [user.username, user.id]);
-    user.password && await pool.query("UPDATE users SET password=$1 WHERE user_id=$2;", [user.password, user.id]); 
+    user.username && await pool.query("UPDATE users SET username=$1 WHERE id = $2;", [user.username, user.id]);
+    user.password && await pool.query("UPDATE users SET password=$1 WHERE id = $2;", [user.password, user.id]); 
+    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [user.username]);
+    return rows[0];
 }
 
 async function deleteUser(id) {
-    await pool.query("DELETE FROM users WHERE user_id = $1;", [id]);
+    await pool.query("DELETE FROM users WHERE id = $1;", [id]);
 }
 
 
 async function getAllFolders(id) {
-    const { rows } = await pool.query("SELECT * FROM folders WHERE user_id=$1;", [id]);
+    const { rows } = await pool.query("SELECT * FROM folders WHERE user_id = $1;", [id]);
     return rows;
-    //SELECT user.id, folders.name
-    //FROM users user
-    //LEFT JOIN folders ON user.id = folders.user_id;
 }
 
 async function getFolder(id) {
@@ -39,10 +40,12 @@ async function getFolder(id) {
 
 async function createFolder(folder) {
     await pool.query("INSERT INTO folders (name, user_id) VALUES ($1, $2)", [folder.name, folder.user_id]);
+    const { rows } = await pool.query("SELECT * FROM folders WHERE name = $1", [folder.name]);
+    return rows[0];
 }
 
 async function updateFolder(folder) {
-    folder.name && await pool.query("UPDATE folders SET name=$1 WHERE id=$2;", [folder.name, folder.id]);
+    folder.name && await pool.query("UPDATE folders SET name=$1 WHERE id = $2;", [folder.name, folder.id]);
 }
 
 async function deleteFolder(id) {
@@ -50,9 +53,7 @@ async function deleteFolder(id) {
 }
 
 async function getAllFiles(id) {
-    const folders  = await pool.query("SELECT id FROM folders WHERE user_id=$1;", [id]);
-    const folderIds = folders.rows.map(folder => folder.id);
-    const { rows } = await pool.query("SELECT * FROM files WHERE folder_id=ANY($1);", [folderIds]);
+    const { rows } = await pool.query("SELECT * FROM files JOIN folders ON files.folder_id = folders.id WHERE folders.user_id = $1;", [id]);
     return rows;
 }
 
@@ -63,6 +64,8 @@ async function getFile(id) {
 
 async function createFile(file) {
     await pool.query("INSERT INTO files (name, url, size_mb, upload_time, folder_id) VALUES ($1, $2, $3, $4, $5)", [file.name, file.url, file.size_mb, file.upload_time, file.folder_id]);
+    const { rows } = await pool.query("SELECT * FROM files WHERE name = $1", [file.name]);
+    return rows[0];
 }
 
 async function updateFile(file) {

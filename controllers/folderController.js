@@ -1,4 +1,4 @@
-//const Folder = require("../models/folder");
+const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 
 // List of all folders for a user
@@ -19,7 +19,9 @@ exports.folders_list = asyncHandler(async(req, res, next) => {
 exports.folder_detail = asyncHandler(async(req, res, next) => {
     try {
         const folder = await db.getFolder(req.params.id);
-        res.json(folder);
+        res.render("folderDetails", {
+            folder: folder,
+        });
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -38,10 +40,12 @@ exports.folder_create_get = asyncHandler(async(req, res, next) => {
 // Handle Folder create on POST
 exports.folder_create_post = asyncHandler(async(req, res, next) => {
     try {
-        const { folder } = req.body;
-        folder.user_id = req.params.id;
-        await db.createFolder(folder)
-        res.json({message: `Folder created: ${folder.name}`});
+        const folder = {
+            name: req.body.name,
+            user_id: req.params.id
+        }
+        const newFolder = await db.createFolder(folder);
+        res.redirect(`/uploads/folder/${newFolder.id}`)
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -52,10 +56,17 @@ exports.folder_create_post = asyncHandler(async(req, res, next) => {
 
 // GET Folder update form
 exports.folder_update_get = asyncHandler(async(req, res, next) => {
-    const folder = req.params.id;
-    res.render("folderUpdateForm", {
-        folder: folder
-    });
+    try {
+        const folder = await db.getFolder(req.params.id);
+        res.render("folderUpdateForm", {
+            folder: folder
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
 });
 
 // Handle Folder update on POST
@@ -78,10 +89,17 @@ exports.folder_update_post = asyncHandler(async(req, res, next) => {
 
 // GET Folder delete form
 exports.folder_delete_get = asyncHandler(async(req, res, next) => {
-    const folder = req.params.id;
-    res.render("folderDeleteForm", {
-        folder: folder
-    });
+    try {
+        const folder = await db.getFolder(req.params.id);
+        res.render("folderDeleteForm", {
+            folder: folder
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+        });
+    }
 });
 
 // Handle Folder delete on POST
