@@ -33,13 +33,16 @@ exports.folder_detail = asyncHandler(async(req, res, next) => {
 // GET Folder create form
 exports.folder_create_get = asyncHandler(async(req, res, next) => {
     res.render("folderCreateForm", {
-        user_id: req.params.id
+        user_id: req.params.id,
+        message: "",
     });
 });
 
 // Handle Folder create on POST
 exports.folder_create_post = asyncHandler(async(req, res, next) => {
     try {
+        const folderExists = await db.getFolder({name: req.body.name});
+
         const folder = {
             name: req.body.name,
             user_id: req.params.id

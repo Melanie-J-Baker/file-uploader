@@ -8,7 +8,7 @@
     <h1>Update folder: <%=folder.name %></h1>
     <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
         <label class="updateFolderLabel" for="name">Name</label>
-        <input id="name" name="name" type="text" class="updateFolderInput">
+        <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>">
         <button type="submit" class="updateFolderBtn">Update Folder</button>
     </form>
     <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>

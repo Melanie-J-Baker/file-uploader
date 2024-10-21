@@ -8,7 +8,7 @@
     <h1>Update file: <%= file.name %> </h1>
     <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
         <label class="updateFileLabel" for="name">Name</label>
-        <input id="name" name="name" type="text" class="updateFileInput">
+        <input id="name" name="name" type="text" class="updateFileInput" value="<%= file.name %>">
         <label class="updateFileLabel" for="file">Choose file</label>
         <input id="file" name="file" type="file" class="updateFileInput">
         <button type="submit" class="updateFileBtn">Update File</button>

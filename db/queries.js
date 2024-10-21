@@ -5,9 +5,16 @@ async function getAllUsers() {
     return rows;
 }
 
-async function getUser(id) {
-    const { rows } = await pool.query("SELECT id, username FROM users WHERE id = $1", [id]);
-    return rows[0];
+async function getUser(user) {
+    if (user.id) {
+        const { rows } = await pool.query("SELECT id, username FROM users WHERE id = $1", [user.id]);
+        return rows[0];
+    } else if (user.username) {
+        const { rows } = await pool.query("SELECT id, username FROM users WHERE username = $1", [user.username]);
+        return rows[0];
+    } else {
+        return null;
+    }
 } 
 
 async function createUser(user) {
@@ -33,9 +40,14 @@ async function getAllFolders(id) {
     return rows;
 }
 
-async function getFolder(id) {
-    const { rows } = await pool.query("SELECT * FROM folders WHERE id = $1;", [id]);
-    return rows[0];
+async function getFolder(folder) {
+    if (folder.id) {
+        const { rows } = await pool.query("SELECT * FROM folders WHERE id = $1;", [folder.id]);
+        return rows[0];
+    } else if (folder.name) {
+        const { rows } = await pool.query("SELECT * FROM folders WHERE name = $1;", [folder.name]);
+        return rows[0];
+    }
 } 
 
 async function createFolder(folder) {
