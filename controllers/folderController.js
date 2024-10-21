@@ -42,13 +42,18 @@ exports.folder_create_get = asyncHandler(async(req, res, next) => {
 exports.folder_create_post = asyncHandler(async(req, res, next) => {
     try {
         const folderExists = await db.getFolder({name: req.body.name});
-
-        const folder = {
-            name: req.body.name,
-            user_id: req.params.id
+        if (!folderExists) {
+            const folder = {
+                name: req.body.name,
+                user_id: req.params.id
+            }
+            const newFolder = await db.createFolder(folder);
+            res.redirect(`/uploads/folder/${newFolder.id}`)
+        } else {
+            return res.render("folderCreateForm", {
+                message: "A folder with that name already exists"
+            })
         }
-        const newFolder = await db.createFolder(folder);
-        res.redirect(`/uploads/folder/${newFolder.id}`)
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -75,13 +80,17 @@ exports.folder_update_get = asyncHandler(async(req, res, next) => {
 // Handle Folder update on POST
 exports.folder_update_post = asyncHandler(async(req, res, next) => {
     try {
-        const { folder } = req.body;
-        folder.id = req.params.id;
-        await db.updateFolder(folder)
-        res.json({
-            message: "Folder updated",
-            folder: folder
-        });
+        const folderExists = await db.getFolder({name: req.body.name});
+        if (folderExists && folderExists.id !== req.params.id) {
+            return res.render("folderUpdateForm", {
+                message: "A folder with that name already exists"
+            })
+        } else {
+            const { folder } = req.body;
+            folder.id = req.params.id;
+            await db.updateFolder(folder)
+            res.redirect(`/uploads/folder/${req.params.id}`);
+        }
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {

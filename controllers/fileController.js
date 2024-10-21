@@ -54,14 +54,21 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 // Handle File create on POST
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
-        const { file } = req.body;
-        //req.body.file >>> CLOUDINARY!!
-        //file.url =
-        //file.size =
-        file.upload_time = Date.now();
-        file.folder_id = req.params.id;
-        const newFile = await db.createFile(file);
-        res.redirect(`/uploads/file/${newFile.id}`);
+        const filenameExists = await db.getFile({name: req.body.name});
+        if (!filenameExists) {
+            const { file } = req.body;
+            //req.body.file >>> CLOUDINARY!!
+            //file.url =
+            //file.size =
+            file.upload_time = Date.now();
+            file.folder_id = req.params.id;
+            const newFile = await db.createFile(file);
+            res.redirect(`/uploads/file/${newFile.id}`);
+        } else {
+            res.render("fileUploadForm", {
+                message: "That filename is already in use",
+            })
+        }
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -88,19 +95,23 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
 // Handle File update on POST
 exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
-        const { file } = req.body;
-        if (req.body.file) {
-            //req.body.file >>> CLOUDINARY!!
-            //file.url =
-            //file.size =
-            file.upload_time = Date.now();
+        const filenameExists = await db.getFile({name: req.body.name});
+        if (!filenameExists) {
+            const { file } = req.body;
+            if (req.body.file) {
+                //req.body.file >>> CLOUDINARY!!
+                //file.url =
+                //file.size =
+                file.upload_time = Date.now();
+            }
+            file.id = req.params.id;
+            await db.updateFile(file)
+            res.redirect(`/uploads/file/${req.params.id}`);
+        } else {
+            res.render("fileUpdateForm", {
+                message: "File name already in use",
+            })
         }
-        file.id = req.params.id;
-        await db.updateFile(file)
-        res.json({
-            message: "File updated",
-            file: file
-        });
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
