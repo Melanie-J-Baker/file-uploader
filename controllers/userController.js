@@ -1,7 +1,6 @@
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
-const bcrypt = require('bcrypt');
-const hashedPassword = await bcrypt.hash(req.body.password, 10);
+const bcrypt = require('bcryptjs');
 
 // Welcome Page
 exports.index = asyncHandler(async(req, res, next) => {    
@@ -27,8 +26,8 @@ exports.user_list = asyncHandler(async(req, res, next) => {
 // Details of a single user
 exports.user_detail = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUser({ id: req.params.id });
-        res.json(user);
+        const userDetails = await db.getUserByID(req.params.id);
+        res.json(userDetails);
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -52,7 +51,7 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
     if (!req.body.username) {
         return res.render("userCreateForm", { message: "Username must be provided" });
     } else {
-        userExists = await db.getUser({ username: req.body.username });
+        userExists = await db.getUserByUsername(req.body.username);
     }
     // Check for password and confirmation
     if (!req.body.password) {
@@ -65,7 +64,6 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
     // Ensure username does not exist and passwords match
     if (!userExists && passwordsMatch) {
         try {
-            const bcrypt = require('bcrypt');
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             const user = {
                 username: req.body.username,
@@ -91,9 +89,14 @@ exports.user_login_get = asyncHandler(async(req, res, next) => {
 // Handle User login on POST
 exports.user_login_post = asyncHandler(async(req, res, next) => {
     try {
-        const { user } = req.body;
-        const newUser = await db.getUser(user)
-        res.redirect(`/uploads/user/${newUser.id}`)
+        const user = await db.getUserByUsername(req.body.username);
+        if (req.body.password === user.password) {
+            res.redirect(`/uploads/user/${newUser.id}`);
+        } else {
+            res.render("userLoginForm", {
+                message: "Password incorrect. Please try again"
+            })
+        }
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -105,13 +108,16 @@ exports.user_login_post = asyncHandler(async(req, res, next) => {
 // GET User Home Page
 exports.user_home_get = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUser(req.params.id);
-        const folders = await db.getAllFolders(req.params.id);
-        const files = await db.getAllFiles(req.params.id);
+        const user = await db.getUserByID(req.params.id);
+        //const folders = await db.getAllFolders(req.params.id);
+        const allFiles = user.folders.map(async(folder) => {
+            const files = await db.getAllFilesInFolder(folder.id);
+            return files;
+        });
         res.render("userHomePage", {
             user: user,
-            folders: folders,
-            files: files
+            folders: user.folders,
+            files: allFiles
         })
     } catch (err) {
         console.error(err);
@@ -124,7 +130,7 @@ exports.user_home_get = asyncHandler(async(req, res, next) => {
 // GET User update form
 exports.user_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUser(req.params.id);
+        const user = await db.getUserByID(req.params.id);
         res.render("userUpdateForm", {
             user: user,
             message: ""
@@ -155,7 +161,6 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
             if (req.body.password !== req.body.confirmPassword) {
                 passwordsMatch = false;
             } else {
-                const bcrypt = require('bcrypt');
                 hashedPassword = await bcrypt.hash(req.body.password, 10);
             }
         }
@@ -184,7 +189,7 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
 // GET User delete form
 exports.user_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUser(req.params.id);
+        const user = await db.getUserByID(req.params.id);
         res.render("userDeleteForm", {
             user: user
         });

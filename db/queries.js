@@ -1,109 +1,211 @@
-const pool = require("./pool");
+//const pool = require("./pool");
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 async function getAllUsers() {
-    const { rows } = await pool.query("SELECT id, username FROM users;");
-    return rows;
+    const users = await prisma.users.findMany({
+        include: {
+            folders: true
+        }
+    });
+    return users;
 }
 
-async function getUser(user) {
-    if (user.id) {
-        const { rows } = await pool.query("SELECT id, username FROM users WHERE id = $1", [user.id]);
-        return rows[0];
-    } else if (user.username) {
-        const { rows } = await pool.query("SELECT id, username FROM users WHERE username = $1", [user.username]);
-        return rows[0];
-    } else {
-        return null;
-    }
-} 
+async function getUserByID(id) {
+    const user = await prisma.users.findUnique({
+        where: {
+            id: id
+        }
+    });
+    return user;
+}
+
+async function getUserByUsername(username) {
+    const user = await prisma.users.findUnique({
+        where: {
+            username: username
+        }
+    });
+    return user;
+}
 
 async function createUser(user) {
-    await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [user.username, user.password]);
-    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [user.username]);
-    return rows[0];
+    const newUser = await prisma.users.create({
+        data: {
+            username: user.username,
+            password: user.password,
+        }
+    });
+    return newUser;
 }
 
 async function updateUser(user) {
-    user.username && await pool.query("UPDATE users SET username=$1 WHERE id = $2;", [user.username, user.id]);
-    user.password && await pool.query("UPDATE users SET password=$1 WHERE id = $2;", [user.password, user.id]); 
-    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [user.username]);
-    return rows[0];
+    const data = user.username && user.password ? { username: user.username, password: user.password } : user.username ? { username: user.username } : { password: user.password }; 
+    const updatedUser = await prisma.users.update({
+        where: { id: user.id },
+        data: data,
+    });
+    return updatedUser;
 }
 
 async function deleteUser(id) {
-    await pool.query("DELETE FROM users WHERE id = $1;", [id]);
+    // Find all folders created by user
+    const allFolders = await prisma.folders.findMany({
+        where: {
+            user_id: id,
+        },
+    });
+    // Delete all files in folders created by user
+    allFolders.map(async(folder) => {
+        await prisma.files.deleteMany({
+            where: {
+                folder_id: folder.id
+            }
+        });
+    });
+    // Delete all folders created by user
+    await prisma.folders.deleteMany({
+        where: {
+            user_id: id,
+        },
+    });
+    // Delete user
+    await prisma.users.delete({
+        where: {
+            id: id,
+        },
+    });
+
 }
 
 
 async function getAllFolders(id) {
-    const { rows } = await pool.query("SELECT * FROM folders WHERE user_id = $1;", [id]);
-    return rows;
+    const folders = await prisma.folders.findMany({
+        where: {
+            user_id: id,
+        },
+    });
+    return folders;
 }
 
-async function getFolder(folder) {
-    if (folder.id) {
-        const { rows } = await pool.query("SELECT * FROM folders WHERE id = $1;", [folder.id]);
-        return rows[0];
-    } else if (folder.name) {
-        const { rows } = await pool.query("SELECT * FROM folders WHERE name = $1;", [folder.name]);
-        return rows[0];
-    }
-} 
+async function getFolderByID(id) {
+    const folder = await prisma.folders.findUnique({
+        where: {
+            id: id,
+        },
+    });
+    return folder;
+}
+
+async function getFolderByName(name) {
+    const folder = await prisma.folders.findUnique({
+        where: {
+            name: name,
+        },
+    });
+    return folder;
+}
 
 async function createFolder(folder) {
-    await pool.query("INSERT INTO folders (name, user_id) VALUES ($1, $2)", [folder.name, folder.user_id]);
-    const { rows } = await pool.query("SELECT * FROM folders WHERE name = $1", [folder.name]);
-    return rows[0];
+    const newFolder = await prisma.folders.create({
+        data: {
+            name: folder.name,
+            user_id: folder.user_id,
+        },
+    });
+    return newFolder;
 }
 
 async function updateFolder(folder) {
-    folder.name && await pool.query("UPDATE folders SET name=$1 WHERE id = $2;", [folder.name, folder.id]);
+    const updatedFolder = await prisma.folders.update({
+        where: { 
+            id: folder.id,
+        },
+        data: { 
+            name: folder.name,
+        },
+    });
+    return updatedFolder;
 }
 
 async function deleteFolder(id) {
-    await pool.query("DELETE FROM folders WHERE id = $1;", [id]);
+    // Delete all files in folders
+    await prisma.files.deleteMany({
+        where: { 
+            folder_id: id,
+        },
+    });
+    // Delete folders
+    await prisma.folders.delete({
+        where: { 
+            id: id,
+        },
+    });
 }
 
-async function getAllFiles(id) {
-    const { rows } = await pool.query("SELECT * FROM files JOIN folders ON files.folder_id = folders.id WHERE folders.user_id = $1;", [id]);
-    return rows;
+async function getAllFilesInFolder(id) {
+    const files = await prisma.files.findMany({
+        where: {
+            folder_id: id,
+        },
+    });
+    return files;
 }
 
 async function getFile(id) {
-    const { rows } = await pool.query("SELECT * FROM files WHERE id = $1;", [id]);
-    return rows[0];
+    const file = await prisma.files.findUnique({
+        where: {
+            id: id,
+        },
+    });
+    return file;
 } 
 
 async function createFile(file) {
-    await pool.query("INSERT INTO files (name, url, size_mb, upload_time, folder_id) VALUES ($1, $2, $3, $4, $5)", [file.name, file.url, file.size_mb, file.upload_time, file.folder_id]);
-    const { rows } = await pool.query("SELECT * FROM files WHERE name = $1", [file.name]);
-    return rows[0];
+    const newFile = await prisma.files.create({
+        data: {
+            name: file.name,
+            url: file.url,
+            size_mb: file.size_mb,
+            upload_time: file.upload_time,
+            folder_id: file.folder_id,
+        },
+    });
+    return newFile;
 }
 
 async function updateFile(file) {
-    file.name && await pool.query("UPDATE files SET name=$1 WHERE id=$2;", [file.name, file.id]);
-    file.url  && await pool.query("UPDATE files SET url=$1 WHERE id=$2;", [file.url, file.id]);
-    file.size_mb  && await pool.query("UPDATE files SET size_mb=$1 WHERE id=$2;", [file.size_mb, file.id]);
-    file.upload_time  && await pool.query("UPDATE files SET upload_time=$1 WHERE id=$2;", [file.upload_time, file.id]);
-    file.folder_id  && await pool.query("UPDATE files SET folder_id=$1 WHERE id=$2;", [file.folder_id, file.id]);
+    const updatedFile = await prisma.files.update({
+        where: {
+            id: file.id, 
+        },
+        data: file,
+    });
+    return updatedFile;
 }
 
 async function deleteFile(id) {
-    await pool.query("DELETE FROM files WHERE id = $1;", [id]);
+    await prisma.files.delete({
+        where: { 
+            id: id,
+        },
+    });
 }
 
 module.exports = {
     getAllUsers,
-    getUser,
+    getUserByID,
+    getUserByUsername,
     createUser,
     updateUser,
     deleteUser,
     getAllFolders,
-    getFolder,
+    getFolderByID,
+    getFolderByName,
     createFolder,
     updateFolder,
     deleteFolder,
-    getAllFiles,
+    getAllFilesInFolder,
     getFile,
     createFile,
     updateFile,

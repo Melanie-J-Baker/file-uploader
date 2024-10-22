@@ -18,7 +18,7 @@ exports.folders_list = asyncHandler(async(req, res, next) => {
 // Details of a single folder
 exports.folder_detail = asyncHandler(async(req, res, next) => {
     try {
-        const folder = await db.getFolder(req.params.id);
+        const folder = await db.getFolderByID(req.params.id);
         res.render("folderDetails", {
             folder: folder,
         });
@@ -41,7 +41,7 @@ exports.folder_create_get = asyncHandler(async(req, res, next) => {
 // Handle Folder create on POST
 exports.folder_create_post = asyncHandler(async(req, res, next) => {
     try {
-        const folderExists = await db.getFolder({name: req.body.name});
+        const folderExists = await db.getFolderByName(req.body.name);
         if (!folderExists) {
             const folder = {
                 name: req.body.name,
@@ -65,7 +65,7 @@ exports.folder_create_post = asyncHandler(async(req, res, next) => {
 // GET Folder update form
 exports.folder_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const folder = await db.getFolder(req.params.id);
+        const folder = await db.getFolderByID(req.params.id);
         res.render("folderUpdateForm", {
             folder: folder
         });
@@ -80,7 +80,7 @@ exports.folder_update_get = asyncHandler(async(req, res, next) => {
 // Handle Folder update on POST
 exports.folder_update_post = asyncHandler(async(req, res, next) => {
     try {
-        const folderExists = await db.getFolder({name: req.body.name});
+        const folderExists = await db.getFolderByName(req.body.name);
         if (folderExists && folderExists.id !== req.params.id) {
             return res.render("folderUpdateForm", {
                 message: "A folder with that name already exists"
@@ -102,7 +102,7 @@ exports.folder_update_post = asyncHandler(async(req, res, next) => {
 // GET Folder delete form
 exports.folder_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const folder = await db.getFolder(req.params.id);
+        const folder = await db.getFolderByID(req.params.id);
         res.render("folderDeleteForm", {
             folder: folder
         });

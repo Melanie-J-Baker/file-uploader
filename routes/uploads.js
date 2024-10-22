@@ -22,10 +22,10 @@ router.get("/user/create", user_controller.user_create_get);
 router.post("/user/create", user_controller.user_create_post);
 
 // GET Login form
-router.get('user/login', user_controller.user_login_get);
+router.get('/user/login', user_controller.user_login_get);
 
 // Handle User login on POST
-router.post('user/login', user_controller.user_login_post);
+router.post('/user/login', user_controller.user_login_post);
 
 // Get User Home Page
 router.get("/user/:id/home", user_controller.user_home_get);

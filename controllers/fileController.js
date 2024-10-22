@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 // List of all files for a folder
 exports.files_list = asyncHandler(async(req, res, next) => {
     try {
-        const files = await db.getAllFiles(req.params.id);
+        const files = await db.getAllFilesInFolder(req.params.id);
         console.log("Files: ", files);
         res.json(files);
     } catch (err) {
@@ -19,7 +19,7 @@ exports.files_list = asyncHandler(async(req, res, next) => {
 exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
         const file = await db.getFile(req.params.id);
-        const folder = await db.getFolder(file.folder_id);
+        const folder = await db.getFolderByID(file.folder_id);
         const user_id = folder.user_id;
         res.render("fileDetails", {
             file: file,
