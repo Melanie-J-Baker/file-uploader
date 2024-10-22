@@ -23,19 +23,6 @@ exports.user_list = asyncHandler(async(req, res, next) => {
     }
 });
 
-// Details of a single user
-exports.user_detail = asyncHandler(async(req, res, next) => {
-    try {
-        const userDetails = await db.getUserByID(req.params.id);
-        res.json(userDetails);
-    } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-          });
-    }
-});
-
 // GET User create form
 exports.user_create_get = asyncHandler(async(req, res, next) => {
     res.render("userCreateForm", {
@@ -49,7 +36,9 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
     let passwordsMatch = false;
     // Check for existing username
     if (!req.body.username) {
-        return res.render("userCreateForm", { message: "Username must be provided" });
+        return res.render("userCreateForm", { 
+            message: "Username must be provided" 
+        });
     } else {
         userExists = await db.getUserByUsername(req.body.username);
     }
@@ -74,16 +63,22 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
             return res.redirect(`/uploads/user/${newUser.id}`);
         } catch (err) {
             console.error(err);
-            return res.status(500).render("error", { error: err });
+            return res.status(500).render("error", { 
+                error: err 
+            });
         }
     } else {
-        return res.render("userCreateForm", { message: "Username already taken" });
+        return res.render("userCreateForm", { 
+            message: "Username already taken" 
+        });
     }
 });
 
 // GET User login form
 exports.user_login_get = asyncHandler(async(req, res, next) => {
-    res.render("userLoginForm");
+    res.render("userLoginForm", {
+        message: "",
+    });
 });
 
 // Handle User login on POST
@@ -105,14 +100,29 @@ exports.user_login_post = asyncHandler(async(req, res, next) => {
     }
 });
 
+// Details of a single user
+exports.user_detail = asyncHandler(async(req, res, next) => {
+    try {
+        const user_id = parseInt(req.params.id);
+        const userDetails = await db.getUserByID(user_id);
+        res.json(userDetails);
+    } catch (err) {
+        console.error(err);
+        res.status(500).render("error", {
+            error: err,
+          });
+    }
+});
+
 // GET User Home Page
 exports.user_home_get = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUserByID(req.params.id);
-        //const folders = await db.getAllFolders(req.params.id);
-        const allFiles = user.folders.map(async(folder) => {
+        let allFiles = [];
+        const user_id = parseInt(req.params.id);
+        const user = await db.getUserByID(user_id);
+        user.folders.map(async(folder) => {
             const files = await db.getAllFilesInFolder(folder.id);
-            return files;
+            allFiles.push(files);
         });
         res.render("userHomePage", {
             user: user,
@@ -130,10 +140,11 @@ exports.user_home_get = asyncHandler(async(req, res, next) => {
 // GET User update form
 exports.user_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUserByID(req.params.id);
+        const user_id = parseInt(req.params.id);
+        const user = await db.getUserByID(user_id);
         res.render("userUpdateForm", {
             user: user,
-            message: ""
+            message: "",
         });
     } catch (err) {
         console.error(err);
@@ -147,10 +158,11 @@ exports.user_update_get = asyncHandler(async(req, res, next) => {
 exports.user_update_post = asyncHandler(async (req, res, next) => {
     try {
         // Check if username already exists for a different user
+        const user_id = parseInt(req.params.id);
         const existingUser = await db.getUserByUsername(req.body.username);
-        if (existingUser && existingUser.id !== req.params.id) {
+        if (existingUser && existingUser.id !== user_id) {
             return res.render("userUpdateForm", {
-                user: { id: req.params.id, username: req.body.username },
+                user: { id: user_id, username: req.body.username },
                 message: "That username is already in use",
             });
         }
@@ -167,13 +179,13 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
         // If passwords do not match, return error
         if (!passwordsMatch) {
             return res.render("userUpdateForm", {
-                user: { id: req.params.id, username: req.body.username },
+                user: { id: user_id, username: req.body.username },
                 message: "Passwords do not match",
             });
         }
         // Update user
         const user = {
-            id: req.params.id,
+            id: user_id,
             username: req.body.username,
             ...(hashedPassword && { password: hashedPassword }) // Only include password if it's updated
         };
@@ -189,9 +201,10 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
 // GET User delete form
 exports.user_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUserByID(req.params.id);
+        const user_id = parseInt(req.params.id);
+        const user = await db.getUserByID(user_id);
         res.render("userDeleteForm", {
-            user: user
+            user: user,
         });
     } catch (err) {
         console.error(err);
@@ -204,7 +217,8 @@ exports.user_delete_get = asyncHandler(async(req, res, next) => {
 // Handle User delete on POST
 exports.user_delete_post = asyncHandler(async(req, res, next) => {
     try {
-        await db.deleteUser(req.params.id);
+        const user_id = parseInt(req.params.id);
+        await db.deleteUser(user_id);
         res.render('accountDeleted')
     } catch (err) {
         console.error(err);

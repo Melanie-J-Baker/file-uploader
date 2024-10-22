@@ -4,7 +4,8 @@ const asyncHandler = require("express-async-handler");
 // List of all files for a folder
 exports.files_list = asyncHandler(async(req, res, next) => {
     try {
-        const files = await db.getAllFilesInFolder(req.params.id);
+        const folder_id = parseInt(req.params.id);
+        const files = await db.getAllFilesInFolder(folder_id);
         console.log("Files: ", files);
         res.json(files);
     } catch (err) {
@@ -18,7 +19,8 @@ exports.files_list = asyncHandler(async(req, res, next) => {
 // Details of a single file
 exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
-        const file = await db.getFile(req.params.id);
+        const file_id = parseInt(req.params.id);
+        const file = await db.getFile(file_id);
         const folder = await db.getFolderByID(file.folder_id);
         const user_id = folder.user_id;
         res.render("fileDetails", {
@@ -37,9 +39,10 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
 // GET File upload form
 exports.file_create_get = asyncHandler(async(req, res, next) => {
     try {
-        const folders = await db.getAllFolders(req.params.id);
+        const user_id = parseInt(req.params.id);
+        const folders = await db.getAllFolders(user_id);
         res.render("fileUploadForm", {
-            user: req.params.id,
+            user: user_id,
             folders: folders
         });
     } catch (err) {
@@ -54,6 +57,7 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 // Handle File create on POST
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
+        const folder_id = parseInt(req.params.id);
         const filenameExists = await db.getFile({name: req.body.name});
         if (!filenameExists) {
             const { file } = req.body;
@@ -61,7 +65,7 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
             //file.url =
             //file.size =
             file.upload_time = Date.now();
-            file.folder_id = req.params.id;
+            file.folder_id = folder_id;
             const newFile = await db.createFile(file);
             res.redirect(`/uploads/file/${newFile.id}`);
         } else {
@@ -80,7 +84,8 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
 // GET File update form
 exports.file_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const file = await db.getFile(req.params.id);
+        const file_id = parseInt(req.params.id);
+        const file = await db.getFile(file_id);
         res.render("fileUpdateForm", {
             file: file,
         });
@@ -95,6 +100,7 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
 // Handle File update on POST
 exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
+        const file_id = parseInt(req.params.id);
         const filenameExists = await db.getFile({name: req.body.name});
         if (!filenameExists) {
             const { file } = req.body;
@@ -104,9 +110,9 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
                 //file.size =
                 file.upload_time = Date.now();
             }
-            file.id = req.params.id;
+            file.id = file_id;
             await db.updateFile(file)
-            res.redirect(`/uploads/file/${req.params.id}`);
+            res.redirect(`/uploads/file/${file_id}`);
         } else {
             res.render("fileUpdateForm", {
                 message: "File name already in use",
@@ -123,7 +129,8 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
 // GET File delete form
 exports.file_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const file = await db.getFile(req.params.id);
+        const file_id = parseInt(req.params.id);
+        const file = await db.getFile(file_id);
         res.render("fileDeleteForm", {
             file: file,
         });
@@ -138,7 +145,7 @@ exports.file_delete_get = asyncHandler(async(req, res, next) => {
 // Handle File delete on POST
 exports.file_delete_post = asyncHandler(async(req, res, next) => {
     try {
-        const file_id = req.params.id;
+        const file_id = parseInt(req.params.id);
         await db.deleteFile(file_id);
         res.json({
             message: "File deleted",

@@ -1,30 +1,32 @@
-//const pool = require("./pool");
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function getAllUsers() {
     const users = await prisma.users.findMany({
         include: {
-            folders: true
-        }
+            folders: true,
+        },
     });
     return users;
 }
 
 async function getUserByID(id) {
     const user = await prisma.users.findUnique({
+        include: {
+            folders: true,
+        },
         where: {
-            id: id
-        }
+            id: id,
+        },
     });
     return user;
 }
 
 async function getUserByUsername(username) {
-    const user = await prisma.users.findUnique({
+    const user = await prisma.users.findFirst({
         where: {
-            username: username
-        }
+            username: username,
+        },
     });
     return user;
 }
@@ -34,7 +36,7 @@ async function createUser(user) {
         data: {
             username: user.username,
             password: user.password,
-        }
+        },
     });
     return newUser;
 }
@@ -78,9 +80,11 @@ async function deleteUser(id) {
 
 }
 
-
 async function getAllFolders(id) {
     const folders = await prisma.folders.findMany({
+        include: { 
+            files: true,
+        },
         where: {
             user_id: id,
         },
@@ -90,6 +94,9 @@ async function getAllFolders(id) {
 
 async function getFolderByID(id) {
     const folder = await prisma.folders.findUnique({
+        include: {
+            files: true,
+        },
         where: {
             id: id,
         },
@@ -99,6 +106,9 @@ async function getFolderByID(id) {
 
 async function getFolderByName(name) {
     const folder = await prisma.folders.findUnique({
+        include: {
+            files: true,
+        },
         where: {
             name: name,
         },

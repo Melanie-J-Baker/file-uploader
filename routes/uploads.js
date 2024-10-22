@@ -12,9 +12,6 @@ router.get("/", user_controller.index);
 // List of all users
 router.get("/users", user_controller.user_list);
 
-// Details of a single user
-router.get("/user/:id", user_controller.user_detail);
-
 // GET User create form
 router.get("/user/create", user_controller.user_create_get);
 
@@ -26,6 +23,9 @@ router.get('/user/login', user_controller.user_login_get);
 
 // Handle User login on POST
 router.post('/user/login', user_controller.user_login_post);
+
+// Details of a single user
+router.get("/user/:id", user_controller.user_detail);
 
 // Get User Home Page
 router.get("/user/:id/home", user_controller.user_home_get);
