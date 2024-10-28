@@ -10,8 +10,7 @@ passport.use(
             if (!user) {
                 return done(null, false, { message: "Incorrect username" });
             }
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const compare = await bcrypt.compare(hashedPassword, user.password)
+            const compare = await bcrypt.compare(password, user.password)
             if (!compare) {
                 return done(null, false, { message: "Incorrect password" });
             }
