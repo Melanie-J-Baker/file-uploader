@@ -28,7 +28,7 @@ async function getUserByUsername(username) {
             username: username,
         },
     });
-    return user;
+    return user[0];
 }
 
 async function createUser(user) {
@@ -105,7 +105,7 @@ async function getFolderByID(id) {
 }
 
 async function getFolderByName(name) {
-    const folder = await prisma.folders.findUnique({
+    const folders = await prisma.folders.findMany({
         include: {
             files: true,
         },
@@ -113,7 +113,7 @@ async function getFolderByName(name) {
             name: name,
         },
     });
-    return folder;
+    return folders[0];
 }
 
 async function createFolder(folder) {
@@ -162,14 +162,23 @@ async function getAllFilesInFolder(id) {
     return files;
 }
 
-async function getFile(id) {
+async function getFileByID(id) {
     const file = await prisma.files.findUnique({
         where: {
             id: id,
         },
     });
     return file;
-} 
+}
+
+async function getFileByName(name) {
+    const files = await prisma.files.findMany({
+        where: {
+            name: name,
+        },
+    });
+    return files[0];
+}
 
 async function createFile(file) {
     const newFile = await prisma.files.create({
@@ -178,7 +187,7 @@ async function createFile(file) {
             url: file.url,
             size_mb: file.size_mb,
             upload_time: file.upload_time,
-            folder_id: file.folder_id,
+            folder: { connect: { id: file.folder_id }},
         },
     });
     return newFile;
@@ -216,7 +225,8 @@ module.exports = {
     updateFolder,
     deleteFolder,
     getAllFilesInFolder,
-    getFile,
+    getFileByID,
+    getFileByName,
     createFile,
     updateFile,
     deleteFile,

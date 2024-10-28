@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Delete folder</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Delete folder: <%= folder.name %></h1>
-    <form id="deleteFolder" action="/uploads/folder/<%= folder.id %>/delete" method="post">
-        <button type="submit" class="deleteFolderBtn">Delete Folder</button>
-    </form>
-    <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
-  </body>
+  <% if (currentUser) { %>
+    <head>
+      <title>Delete folder</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Delete folder: <%= folder.name %></h1>
+      <form id="deleteFolder" action="/uploads/folder/<%= folder.id %>/delete" method="post">
+          <button type="submit" class="deleteFolderBtn">Delete Folder</button>
+      </form>
+      <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
+    </body>
+  <% } else { %>
+    <head>
+      <title>Page not accessible</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Page not accessible</h1>
+      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
+    </body>
+  <% } %>
 </html>

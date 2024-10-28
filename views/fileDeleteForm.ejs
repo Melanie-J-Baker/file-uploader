@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Delete file</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Delete file</h1>
-    <%= file_id %>
-    <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
-        <button type="submit" class="deleteFileBtn">Delete File</button>
-    </form>
-    <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
-  </body>
+  <% if (currentUser) { %>
+    <head>
+      <title>Delete file</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Delete file</h1>
+      <%= file_id %>
+      <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
+          <button type="submit" class="deleteFileBtn">Delete File</button>
+      </form>
+      <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
+    </body>
+  <% } else { %>
+    <head>
+      <title>Page not accessible</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Page not accessible</h1>
+      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
+    </body>
+  <% } %>
 </html>

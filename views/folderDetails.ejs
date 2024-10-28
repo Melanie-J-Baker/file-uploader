@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= folder.name %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= folder.name %></h1>
-    <a href="/uploads/user/<%= folder.user_id %>/file/create" class="createFile">Upload a new file</a>
-    <h3>Files</h3>
-    <% if (files) { %>
-      <% files.map((file) => { %>
-        <div class="file" id="<%= file.id %>">
-          <a href="/uploads/file/<%= file.id %>" class="fileLink"><%= file.name %></a>
-          <p class="fileListDetail">Size: <%= file.size_mb %> mb</p>
-          <p class="fileListDetail">Upload time: <%= file.upload_time %></p>
-        </div>
-      <% }) %>
-    <% } else { %>
-      <div class="noFiles">No files uploaded</div>
-    <% } %>
-    <a href="/uploads/user/<%= folder.user_id %>/home" class="homeLink">Back to home</a>
-  </body>
+  <% if (currentUser) { %>
+    <head>
+      <title><%= folder.name %></title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1><%= folder.name %></h1>
+      <a href="/uploads/user/<%= currentUser.id %>/file/create" class="createFile">Upload a new file</a>
+      <h3>Files</h3>
+      <% if (files) { %>
+        <% files.map((file) => { %>
+          <div class="file" id="<%= file.id %>">
+            <a href="/uploads/file/<%= file.id %>" class="fileLink"><%= file.name %></a>
+            <p class="fileListDetail">Size: <%= file.size_mb %> mb</p>
+            <p class="fileListDetail">Upload time: <%= file.upload_time %></p>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="noFiles">No files uploaded</div>
+      <% } %>
+      <a href="/uploads/user/<%= currentUser.id %>/home" class="homeLink">Back to home</a>
+    </body>
+  <% } else { %>
+    <head>
+      <title>Page not accessible</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Page not accessible</h1>
+      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
+    </body>
+  <% } %>
 </html>

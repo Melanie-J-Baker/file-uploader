@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Move file</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Move file: <%= file.name %> </h1>
-    <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
-      <div>
-        <label class="updateFileLabel" for="folder_select">Select folder</label>
-        <select id="folder_select" name="folder_select">
-          <ul>
-            <% folders.map((folder) => { %>
-              <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
-            <% }) %>
-          </ul>
-        </select>
-      </div>
-        <button type="submit" class="updateFileBtn">Move File</button>
-    </form>
-    <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
-    <p class="message"><%= message %></p>
-  </body>
+  <% if (currentUser) { %>
+    <head>
+      <title>Move file</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Move file: <%= file.name %> </h1>
+      <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
+        <div>
+          <label class="updateFileLabel" for="folder_select">Select folder</label>
+          <select id="folder_select" name="folder_select">
+            <ul>
+              <% folders.map((folder) => { %>
+                <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
+              <% }) %>
+            </ul>
+          </select>
+        </div>
+          <button type="submit" class="updateFileBtn">Move File</button>
+      </form>
+      <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
+      <p class="message"><%= message %></p>
+    </body>
+    <% } else { %>
+      <head>
+        <title>Page not accessible</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+      </head>
+      <body>
+        <h1>Page not accessible</h1>
+        <a href="/uploads" class="welcomeLink">Back to welcome page</a>
+      </body>
+    <% } %>
 </html>

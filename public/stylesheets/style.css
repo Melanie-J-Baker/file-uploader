@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.fileImage {
+  width: 50vw;
+  height: 50vw;
+}

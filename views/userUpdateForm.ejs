@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Update user</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Update user</h1>
-    <%= user.name %>
-    <form id="updateUser" action="/uploads/user/<%= user.id %>/update" method="post">
-      <div>
-        <label class="updateUserLabel" for="newUsername">New Username</label>
-        <input id="newUsername" name="newUsername" type="text" class="updateUserInput" value="<%= user.username %>">
-      </div>
-      <div>
-        <label class="updateUserLabel" for="newPassword">New Password</label>
-        <input id="newPassword" name="newPassword" type="password" class="updateUserInput">
-      </div>
-      <div>
-        <label class="updateUserLabel" for="confirmNewPassword">Confirm password</label>
-        <input id="confirmNewPassword" name="confirmNewPassword" type="password" class="updateUserInput">
-      </div>
-        <button type="submit" class="updateUserBtn">Update User</button>
-    </form>
-    <a href="/uploads/user/<%= user.id %>/delete" class="deleteUserLink">Delete Account</a>
-    <a href="/uploads/user/<%= user.id %>/home" class="cancel">Cancel</a>
-    <p class="message"><%= message %></p>
-  </body>
+  <% if (currentUser) { %>
+    <head>
+      <title>Update account details</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Update <%= currentUser.username %>'s account</h1>
+      <form id="updateUser" action="/uploads/user/<%= currentUser.id %>/update" method="post">
+        <div>
+          <label class="updateUserLabel" for="newUsername">New Username</label>
+          <input id="newUsername" name="newUsername" type="text" class="updateUserInput">
+        </div>
+        <div>
+          <label class="updateUserLabel" for="newPassword">New Password</label>
+          <input id="newPassword" name="newPassword" type="password" class="updateUserInput">
+        </div>
+        <div>
+          <label class="updateUserLabel" for="confirmNewPassword">Confirm password</label>
+          <input id="confirmNewPassword" name="confirmNewPassword" type="password" class="updateUserInput">
+        </div>
+          <button type="submit" class="updateUserBtn">Update User</button>
+      </form>
+      <a href="/uploads/user/<%= currentUser.id %>/delete" class="deleteUserLink">Delete Account</a>
+      <a href="/uploads/user/<%= currentUser.id %>/home" class="cancel">Cancel</a>
+      <p class="message"><%= message %></p>
+    </body>
+  <% } else { %>
+    <head>
+      <title>Page not accessible</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Page not accessible</h1>
+      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
+    </body>
+  <% } %>
 </html>

@@ -35,13 +35,11 @@ exports.files_list = asyncHandler(async(req, res, next) => {
 exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
-        const file = await db.getFile(file_id);
+        const file = await db.getFileByID(file_id);
         const folder = await db.getFolderByID(file.folder_id);
         const user_id = folder.user_id;
         res.render("fileDetails", {
             file: file,
-            user_id: user_id
-
         });
     } catch (err) {
         console.error(err);
@@ -57,7 +55,6 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
         const user_id = parseInt(req.params.id);
         const folders = await db.getAllFolders(user_id);
         res.render("fileUploadForm", {
-            user: user_id,
             folders: folders,
             message: "",
         });
@@ -74,16 +71,16 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
         const folder_id = parseInt(req.params.id);
-        const filenameExists = await db.getFile({ name: req.file.name });
+        const filenameExists = await db.getFileByName(req.file.originalname);
         if (!filenameExists) {
             const b64 = Buffer.from(req.file.buffer).toString("base64");
             let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
             const cldRes = await handleUpload(dataURI);
             const file = {
-                name: req.file.name,
+                name: req.file.originalname,
                 url: cldRes.secure_url,
                 size_mb: req.file.size / 1000000,
-                upload_time: Date.now(),
+                upload_time: new Date(Date.now()),
                 folder_id: folder_id,
             };
             const newFile = await db.createFile(file);
@@ -105,7 +102,7 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
 exports.file_update_get = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
-        const file = await db.getFile(file_id);
+        const file = await db.getFileByID(file_id);
         const folder = await db.getFolderByID(file.folder_id);
         const user = await db.getUserByID(folder.user_id);
         res.render("fileUpdateForm", {
@@ -124,7 +121,7 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
 exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
-        const oldFile = getFile(file_id);
+        const oldFile = getFileByID(file_id);
         if (req.body.folder_id) {
             const file = {
                 id: file_id,
@@ -135,7 +132,7 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
         } else {
             res.render('fileUpdateForm', {
                 file: oldFile,
-                message: "New folder must be provided"
+                message: "New folder must be provided",
             })
         }
     } catch (err) {
@@ -150,7 +147,7 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
 exports.file_delete_get = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
-        const file = await db.getFile(file_id);
+        const file = await db.getFileByID(file_id);
         res.render("fileDeleteForm", {
             file: file,
         });

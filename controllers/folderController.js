@@ -37,7 +37,6 @@ exports.folder_detail = asyncHandler(async(req, res, next) => {
 exports.folder_create_get = asyncHandler(async(req, res, next) => {
     const user_id = parseInt(req.params.id);
     res.render("folderCreateForm", {
-        user_id: user_id,
         message: "",
     });
 });
@@ -56,7 +55,7 @@ exports.folder_create_post = asyncHandler(async(req, res, next) => {
             res.redirect(`/uploads/folder/${newFolder.id}`)
         } else {
             return res.render("folderCreateForm", {
-                message: "A folder with that name already exists"
+                message: "A folder with that name already exists",
             })
         }
     } catch (err) {
@@ -73,7 +72,7 @@ exports.folder_update_get = asyncHandler(async(req, res, next) => {
         const folder_id = parseInt(req.params.id);
         const folder = await db.getFolderByID(folder_id);
         res.render("folderUpdateForm", {
-            folder: folder
+            folder: folder,
         });
     } catch (err) {
         console.error(err);
@@ -90,7 +89,7 @@ exports.folder_update_post = asyncHandler(async(req, res, next) => {
         const folderExists = await db.getFolderByName(req.body.name);
         if (folderExists && folderExists.id !== req.folder_id) {
             return res.render("folderUpdateForm", {
-                message: "A folder with that name already exists"
+                message: "A folder with that name already exists",
             })
         } else {
             const { folder } = req.body;
@@ -112,7 +111,7 @@ exports.folder_delete_get = asyncHandler(async(req, res, next) => {
         const folder_id = parseInt(req.params.id);
         const folder = await db.getFolderByID(folder_id);
         res.render("folderDeleteForm", {
-            folder: folder
+            folder: folder,
         });
     } catch (err) {
         console.error(err);

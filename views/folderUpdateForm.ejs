@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Update folder</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Update folder: <%=folder.name %></h1>
-    <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
-      <div>
-        <label class="updateFolderLabel" for="name">Name</label>
-        <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>">
-        <button type="submit" class="updateFolderBtn">Update Folder</button>
-      </div>
+  <% if (currentUser) { %>
+    <head>
+      <title>Update folder</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Update folder: <%=folder.name %></h1>
+      <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
+        <div>
+          <label class="updateFolderLabel" for="name">Name</label>
+          <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>">
+          <button type="submit" class="updateFolderBtn">Update Folder</button>
+        </div>
 
-    </form>
-    <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
-  </body>
+      </form>
+      <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
+    </body>
+  <% } else { %>
+    <head>
+      <title>Page not accessible</title>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+      <h1>Page not accessible</h1>
+      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
+    </body>
+  <% } %>
 </html>

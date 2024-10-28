@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require('bcryptjs');
+const passport = require("passport");
 
 // Welcome Page
 exports.index = asyncHandler(async(req, res, next) => {    
@@ -32,7 +33,7 @@ exports.user_create_get = asyncHandler(async(req, res, next) => {
 
 // Handle User create on POST
 exports.user_create_post = asyncHandler(async(req, res, next) => {
-    let existingUsers = [];
+    let existingUser = false;
     let passwordsMatch = false;
     // Check for existing username
     if (!req.body.username) {
@@ -40,7 +41,7 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
             message: "Username must be provided" 
         });
     } else {
-        existingUsers = await db.getUserByUsername(req.body.username);
+        existingUser = await db.getUserByUsername(req.body.username);
     }
     // Check for password and confirmation
     if (!req.body.password) {
@@ -51,16 +52,24 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
         passwordsMatch = true;
     }
     // Ensure username does not exist and passwords match
-    if (existingUsers.length === 0 && passwordsMatch) {
+    if (!existingUser && passwordsMatch) {
         try {
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
-            const user = {
-                username: req.body.username,
-                password: hashedPassword
-            };
-            const newUser = await db.createUser(user);
-            // Redirect to new user's profile page
-            return res.redirect(`/uploads/user/${newUser.id}/home`);
+            bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).render("error", { 
+                        error: err 
+                    });
+                } else {
+                    const user = {
+                        username: req.body.username,
+                        password: hashedPassword
+                    };
+                    const newUser = await db.createUser(user);
+                    // Redirect to new user's profile page
+                    return res.redirect(`/uploads/user/${newUser.id}/home`);
+                }
+            });
         } catch (err) {
             console.error(err);
             return res.status(500).render("error", { 
@@ -83,26 +92,50 @@ exports.user_login_get = asyncHandler(async(req, res, next) => {
 
 // Handle User login on POST
 exports.user_login_post = asyncHandler(async(req, res, next) => {
-    try {
-        const username = req.body.username;
-        const user = await db.getUserByUsername(username);
-        console.log(user);
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const compare = await bcrypt.compare(hashedPassword, user.password);
-        if (compare) {
-            res.redirect(`/uploads/user/${newUser.id}`);
-        } else {
+    passport.authenticate("local", {
+        successRedirect: `/uploads/user/${req.user.id}/home`,
+        failureRedirect: "/uploads/user/create"
+    });
+    /*try {
+        if (!req.body.username) {
             res.render("userLoginForm", {
-                message: "Password incorrect. Please try again"
+                message: "Username must be provided"
             })
+        } else if (!req.body.password) {
+            res.render("userLoginForm", {
+                message: "Password must be provided"
+            })
+        } else {
+            const username = req.body.username;
+            const user = await db.getUserByUsername(username);
+            console.log(user);
+            //const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            //const compare = await bcrypt.compare(hashedPassword, user.password);
+            if (compare) {
+                res.redirect(`/uploads/user/${newUser.id}/home`);
+            } else {
+                res.render("userLoginForm", {
+                    message: "Password incorrect. Please try again"
+                })
+            }
         }
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
             error: err,
         });
-    }
+    }*/
 });
+
+// Handle User log out on POST
+exports.user_logout_post = asyncHandler(async(req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/uploads");
+      });
+})
 
 // Details of a single user
 exports.user_detail = asyncHandler(async(req, res, next) => {
@@ -129,7 +162,6 @@ exports.user_home_get = asyncHandler(async(req, res, next) => {
             allFiles.push(files);
         });
         res.render("userHomePage", {
-            user: user,
             folders: user.folders,
             files: allFiles
         })
@@ -144,10 +176,9 @@ exports.user_home_get = asyncHandler(async(req, res, next) => {
 // GET User update form
 exports.user_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const user_id = parseInt(req.params.id);
-        const user = await db.getUserByID(user_id);
+        //const user_id = parseInt(req.params.id);
+        //const user = await db.getUserByID(user_id);
         res.render("userUpdateForm", {
-            user: user,
             message: "",
         });
     } catch (err) {
@@ -163,34 +194,45 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
     try {
         // Check if username already exists for a different user
         const user_id = parseInt(req.params.id);
-        const existingUser = await db.getUserByUsername(req.body.username);
+        const oldUser = await db.getUserByID(user_id); 
+        const existingUser = await db.getUserByUsername(req.body.newUsername);
+        console.log(req.body.newUsername);
         if (existingUser && existingUser.id !== user_id) {
             return res.render("userUpdateForm", {
-                user: { id: user_id, username: req.body.username },
                 message: "That username is already in use",
             });
         }
         // Check if passwords match
-        let passwordsMatch = true;
-        let hashedPassword = null;
-        if (req.body.password) {
-            if (req.body.password !== req.body.confirmPassword) {
-                passwordsMatch = false;
+        if (req.body.newPassword) {
+            if (req.body.newPassword !== req.body.confirmNewPassword) {
+                // If passwords do not match, return error
+                return res.render("userUpdateForm", {
+                    message: "Passwords do not match",
+                });
             } else {
-                hashedPassword = await bcrypt.hash(req.body.password, 10);
+                bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                    if (err) {
+                        console.error(err);
+                        return res.status(500).render("error", { 
+                            error: err 
+                        });
+                    } else {
+                        const user = {
+                            username: req.body.username,
+                            password: hashedPassword
+                        };
+                        const newUser = await db.createUser(user);
+                        // Redirect to new user's profile page
+                        return res.redirect(`/uploads/user/${newUser.id}/home`);
+                    }
+                });
             }
         }
-        // If passwords do not match, return error
-        if (!passwordsMatch) {
-            return res.render("userUpdateForm", {
-                user: { id: user_id, username: req.body.username },
-                message: "Passwords do not match",
-            });
-        }
+        
         // Update user
         const user = {
             id: user_id,
-            username: req.body.username,
+            username: req.body.newUsername,
             ...(hashedPassword && { password: hashedPassword }) // Only include password if it's updated
         };
         const newUser = await db.updateUser(user);
@@ -205,11 +247,9 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
 // GET User delete form
 exports.user_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const user_id = parseInt(req.params.id);
-        const user = await db.getUserByID(user_id);
-        res.render("userDeleteForm", {
-            user: user,
-        });
+        //const user_id = parseInt(req.params.id);
+        //const user = await db.getUserByID(user_id);
+        res.render("userDeleteForm");
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
