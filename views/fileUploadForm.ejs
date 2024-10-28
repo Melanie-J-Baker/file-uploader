@@ -6,17 +6,21 @@
   </head>
   <body>
     <h1>Upload file</h1>
-    <form id="uploadFile" action="/uploads/user/<%= user %>/file/create" method="post">
+    <form id="uploadFile" action="/uploads/user/<%= user %>/file/create" method="post" enctype="multipart/form-data">
+      <div>
         <label class="uploadFileLabel" for="folder_select">Select folder</label>
         <select id="folder_select" name="folder_select">
-          <% folders.map((folder) => { %>
-            <option value="<%= folder.id %>">folder.name</option>
-          <% }) %>
+          <ul>
+            <% folders.map((folder) => { %>
+              <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
+            <% }) %>
+          </ul>
         </select>
-        <label class="uploadFileLabel" for="name">Name</label>
-        <input id="name" name="name" type="text" class="uploadFileInput">
+      </div>
+      <div>
         <label class="uploadFileLabel" for="file">Choose file</label>
         <input id="file" name="file" type="file" class="uploadFileInput">
+      </div>
         <button type="submit" class="uploadFileBtn">Upload File</button>
     </form>
     <a href="/uploads/user/<%= user %>/home" class="cancel">Cancel</a>

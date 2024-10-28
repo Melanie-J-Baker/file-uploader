@@ -23,7 +23,7 @@ async function getUserByID(id) {
 }
 
 async function getUserByUsername(username) {
-    const user = await prisma.users.findFirst({
+    const user = await prisma.users.findMany({
         where: {
             username: username,
         },

@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1><%= user.username %>'s Home Page</h1>
-    <a href="/uploads/user/<%= user.id %>/update" class="accountDetailsLink">Account Details</a>
+    <a href="/uploads/user/<%= user.id %>/update" class="accountDetailsLink">Update account details</a>
     <h3>All folders</h3>
     <a href="/uploads/user/<%= user.id %>/folder/create" class="createFolder">Create a new folder</a>
     <% folders.map((folder) => { %>

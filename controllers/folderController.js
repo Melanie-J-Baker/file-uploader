@@ -23,6 +23,7 @@ exports.folder_detail = asyncHandler(async(req, res, next) => {
         const folder = await db.getFolderByID(folder_id);
         res.render("folderDetails", {
             folder: folder,
+            files: folder.files,
         });
     } catch (err) {
         console.error(err);

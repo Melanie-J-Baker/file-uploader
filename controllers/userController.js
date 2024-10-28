@@ -32,7 +32,7 @@ exports.user_create_get = asyncHandler(async(req, res, next) => {
 
 // Handle User create on POST
 exports.user_create_post = asyncHandler(async(req, res, next) => {
-    let userExists = false;
+    let existingUsers = [];
     let passwordsMatch = false;
     // Check for existing username
     if (!req.body.username) {
@@ -40,7 +40,7 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
             message: "Username must be provided" 
         });
     } else {
-        userExists = await db.getUserByUsername(req.body.username);
+        existingUsers = await db.getUserByUsername(req.body.username);
     }
     // Check for password and confirmation
     if (!req.body.password) {
@@ -51,7 +51,7 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
         passwordsMatch = true;
     }
     // Ensure username does not exist and passwords match
-    if (!userExists && passwordsMatch) {
+    if (existingUsers.length === 0 && passwordsMatch) {
         try {
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             const user = {
@@ -60,7 +60,7 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
             };
             const newUser = await db.createUser(user);
             // Redirect to new user's profile page
-            return res.redirect(`/uploads/user/${newUser.id}`);
+            return res.redirect(`/uploads/user/${newUser.id}/home`);
         } catch (err) {
             console.error(err);
             return res.status(500).render("error", { 
@@ -84,8 +84,12 @@ exports.user_login_get = asyncHandler(async(req, res, next) => {
 // Handle User login on POST
 exports.user_login_post = asyncHandler(async(req, res, next) => {
     try {
-        const user = await db.getUserByUsername(req.body.username);
-        if (req.body.password === user.password) {
+        const username = req.body.username;
+        const user = await db.getUserByUsername(username);
+        console.log(user);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const compare = await bcrypt.compare(hashedPassword, user.password);
+        if (compare) {
             res.redirect(`/uploads/user/${newUser.id}`);
         } else {
             res.render("userLoginForm", {

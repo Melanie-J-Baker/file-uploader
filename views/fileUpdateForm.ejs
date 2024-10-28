@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Update file</title>
+    <title>Move file</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Update file: <%= file.name %> </h1>
+    <h1>Move file: <%= file.name %> </h1>
     <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
-        <label class="updateFileLabel" for="name">Name</label>
-        <input id="name" name="name" type="text" class="updateFileInput" value="<%= file.name %>">
-        <label class="updateFileLabel" for="file">Choose file</label>
-        <input id="file" name="file" type="file" class="updateFileInput">
-        <button type="submit" class="updateFileBtn">Update File</button>
+      <div>
+        <label class="updateFileLabel" for="folder_select">Select folder</label>
+        <select id="folder_select" name="folder_select">
+          <ul>
+            <% folders.map((folder) => { %>
+              <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
+            <% }) %>
+          </ul>
+        </select>
+      </div>
+        <button type="submit" class="updateFileBtn">Move File</button>
     </form>
     <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
     <p class="message"><%= message %></p>

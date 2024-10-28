@@ -1,5 +1,20 @@
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+  });
+
+// Handle file upload
+async function handleUpload(file) {
+    const res = await cloudinary.uploader.upload(file, {
+        resource_type: "auto",
+    });
+    return res;
+}
 
 // List of all files for a folder
 exports.files_list = asyncHandler(async(req, res, next) => {
@@ -43,7 +58,8 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
         const folders = await db.getAllFolders(user_id);
         res.render("fileUploadForm", {
             user: user_id,
-            folders: folders
+            folders: folders,
+            message: "",
         });
     } catch (err) {
         console.error(err);
@@ -58,14 +74,18 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
         const folder_id = parseInt(req.params.id);
-        const filenameExists = await db.getFile({name: req.body.name});
+        const filenameExists = await db.getFile({ name: req.file.name });
         if (!filenameExists) {
-            const { file } = req.body;
-            //req.body.file >>> CLOUDINARY!!
-            //file.url =
-            //file.size =
-            file.upload_time = Date.now();
-            file.folder_id = folder_id;
+            const b64 = Buffer.from(req.file.buffer).toString("base64");
+            let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+            const cldRes = await handleUpload(dataURI);
+            const file = {
+                name: req.file.name,
+                url: cldRes.secure_url,
+                size_mb: req.file.size / 1000000,
+                upload_time: Date.now(),
+                folder_id: folder_id,
+            };
             const newFile = await db.createFile(file);
             res.redirect(`/uploads/file/${newFile.id}`);
         } else {
@@ -86,8 +106,11 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
         const file = await db.getFile(file_id);
+        const folder = await db.getFolderByID(file.folder_id);
+        const user = await db.getUserByID(folder.user_id);
         res.render("fileUpdateForm", {
             file: file,
+            folders: user.folders,
         });
     } catch (err) {
         console.error(err);
@@ -101,21 +124,18 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
 exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
-        const filenameExists = await db.getFile({name: req.body.name});
-        if (!filenameExists) {
-            const { file } = req.body;
-            if (req.body.file) {
-                //req.body.file >>> CLOUDINARY!!
-                //file.url =
-                //file.size =
-                file.upload_time = Date.now();
-            }
-            file.id = file_id;
-            await db.updateFile(file)
-            res.redirect(`/uploads/file/${file_id}`);
+        const oldFile = getFile(file_id);
+        if (req.body.folder_id) {
+            const file = {
+                id: file_id,
+                folder_id: req.body.folder_id,
+            };
+            const newFile = await db.updateFile(file);
+            res.redirect(`/uploads/file/${newFile.id}`);
         } else {
-            res.render("fileUpdateForm", {
-                message: "File name already in use",
+            res.render('fileUpdateForm', {
+                file: oldFile,
+                message: "New folder must be provided"
             })
         }
     } catch (err) {
