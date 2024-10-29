@@ -13,7 +13,11 @@
           <select id="folder_select" name="folder_select">
             <ul>
               <% folders.map((folder) => { %>
-                <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
+                <% if (folder.id === file.folder_id) { %>
+                  <li><option value="<%= folder.id %>" selected><%= folder.name %></option></li>
+                <% } else { %>
+                  <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
+                <% } %>
               <% }) %>
             </ul>
           </select>

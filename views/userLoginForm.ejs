@@ -10,11 +10,11 @@
       <form id="login" action="/uploads/user/login" method="post">
         <div>
           <label class="loginLabel" for="username">Username</label>
-          <input id="username" name="username" type="text" class="loginInput">
+          <input id="username" name="username" type="text" class="loginInput" required autocomplete>
         </div>
         <div>
           <label class="loginLabel" for="password">Password</label>
-          <input id="password" name="password" type="password" class="loginInput">
+          <input id="password" name="password" type="password" class="loginInput" required autocomplete>
         </div>
           <button type="submit" class="loginBtn">Log in</button>
       </form>

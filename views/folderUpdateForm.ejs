@@ -10,12 +10,12 @@
       <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
         <div>
           <label class="updateFolderLabel" for="name">Name</label>
-          <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>">
+          <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>" required autocomplete>
           <button type="submit" class="updateFolderBtn">Update Folder</button>
         </div>
-
       </form>
       <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
+      <p class="message"><%= message %></p>
     </body>
   <% } else { %>
     <head>

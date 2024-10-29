@@ -70,7 +70,6 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 // Handle File create on POST
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
-        const folder_id = parseInt(req.params.id);
         const filenameExists = await db.getFileByName(req.file.originalname);
         if (!filenameExists) {
             const b64 = Buffer.from(req.file.buffer).toString("base64");
@@ -81,7 +80,7 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
                 url: cldRes.secure_url,
                 size_mb: req.file.size / 1000000,
                 upload_time: new Date(Date.now()),
-                folder_id: folder_id,
+                folder_id: parseInt(req.body.folder_id),
             };
             const newFile = await db.createFile(file);
             res.redirect(`/uploads/file/${newFile.id}`);
@@ -108,6 +107,7 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
         res.render("fileUpdateForm", {
             file: file,
             folders: user.folders,
+            message: "",
         });
     } catch (err) {
         console.error(err);
@@ -122,6 +122,8 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
         const oldFile = getFileByID(file_id);
+        const folder = await db.getFolderByID(file.folder_id);
+        const user = await db.getUserByID(folder.user_id);
         if (req.body.folder_id) {
             const file = {
                 id: file_id,
@@ -132,7 +134,8 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
         } else {
             res.render('fileUpdateForm', {
                 file: oldFile,
-                message: "New folder must be provided",
+                folders: user.folders,
+                message: "Folder must be provided",
             })
         }
     } catch (err) {
@@ -164,10 +167,7 @@ exports.file_delete_post = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
         await db.deleteFile(file_id);
-        res.json({
-            message: "File deleted",
-            file_id: file_id
-        });
+        res.render("fileDeleted");
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {

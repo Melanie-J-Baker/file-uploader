@@ -10,7 +10,7 @@
       <form id="createFolder" action="/uploads/user/<%= currentUser.id %>/folder/create" method="post">
         <div>
           <label class="createFolderLabel" for="name">Name</label>
-          <input id="name" name="name" type="text" class="createFolderInput">
+          <input id="name" name="name" type="text" class="createFolderInput" required autocomplete>
         </div>
           <button type="submit" class="createFolderBtn">Create Folder</button>
       </form>

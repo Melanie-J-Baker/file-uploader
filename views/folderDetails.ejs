@@ -8,6 +8,8 @@
     <body>
       <h1><%= folder.name %></h1>
       <a href="/uploads/user/<%= currentUser.id %>/file/create" class="createFile">Upload a new file</a>
+      <a href="/uploads/folder/<%= folder.id %>/update" class="updateFolder">Rename folder</a>
+      <a href="/uploads/folder/<%= folder.id %>/delete" class="deleteFolder">Delete folder</a>
       <h3>Files</h3>
       <% if (files) { %>
         <% files.map((file) => { %>

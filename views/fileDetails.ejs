@@ -11,6 +11,8 @@
       <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
       <p class="fileDetail">Upload time: <%= file.upload_time %></p>
       <button type="button">Download file</button>
+      <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Update file</a>
+      <a href="/uploads/file/<%= file.id %>/delete" class="deleteFile">Delete file</a>
       <% if (file.folder_id) { %>
         <a href="/uploads/folder/<%= file.folder_id %>" class="folderLink">Go back to folder</a>
       <% } else { %>
