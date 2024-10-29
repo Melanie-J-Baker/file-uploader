@@ -5,19 +5,24 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Log in</h1>
-    <form id="login" action="/uploads/user/login" method="post">
-      <div>
-        <label class="loginLabel" for="username">Username</label>
-        <input id="username" name="username" type="text" class="loginInput">
-      </div>
-      <div>
-        <label class="loginLabel" for="password">Password</label>
-        <input id="password" name="password" type="password" class="loginInput">
-      </div>
-        <button type="submit" class="loginBtn">Log in</button>
-    </form>
-    <a href="/uploads/" class="cancel">Cancel</a>
-    <p class="message"><%= message %></p>
+    <% if (!currentUser) { %>
+      <h1>Log in</h1>
+      <form id="login" action="/uploads/user/login" method="post">
+        <div>
+          <label class="loginLabel" for="username">Username</label>
+          <input id="username" name="username" type="text" class="loginInput">
+        </div>
+        <div>
+          <label class="loginLabel" for="password">Password</label>
+          <input id="password" name="password" type="password" class="loginInput">
+        </div>
+          <button type="submit" class="loginBtn">Log in</button>
+      </form>
+      <a href="/uploads/" class="cancel">Cancel</a>
+      <p class="message"><%= message %></p>
+    <% } else { %>
+      <h1>You are logged in!</h1>
+      <a href="/uploads/user/<%= currentUser.id %>/home" class="homeLink">Go to home</a>
+    <% } %>
   </body>
 </html>

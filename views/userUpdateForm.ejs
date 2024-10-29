@@ -23,7 +23,7 @@
           <button type="submit" class="updateUserBtn">Update User</button>
       </form>
       <a href="/uploads/user/<%= currentUser.id %>/delete" class="deleteUserLink">Delete Account</a>
-      <a href="/uploads/user/<%= currentUser.id %>/home" class="cancel">Cancel</a>
+      <a href="/uploads/user/<%=currentUser.id %>/home" class="cancel">Cancel</a>
       <p class="message"><%= message %></p>
     </body>
   <% } else { %>

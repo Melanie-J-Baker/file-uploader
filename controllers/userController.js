@@ -2,6 +2,7 @@ const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require('bcryptjs');
 const passport = require("passport");
+require("../auth/auth");
 
 // Welcome Page
 exports.index = asyncHandler(async(req, res, next) => {    
@@ -65,9 +66,9 @@ exports.user_create_post = asyncHandler(async(req, res, next) => {
                         username: req.body.username,
                         password: hashedPassword
                     };
-                    const newUser = await db.createUser(user);
-                    // Redirect to new user's profile page
-                    return res.redirect(`/uploads/user/${newUser.id}/home`);
+                    await db.createUser(user);
+                    // Redirect to login page
+                    return res.redirect("/uploads/user/login");
                 }
             });
         } catch (err) {
@@ -91,11 +92,10 @@ exports.user_login_get = asyncHandler(async(req, res, next) => {
 });
 
 // Handle User login on POST
-exports.user_login_post = asyncHandler(async(req, res, next) => {
-    passport.authenticate("local", {
-        successRedirect: `/uploads/user/${req.user.id}/home`,
-        failureRedirect: "/uploads/user/create"
-    });
+exports.user_login_post = passport.authenticate("local", {
+    successRedirect: "/uploads/user/login",
+    failureRedirect: "/uploads/user/login"
+});
     /*try {
         if (!req.body.username) {
             res.render("userLoginForm", {
@@ -112,7 +112,7 @@ exports.user_login_post = asyncHandler(async(req, res, next) => {
             //const hashedPassword = await bcrypt.hash(req.body.password, 10);
             //const compare = await bcrypt.compare(hashedPassword, user.password);
             if (compare) {
-                res.redirect(`/uploads/user/${newUser.id}/home`);
+                res.redirect(`/uploads/user/${user.id}/home`);
             } else {
                 res.render("userLoginForm", {
                     message: "Password incorrect. Please try again"
@@ -125,17 +125,16 @@ exports.user_login_post = asyncHandler(async(req, res, next) => {
             error: err,
         });
     }*/
-});
 
-// Handle User log out on POST
-exports.user_logout_post = asyncHandler(async(req, res, next) => {
+// Handle User log out on GET
+exports.user_logout_get = (req, res, next) => {
     req.logout((err) => {
         if (err) {
           return next(err);
         }
         res.redirect("/uploads");
       });
-})
+}
 
 // Details of a single user
 exports.user_detail = asyncHandler(async(req, res, next) => {
@@ -154,17 +153,14 @@ exports.user_detail = asyncHandler(async(req, res, next) => {
 // GET User Home Page
 exports.user_home_get = asyncHandler(async(req, res, next) => {
     try {
-        let allFiles = [];
+        /*let allFiles = [];
         const user_id = parseInt(req.params.id);
         const user = await db.getUserByID(user_id);
         user.folders.map(async(folder) => {
             const files = await db.getAllFilesInFolder(folder.id);
             allFiles.push(files);
-        });
-        res.render("userHomePage", {
-            folders: user.folders,
-            files: allFiles
-        })
+        });*/
+        res.render("userHomePage")
     } catch (err) {
         console.error(err);
         res.status(500).render("error", {
@@ -237,7 +233,7 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
         };
         const newUser = await db.updateUser(user);
         // Redirect to user's home page
-        return res.redirect(`/uploads/user/${newUser.id}/home`);
+        return res.redirect(`/uploads/user/${user_id}/home`);
     } catch (err) {
         console.error(err);
         return res.status(500).render("error", { error: err });

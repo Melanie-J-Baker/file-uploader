@@ -31,8 +31,8 @@ router.get('/user/login', user_controller.user_login_get);
 // Handle User login on POST
 router.post('/user/login', user_controller.user_login_post);
 
-// Handle User log out on POST
-router.post('/logout', user_controller.user_logout_post);
+// Handle User log out on GET
+router.get('/user/logout', user_controller.user_logout_get);
 
 // Details of a single user
 router.get("/user/:id", user_controller.user_detail);
