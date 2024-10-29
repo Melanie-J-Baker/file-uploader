@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <%- include('navbar') %>
     <% if (!currentUser) { %>
       <h1>Log in</h1>
       <form id="login" action="/uploads/user/login" method="post">

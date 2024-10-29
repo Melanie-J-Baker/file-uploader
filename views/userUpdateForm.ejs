@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Update <%= currentUser.username %>'s account</h1>
       <form id="updateUser" action="/uploads/user/<%= currentUser.id %>/update" method="post">
         <div>
@@ -32,6 +33,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

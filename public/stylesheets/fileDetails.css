@@ -1,0 +1,34 @@
+.fileDetails {
+    margin-top: 100px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fileImage {
+    width: 400px;
+    border: 4px solid var(--highlight2);
+}
+
+.downloadBtn {
+    border: none;
+    border-radius: 5px;
+    color: var(--dark);
+    padding: 5px 20px;
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.downloadBtn:hover {
+    color: var(--highlight2);
+}
+
+.backLink, .updateFile, .deleteFile {
+    color: var(--dark);
+}
+
+.backLink:hover, .updateFile:hover, .deleteFile:hover {
+    color: var(--highlight1);
+}

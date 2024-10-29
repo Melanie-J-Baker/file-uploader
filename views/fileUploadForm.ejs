@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Upload file</h1>
       <form id="uploadFile" action="/uploads/user/file/create" method="post" enctype="multipart/form-data">
         <div>
@@ -33,6 +34,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

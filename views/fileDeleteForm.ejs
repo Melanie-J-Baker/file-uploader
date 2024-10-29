@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Delete file</h1>
       <%= file.name %>
       <p>Size: <%= file.size_mb %> mb</p>
@@ -20,6 +21,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

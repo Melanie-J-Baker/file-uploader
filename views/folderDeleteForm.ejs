@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Delete folder: <%= folder.name %></h1>
       <form id="deleteFolder" action="/uploads/folder/<%= folder.id %>/delete" method="post">
           <button type="submit" class="deleteFolderBtn">Delete Folder</button>
@@ -18,6 +19,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

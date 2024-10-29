@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Delete user</h1>
       <%= currentUser.username %>
       <form id="deleteUser" action="/uploads/user/<%= currentUser.id %>/delete" method="post">
@@ -19,6 +20,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

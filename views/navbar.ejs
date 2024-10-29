@@ -1,0 +1,14 @@
+<nav>
+    <ul class="nav-ul">
+        <% if (!currentUser) { %>
+            <li><a href="/uploads/user/login" class="navLink">Log in</a></li>
+            <li><a href="/uploads/user/create" class="navLink">Create account</a></li>
+        <% } else { %>
+            <li><a href="/uploads/user/<%= currentUser.id %>/home" class="navLink">Home</a></li>
+            <li><a href="/uploads/user/<%= currentUser.id %>/update" class="navLink">Account</a></li>
+            <li><a href="/uploads/user/<%= currentUser.id %>/folder/create" class="navLink">Create folder</a></li>
+            <li><a href="/uploads/user/<%= currentUser.id %>/file/create" class="navLink">Upload file</a></li>
+            <li><a href="/uploads/user/logout" class="navLink">Log out</a></li>
+        <% } %>
+    </ul>
+</nav>

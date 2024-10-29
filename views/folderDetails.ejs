@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1><%= folder.name %></h1>
       <a href="/uploads/user/<%= currentUser.id %>/file/create" class="createFile">Upload a new file</a>
       <a href="/uploads/folder/<%= folder.id %>/update" class="updateFolder">Rename folder</a>
@@ -30,6 +31,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

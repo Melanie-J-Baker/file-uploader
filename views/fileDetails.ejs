@@ -3,21 +3,25 @@
   <% if (currentUser) { %>
     <head>
       <title><%= file.name %></title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/fileDetails.css" />
     </head>
     <body>
-      <h1><%= file.name %></h1>
-      <img src="<%= file.url %>" class="fileImage" alt="File preview">
-      <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
-      <p class="fileDetail">Upload time: <%= file.upload_time %></p>
-      <button type="button">Download file</button>
-      <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Update file</a>
-      <a href="/uploads/file/<%= file.id %>/delete" class="deleteFile">Delete file</a>
-      <% if (file.folder_id) { %>
-        <a href="/uploads/folder/<%= file.folder_id %>" class="folderLink">Go back to folder</a>
-      <% } else { %>
-        <a href="/uploads/user/<%= currentUser.id %>/home" class="homeLink">Go back to home</a>
-      <% } %>
+      <%- include('navbar') %>
+      <div class="fileDetails">
+        <h1><%= file.name %></h1>
+        <img src="<%= file.url %>" class="fileImage" alt="File preview">
+        <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
+        <p class="fileDetail">Uploaded on: <%= file.upload_time.toUTCString() %></p>
+        <button type="button" class="downloadBtn">Download file</button>
+        <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Update file</a>
+        <a href="/uploads/file/<%= file.id %>/delete" class="deleteFile">Delete file</a>
+        <% if (file.folder_id) { %>
+          <a href="/uploads/folder/<%= file.folder_id %>" class="backLink">Go back to folder</a>
+        <% } else { %>
+          <a href="/uploads/user/<%= currentUser.id %>/home" class="backLink">Go back to home</a>
+        <% } %>
+      </div>
     </body>
   <% } else { %>
     <head>
@@ -25,6 +29,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>

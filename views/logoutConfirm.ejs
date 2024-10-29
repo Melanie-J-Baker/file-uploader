@@ -6,6 +6,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Are you sure you want to log out?</h1>
       <button type="button">Log out</button>
       <a href="/uploads/user/<%= currentUser.id %>/home" class="homeLink">Go back</a>
@@ -16,6 +17,7 @@
       <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
+      <%- include('navbar') %>
       <h1>Page not accessible</h1>
       <a href="/uploads" class="welcomeLink">Back to welcome page</a>
     </body>
