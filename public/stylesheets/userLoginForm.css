@@ -1,0 +1,63 @@
+.userLoginForm, .userLoggedIn {
+    margin: 180px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light);
+}
+
+.loginTitle {
+    font-size: 4rem;
+    text-align: center;
+    margin: 100px 0px;
+    padding: 20px;
+    border: 2px solid var(--highlight2);
+    border-radius: 15px;
+}
+
+.homeLink {
+    background-color: var(--dark);
+    border-radius: 15px;
+    padding: 15px 40px;
+    font-size: 2.5rem;
+    margin: 100px 0px;
+}
+
+.homeLink:hover {
+    cursor: pointer;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.formInputsDiv {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.loginLabel {
+    font-size: 3rem;
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+
+.loginInput {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.loginBtn {
+    background-color: var(--dark);
+    color: var(--highlight2);
+    margin: 100px 0px;
+    font-size: 3rem;
+    border-radius: 15px;
+    padding: 20px 40px;
+    text-align: center;
+}

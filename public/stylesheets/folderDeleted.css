@@ -1,0 +1,8 @@
+.folderDeleted {
+    margin: 180px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light);
+}

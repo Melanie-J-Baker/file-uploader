@@ -3,37 +3,46 @@
   <% if (currentUser) { %>
     <head>
       <title><%= folder.name %></title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/folderDetails.css" />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1><%= folder.name %></h1>
-      <a href="/uploads/user/<%= currentUser.id %>/file/create" class="createFile">Upload a new file</a>
-      <a href="/uploads/folder/<%= folder.id %>/update" class="updateFolder">Rename folder</a>
-      <a href="/uploads/folder/<%= folder.id %>/delete" class="deleteFolder">Delete folder</a>
-      <h3>Files</h3>
-      <% if (files) { %>
-        <% files.map((file) => { %>
-          <div class="file" id="<%= file.id %>">
-            <a href="/uploads/file/<%= file.id %>" class="fileLink"><%= file.name %></a>
-            <p class="fileListDetail">Size: <%= file.size_mb %> mb</p>
-            <p class="fileListDetail">Upload time: <%= file.upload_time %></p>
+      <div class="folderDetails">
+        <h1 class="title">Folder details</h1>
+        <h2 class="folderName"><%= folder.name %></h1>
+        <div class="folderOptions">
+          <a href="/uploads/user/<%= currentUser.id %>/file/create" class="folderOption">Upload file</a>
+          <a href="/uploads/folder/<%= folder.id %>/update" class="folderOption">Rename folder</a>
+          <a href="/uploads/folder/<%= folder.id %>/delete" class="folderOption">Delete folder</a>
+        </div>
+        <h3 class="filesTitle">Files</h3>
+        <% if (files) { %>
+          <div class="files">
+            <% files.map((file) => { %>
+              <div class="file" id="<%= file.id %>">
+                <a href="/uploads/file/<%= file.id %>" class="fileLink fileListDetail"><%= file.name %></a>
+                <div class="fileDivBottom">
+                  <div class="fileListDetails">
+                    <p class="fileListDetail">Size: <%= file.size_mb %> mb</p>
+                    <p class="fileListDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>
+                  </div>
+                  <div class="fileLinkBtnDiv">
+                    <a href="/uploads/file/<%= file.id %>" class="fileLinkBtn">See details</a>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
           </div>
-        <% }) %>
-      <% } else { %>
-        <div class="noFiles">No files uploaded</div>
-      <% } %>
-      <a href="/uploads/user/<%= currentUser %>/home" class="homeLink">Back to home</a>
+        <% } else { %>
+          <div class="noFiles">
+            <h1 class="noFilesText">No files uploaded yet!<a href="/uploads/user/<%= currentUser.id %>/file/create" class="noFilesLink">Upload a file</a></h1>
+          </div>
+        <% } %>
+        <a href="/uploads/user/<%= currentUser %>/home" class="backLink">Back to home</a>
+      </div>
     </body>
   <% } else { %>
-    <head>
-      <title>Page not accessible</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
-    </head>
-    <body>
-      <%- include('navbar') %>
-      <h1>Page not accessible</h1>
-      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
-    </body>
+      <%- include('pageNotFound') %>
   <% } %>
 </html>

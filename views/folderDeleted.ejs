@@ -2,11 +2,14 @@
 <html>
   <head>
     <title>Folder deleted</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet"  href="/stylesheets/folderDeleted.css" />
   </head>
   <body>
     <%- include('navbar') %>
-    <h3>Folder successfully deleted</h3>
-    <a href="/uploads/user/<%= currentUser %>/home" class="welcomeLink">Go back</a>
+    <div class="folderDeleted">
+      <h1 class="folderDeletedTitle">Folder successfully deleted</h3>
+      <a href="/uploads/user/<%= currentUser %>/home" class="welcomeLink">Go back to home</a>
+    </div>
   </body>
 </html>

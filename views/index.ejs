@@ -3,14 +3,18 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
     <%- include('navbar') %>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>Upload and store your files here</p>
-    <p>Get started:</p>
-    <a href="/uploads/user/create" class="welcomeLink">Create an account</a>
-    <a href="/uploads/user/login" class="welcomeLink">Log in</a>
+    <div class="welcome">
+      <h1 class="welcomeTitle"><%= title %></h1>
+      <p class="welcomeHeading">Welcome to <%= title %></p>
+      <p class="welcomeText">Upload and store your files here</p>
+      <div class="welcomeLinkDiv">
+        <a href="/uploads/user/create" class="welcomeLink">Create account</a>
+        <a href="/uploads/user/login" class="welcomeLink">Log in</a>
+      </div>
+    </div>
   </body>
 </html>

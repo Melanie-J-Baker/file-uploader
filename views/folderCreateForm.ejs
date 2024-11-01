@@ -3,30 +3,25 @@
   <% if (currentUser) { %>
     <head>
       <title>Create new folder</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/folderCreateForm.css" />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Create new folder</h1>
-      <form id="createFolder" action="/uploads/user/<%= currentUser.id %>/folder/create" method="post">
-        <div>
-          <label class="createFolderLabel" for="name">Name</label>
-          <input id="name" name="name" type="text" class="createFolderInput" required autocomplete>
-        </div>
-          <button type="submit" class="createFolderBtn">Create Folder</button>
-      </form>
-      <a href="/uploads/user/<%= currentUser %>/home" class="cancel">Cancel</a>
-      <p class="message"><%= message %></p>
+      <div class="createFolder">
+        <h1 class="createFolderTitle">Create new folder</h1>
+        <form id="createFolder" action="/uploads/user/<%= currentUser.id %>/folder/create" method="post">
+          <div class="inputDiv">
+            <label class="createFolderLabel" for="name">Name</label>
+            <input id="name" name="name" type="text" class="createFolderInput" required autocomplete>
+          </div>
+            <button type="submit" class="createFolderBtn">Create Folder</button>
+        </form>
+        <a href="/uploads/user/<%= currentUser %>/home" class="cancelBtn">Cancel</a>
+        <p class="message"><%= message %></p>
+      </div>
     </body>
   <% } else { %>
-    <head>
-      <title>Page not accessible</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
-    </head>
-    <body>
-      <%- include('navbar') %>
-      <h1>Page not accessible</h1>
-      <a href="/uploads" class="welcomeLink">Back to welcome page</a>
-    </body>
+    <%- include('pageNotFound') %>
   <% } %>
 </html>

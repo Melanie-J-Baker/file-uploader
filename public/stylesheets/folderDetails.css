@@ -1,0 +1,161 @@
+.folderDetails {
+    margin: 180px 30px 30px 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--light);
+    height: 95%;
+}
+
+.title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 3.5rem;
+    border: 4px solid var(--highlight2);
+    padding: 20px;
+    width: 90%;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.folderName {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 3rem;
+    width: 100%;
+    text-align: center;
+    background-color: var(--highlight1);
+    padding: 10px 0px;
+}
+
+.folderOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.folderOption {
+    background-color: var(--dark);
+    margin: 10px;
+    font-size: 2.3rem;
+    border-radius: 15px;
+    padding: 15px 30px;
+    text-align: center;
+    text-wrap: nowrap;
+} 
+
+.folderOption:hover {
+    cursor: pointer;
+}
+
+.filesTitle {
+    font-size: 2.5rem;
+    padding: 10px;
+    border: 2px solid var(--highlight2);
+    border-radius: 15px;
+}
+
+.files {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+}
+
+.file {
+    font-size: 1.8rem;
+    background-color: white;
+    color: var(--dark);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.fileDivBottom {
+    display: flex;
+    flex-direction: row;
+}
+
+.fileListDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 70%;
+}
+
+.fileListDetail {
+    margin: 10px;
+    width: 100%;
+}
+
+.fileLink {
+    font-size: 2rem;
+    font-weight: bold;
+    width: 100%;
+}
+
+.fileLink:hover {
+    cursor: pointer;
+}
+
+.fileLinkBtnDiv {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fileLinkBtn {
+    background-color: var(--dark);
+    font-size: 2.2rem;
+    border-radius: 15px;
+    padding: 15px 20px;
+    text-align: center;
+    margin: 10px;
+    text-wrap: nowrap;
+}
+
+.fileLinkBtn:hover {
+    cursor: pointer;
+}
+
+.noFiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.noFilesText {
+    font-size: 2.5rem;
+}
+
+.noFilesLink {
+    color: var(--highlight2);
+}
+
+.noFilesLink:hover {
+    color: var(--highlight1);
+    cursor: pointer;
+}
+
+.backLink {
+    background-color: var(--dark);
+    border-radius: 15px;
+    padding: 15px 30px;
+    margin: 20px;
+    font-size: 2.3rem;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.backLink:hover {
+    cursor: pointer;
+}

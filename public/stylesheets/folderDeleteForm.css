@@ -1,0 +1,45 @@
+.deleteFolderDiv {
+    margin: 180px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light);
+}
+
+.deleteFolderTitle {
+    font-size: 3rem;
+    padding: 20px;
+    border: 2px solid var(--highlight2);
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.deleteFolderBtn {
+    background-color: var(--dark);
+    color: var(--highlight2);
+    margin: 50px 0px;
+    font-size: 3rem;
+    border-radius: 15px;
+    padding: 15px 30px;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.deleteFolderBtn:hover {
+    color: var(--highlight1);
+    cursor: pointer;
+}
+
+.cancelBtn {
+    background-color: var(--dark);
+    border-radius: 15px;
+    padding: 15px 40px;
+    font-size: 2.5rem;
+    margin-bottom: 100px;
+}
+
+.cancelBtn:hover {
+    cursor: pointer;
+}
