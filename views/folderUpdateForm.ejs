@@ -2,21 +2,24 @@
 <html>
   <% if (currentUser) { %>
     <head>
-      <title>Update folder</title>
+      <title>Rename folder</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/folderUpdateForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Update folder: <%=folder.name %></h1>
-      <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
-        <div>
-          <label class="updateFolderLabel" for="name">Name</label>
-          <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>" required autocomplete>
-          <button type="submit" class="updateFolderBtn">Update Folder</button>
-        </div>
-      </form>
-      <a href="/uploads/folder/<%= folder.id %>" class="cancel">Cancel</a>
-      <p class="message"><%= message %></p>
+      <div class="updateFolder">
+        <h1 class="title">Rename folder: <%=folder.name %></h1>
+        <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
+          <div class="inputDiv">
+            <label class="updateFolderLabel" for="name">Name</label>
+            <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>" required autocomplete>
+          </div>
+            <button type="submit" class="updateFolderBtn">Rename Folder</button>
+        </form>
+        <a href="/uploads/folder/<%= folder.id %>" class="cancelBtn">Cancel</a>
+        <p class="message"><%= message %></p>
+      </div>
     </body>
   <% } else { %>
     <%- include('pageNotFound') %>

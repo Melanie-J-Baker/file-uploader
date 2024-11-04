@@ -1,4 +1,4 @@
-.createFolder {
+.createUser {
     margin: 180px 30px 30px 30px;
     display: flex;
     flex-direction: column;
@@ -7,56 +7,77 @@
     background-color: var(--light);
 }
 
-.createFolderTitle {
+.title {
     font-size: 4rem;
     text-align: center;
-    margin: 100px 20px;
+    margin: 50px 20px 20px 20px;
     padding: 20px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
 }
 
-#createFolder {
+#createUser {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 100%;
+    padding: 20px;
 }
 
-.inputDiv {
+.inputsDiv {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.createFolderLabel {
+.createUserLabel {
     font-size: 3rem;
-    margin-right: 20px;
+    margin: 20px;
 }
 
-.createFolderInput {
-    width: 70%;
+.createUserInput {
+    width: 90%;
     height: 70px;
-    font-size: 2.5rem;
+    font-size: 3rem;
     padding-left: 20px;
+    margin: 20px;
 }
 
-.createFolderBtn {
+.createUserBtn {
     background-color: var(--dark);
     color: var(--highlight2);
-    margin: 100px 0px;
+    margin: 50px 0px 20px 0px ;
     font-size: 3rem;
     border-radius: 15px;
     padding: 15px 30px;
     text-align: center;
     text-wrap: nowrap;
 }
-    
-.createFolderBtn:hover {
+
+.createUserBtn:hover {
     color: var(--highlight1);
     cursor: pointer;
+}
+
+.loginLinkDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginLinkText {
+    font-size: 3rem;
+    margin-right: 20px;
+}
+
+#loginLink {
+    color: var(--dark);
+    text-decoration: underline;
+    font-size: 3rem;
 }
 
 .cancelBtn {
@@ -64,7 +85,7 @@
     border-radius: 15px;
     padding: 15px 40px;
     font-size: 2.5rem;
-    margin: 100px 0px;
+    margin: 20px 0px;
 }
 
 .cancelBtn:hover {
@@ -76,3 +97,4 @@
     font-style: italic;
     margin-bottom: 50px;
 }
+

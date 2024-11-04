@@ -3,27 +3,29 @@
   <head>
     <title>Create account</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/userCreateForm.css' />
   </head>
   <body>
     <%- include('navbar') %>
-    <h1>Create account</h1>
-    <form id="createUser" action="/uploads/user/create" method="post">
-      <div>
-        <label class="createUserLabel" for="username">Username</label>
-        <input id="username" name="username" type="text" class="createUserInput" required autocomplete>
+    <div class="createUser">
+      <h1 class="title">Create account</h1>
+      <form id="createUser" action="/uploads/user/create" method="post">
+        <div class="inputsDiv">
+          <label class="createUserLabel" for="username">Username</label>
+          <input id="username" name="username" type="text" class="createUserInput" required autocomplete>
+          <label class="createUserLabel" for="password">Password</label>
+          <input id="password" name="password" type="password" class="createUserInput" required>
+          <label class="createUserLabel" for="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" name="confirmPassword" type="password" class="createUserInput" required>
+        </div>
+          <button type="submit" class="createUserBtn">Create Account</button>
+      </form>
+      <div class="loginLinkDiv">
+        <p class="loginLinkText">Already a user? </p>
+        <a href="/uploads/user/login" id="loginLink">Log in</a>
       </div>
-      <div>
-        <label class="createUserLabel" for="password">Password</label>
-        <input id="password" name="password" type="password" class="createUserInput" required>
-      </div>
-      <div>
-        <label class="createUserLabel" for="confirmPassword">Confirm password</label>
-        <input id="confirmPassword" name="confirmPassword" type="password" class="createUserInput" required>
-      </div>
-        <button type="submit" class="createUserBtn">Create Account</button>
-    </form>
-    <p>Already a user? </p><a href="/uploads/user/login" class="loginLink">Log in</a>
-    <a href="/uploads" class="cancel">Cancel</a>
-    <p class="message"><%= message %></p>
+      <a href="/uploads" class="cancelBtn">Cancel</a>
+      <p class="message"><%= message %></p>
+    </div>
   </body>
 </html>

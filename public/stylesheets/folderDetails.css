@@ -10,24 +10,13 @@
 }
 
 .title {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 30px 20px;
     font-size: 3.5rem;
     border: 4px solid var(--highlight2);
     padding: 20px;
     width: 90%;
     text-align: center;
     border-radius: 15px;
-}
-
-.folderName {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-size: 3rem;
-    width: 100%;
-    text-align: center;
-    background-color: var(--highlight1);
-    padding: 10px 0px;
 }
 
 .folderOptions {

@@ -10,7 +10,7 @@
 .uploadFileTitle {
     font-size: 4rem;
     text-align: center;
-    margin: 100px 0px;
+    margin: 100px 20px;
     padding: 20px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
@@ -105,4 +105,10 @@ option {
 
 .cancelBtn:hover {
     cursor: pointer;
+}
+
+.message {
+    font-size: 2.5rem;
+    font-style: italic;
+    margin-bottom: 50px;
 }

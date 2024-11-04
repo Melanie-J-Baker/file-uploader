@@ -13,7 +13,7 @@
     border: 2px solid var(--highlight2);
     border-radius: 15px;
     text-align: center;
-    margin-top: 100px;
+    margin: 100px 20px 20px 20px;
 }
 
 .deleteFolderBtn {

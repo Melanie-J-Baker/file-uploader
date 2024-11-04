@@ -127,9 +127,11 @@ exports.folder_update_post = [
                     message: "A folder with that name already exists",
                 })
             } else {
-                const { folder } = req.body;
-                folder.id = folder_id;
-                await db.updateFolder(folder)
+                const newFolder = {
+                    name: req.body.name,
+                    id: folder_id,
+                };
+                await db.updateFolder(newFolder)
                 res.redirect(`/uploads/folder/${folder_id}`);
             }
         } catch (err) {

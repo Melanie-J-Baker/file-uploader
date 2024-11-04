@@ -7,26 +7,19 @@
   </head>
   <body>
     <%- include('navbar') %>
-    <% if (!currentUser) { %>
-      <div class="userLoginForm">
-        <h1 class="loginTitle">Log in</h1>
-        <form id="login" action="/uploads/user/login" method="post">
-          <div class="formInputsDiv">
-            <label class="loginLabel" for="username">Username</label>
-            <input id="username" name="username" type="text" class="loginInput" required autocomplete>
-            <label class="loginLabel" for="password">Password</label>
-            <input id="password" name="password" type="password" class="loginInput" required autocomplete>
-          </div>
-          <button type="submit" class="loginBtn">Log in</button>
-        </form>
-        <a href="/uploads/" class="cancel">Cancel</a>
-        <p class="message"><%= message %></p>
-      </div>
-    <% } else { %>
-      <div class="userLoggedIn">
-        <h1 class="loginTitle">Successfully logged in</h1>
-        <a href="/uploads/user/<%= currentUser.id %>/home" class="homeLink">Continue to home</a>
-    <% } %>
-      </div>
+    <div class="userLoginForm">
+      <h1 class="loginTitle">Log in</h1>
+      <form id="login" action="/uploads/user/login" method="post">
+        <div class="formInputsDiv">
+          <label class="loginLabel" for="username">Username</label>
+          <input id="username" name="username" type="text" class="loginInput" required autocomplete>
+          <label class="loginLabel" for="password">Password</label>
+          <input id="password" name="password" type="password" class="loginInput" required autocomplete>
+        </div>
+        <button type="submit" class="loginBtn">Log in</button>
+      </form>
+      <a href="/uploads/" class="cancelBtn">Cancel</a>
+      <p class="message"><%= message %></p>
+    </div>
   </body>
 </html>

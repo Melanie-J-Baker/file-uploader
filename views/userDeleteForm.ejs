@@ -4,15 +4,18 @@
     <head>
       <title>Delete user</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/userDeleteForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Delete user</h1>
-      <%= currentUser.username %>
-      <form id="deleteUser" action="/uploads/user/<%= currentUser.id %>/delete" method="post">
-          <button type="submit" class="deleteUserBtn">Delete User</button>
-      </form>
-      <a href="/uploads/user/<%= currentUser %>/home" class="cancel">Cancel</a>
+      <div class="deleteUser">
+        <h1 class="title">Delete user: <%= currentUser.username %></h1>
+        <p class="confirmText">Are you sure you want to delete ths account?</p>
+        <form id="deleteUser" action="/uploads/user/<%= currentUser.id %>/delete" method="post">
+            <button type="submit" class="deleteUserBtn">Delete User</button>
+        </form>
+        <a href="/uploads/user/<%= currentUser %>/home" class="cancelBtn">Cancel</a>
+      </div>
     </body>
   <% } else { %>
     <%- include('pageNotFound') %>

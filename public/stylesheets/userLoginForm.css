@@ -1,4 +1,4 @@
-.userLoginForm, .userLoggedIn {
+.userLoginForm {
     margin: 180px 30px 30px 30px;
     display: flex;
     flex-direction: column;
@@ -10,22 +10,10 @@
 .loginTitle {
     font-size: 4rem;
     text-align: center;
-    margin: 100px 0px;
-    padding: 20px;
+    margin: 100px 20px;
+    padding: 30px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
-}
-
-.homeLink {
-    background-color: var(--dark);
-    border-radius: 15px;
-    padding: 15px 40px;
-    font-size: 2.5rem;
-    margin: 100px 0px;
-}
-
-.homeLink:hover {
-    cursor: pointer;
 }
 
 #login {
@@ -36,9 +24,10 @@
 }
 
 .formInputsDiv {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .loginLabel {
@@ -48,8 +37,10 @@
 }
 
 .loginInput {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
+    font-size: 3rem;
+    height: 70px;
+    margin: 20px;
+    padding-left: 20px;
 }
 
 .loginBtn {
@@ -60,4 +51,22 @@
     border-radius: 15px;
     padding: 20px 40px;
     text-align: center;
+}
+
+.cancelBtn {
+    background-color: var(--dark);
+    border-radius: 15px;
+    padding: 15px 40px;
+    font-size: 2.5rem;
+    margin: 50px 0px;
+}
+
+.cancelBtn:hover {
+    cursor: pointer;
+}
+
+.message {
+    font-size: 3rem;
+    font-style: italic;
+    margin-bottom: 100px;
 }

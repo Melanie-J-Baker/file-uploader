@@ -4,28 +4,25 @@
     <head>
       <title>Update account details</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/userUpdateForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Update <%= currentUser.username %>'s account</h1>
-      <form id="updateUser" action="/uploads/user/<%= currentUser.id %>/update" method="post">
-        <div>
-          <label class="updateUserLabel" for="newUsername">New Username</label>
-          <input id="newUsername" value="<%= currentUser.username %>" name="newUsername" type="text" class="updateUserInput" required autocomplete>
-        </div>
-        <div>
-          <label class="updateUserLabel" for="newPassword">New Password</label>
-          <input id="newPassword" name="newPassword" type="password" class="updateUserInput" required autocomplete >
-        </div>
-        <div>
-          <label class="updateUserLabel" for="confirmNewPassword">Confirm password</label>
-          <input id="confirmNewPassword" name="confirmNewPassword" type="password" class="updateUserInput" required autocomplete >
-        </div>
-          <button type="submit" class="updateUserBtn">Update User</button>
-      </form>
-      <a href="/uploads/user/<%= currentUser.id %>/delete" class="deleteUserLink">Delete Account</a>
-      <a href="/uploads/user/<%=currentUser.id %>/home" class="cancel">Cancel</a>
-      <p class="message"><%= message %></p>
+      <div class="updateUser">
+        <h1 class="title">Update <%= currentUser.username %>'s account</h1>
+        <form id="updateUser" action="/uploads/user/<%= currentUser.id %>/update" method="post">
+            <label class="updateUserLabel" for="newUsername">New Username</label>
+            <input id="newUsername" name="newUsername" type="text" class="updateUserInput" required autocomplete>
+            <label class="updateUserLabel" for="newPassword">New Password</label>
+            <input id="newPassword" name="newPassword" type="password" class="updateUserInput" autocomplete >
+            <label class="updateUserLabel" for="confirmNewPassword">Confirm password</label>
+            <input id="confirmNewPassword" name="confirmNewPassword" type="password" class="updateUserInput" autocomplete >
+            <button type="submit" class="updateUserBtn">Update User</button>
+        </form>
+        <a href="/uploads/user/<%= currentUser.id %>/delete" class="deleteUserLink">Delete Account</a>
+        <a href="/uploads/user/<%=currentUser.id %>/home" class="cancelBtn">Cancel</a>
+        <p class="message"><%= message %></p>
+      </div>
     </body>
   <% } else { %>
     <%- include('pageNotFound') %>

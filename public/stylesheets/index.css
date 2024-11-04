@@ -10,7 +10,7 @@
 .welcomeTitle {
     font-size: 7rem;
     text-align: center;
-    margin: 100px 0px 50px 0px;
+    margin: 100px 20px 50px 20px;
     padding: 10px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
