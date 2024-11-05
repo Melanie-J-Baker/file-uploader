@@ -11,14 +11,12 @@
     <body>
       <%- include('navbar') %>
       <div class="pageContainer">
-        <h1 class="title">Rename folder: <%=folder.name %></h1>
+        <h1 class="title"><span class="boldText">Rename folder:</span> <%=folder.name %></h1>
         <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
-          <div class="inputDiv">
-            <label class="updateFolderLabel" for="name">Name</label>
-            <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>" required autocomplete>
-          </div>
-            <button type="submit" class="updateFolderBtn">Rename Folder</button>
-            <p class="message"><%= message %></p>
+          <label class="updateFolderLabel" for="name">Name</label>
+          <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>" required autocomplete>
+          <button type="submit" class="updateFolderBtn">Rename Folder</button>
+          <p class="message"><%= message %></p>
         </form>
         <a href="/uploads/folder/<%= folder.id %>" class="cancelBtn">Cancel</a>
       </div>

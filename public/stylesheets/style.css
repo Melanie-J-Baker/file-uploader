@@ -59,7 +59,6 @@ nav {
   width: 100vw;
   height: 60px;
   background-color: var(--dark);
-  font-size: 3rem;
   border-bottom: 3px solid var(--highlight2);
   position: fixed;
   top: 0;
@@ -78,18 +77,47 @@ ul {
   align-items: center;
 }
 
+.navLink {
+  font-size: 1.1rem;
+}
+
 .backLink {
   background-color: var(--dark);
   color: var(--light);
-  margin: 20px;
-  font-size: 3rem;
+  margin: 10px;
+  font-size: 1.5rem;
   border-radius: 15px;
-  padding: 15px 40px;
+  padding: 10px 20px;
 }
 
 .backLink:hover {
   color: var(--highlight1);
   cursor: pointer;
+}
+
+.cancelBtn {
+  background-color: var(--dark);
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  margin: 10px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  border-image: initial;
+}
+
+.cancelBtn:hover {
+  cursor: pointer;
+}
+
+.message {
+  font-style: italic;
+  text-align: center;
+}
+
+.boldText {
+  font-weight: 800;
 }
 
 @media screen and (min-width: 768px) and (orientation: landscape) {

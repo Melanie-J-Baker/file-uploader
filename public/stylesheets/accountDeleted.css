@@ -1,12 +1,8 @@
 .title {
-    font-size: 4rem;
+    font-size: 3rem;
     text-align: center;
-    margin: 50px 20px 20px 20px;
+    margin: 20px;
     padding: 20px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
-}
-
-.backLink {
-    margin: 50px;
 }

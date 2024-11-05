@@ -1,45 +1,39 @@
 .title {
-    font-size: 3rem;
-    padding: 20px;
+    font-size: 2rem;
+    padding: 10px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
     text-align: center;
-    margin: 100px 20px 20px 20px;
+    margin: 10px;
+}
+
+span.boldText {
+    font-size: 2rem;
 }
 
 .fileDetail {
-    font-size: 2rem;
-    width: 100%;
-    padding: 20px;
+    font-size: 1.5rem;
+    padding: 10px;
     text-align: center;
 }
 
 .deleteFileBtn {
     background-color: var(--dark);
     color: var(--highlight2);
-    margin: 50px 0px;
-    font-size: 3rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
     border-radius: 15px;
-    padding: 15px 30px;
+    padding: 10px 20px;
     text-align: center;
     text-wrap: nowrap;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
 .deleteFileBtn:hover {
     color: var(--highlight1);
-    cursor: pointer;
-}
-
-.cancelBtn {
-    background-color: var(--dark);
-    border-radius: 15px;
-    padding: 15px 50px;
-    font-size: 3rem;
-    margin-bottom: 100px;
-    text-align: center;
-    width: 200px;
-}
-
-.cancelBtn:hover {
     cursor: pointer;
 }

@@ -1,11 +1,14 @@
 .errorTitle {
-    font-size: 4rem;
+    font-size: 0.8rem;
+    width: 100%;
 }
 
 .errorStatus {
-    font-size: 3rem;
+    font-size: 0.5rem;
+    max-width: 100%;
 }
 
 pre {
-    font-size: 2.5rem;
+    font-size: 0.5rem;
+    max-width: 100%;
 }

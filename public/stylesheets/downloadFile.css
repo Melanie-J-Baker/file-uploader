@@ -1,7 +1,7 @@
 .title {
-    font-size: 4rem;
+    font-size: 2rem;
     text-align: center;
-    margin: 50px 20px 20px 20px;
+    margin: 20px;
     padding: 20px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;

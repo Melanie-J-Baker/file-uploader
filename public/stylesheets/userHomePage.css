@@ -3,7 +3,8 @@
     width: 100%;
     text-align: center;
     border: 2px solid var(--highlight2);
-    padding: 20px;
+    padding: 10px;
+    margin: 10px;
     border-radius: 15px;
 }
 
@@ -13,18 +14,21 @@
     justify-content: center;
     align-content: center;
     width: 100%;
-    border-bottom: 4px solid var(--highlight2);
-    padding-bottom: 30px;
-    margin-top: 30px;
+    border-bottom: 4px solid var(--highlight1);
+    padding-bottom: 20px;
 }
 
 .homeLink {
     background-color: var(--dark);
     border-radius: 15px;
-    padding: 15px 40px;
-    font-size: 2.5rem;
-    margin: 30px 30px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    margin: 10px;
     text-wrap: nowrap;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
 .homeLink:hover, .createFolderLink:hover {
@@ -34,17 +38,28 @@
 .createFolderLink {
     background-color: var(--dark);
     border-radius: 15px;
-    padding: 15px 40px;
-    font-size: 2.5rem;
-    margin: 30px 30px 100px 30px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    margin: 20px;
     text-wrap: nowrap;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
 .foldersTitle {
-    font-size: 3rem;
-    padding: 20px;
+    font-size: 2rem;
+    padding: 10px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
+    margin-top: 20px;
+
+}
+
+.folders {
+    margin-bottom: 50px;
+    width: 100%;
 }
 
 .folder {
@@ -54,20 +69,24 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .folderName {
     color: var(--dark);
-    font-size: 2.5rem;
-    margin-left: 30px;
+    font-size: 1.5rem;
+    padding-left: 10px;
 }
 
 .folderLink {
     background-color: var(--dark);
-    padding: 15px 40px;
-    font-size: 2.5rem;
-    margin: 30px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    margin: 10px;
     text-wrap: nowrap;
     border-radius: 15px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }

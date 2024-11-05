@@ -11,7 +11,7 @@
     <body>
       <%- include('navbar') %>
       <div class="pageContainer">
-        <h1 class="title">Move file: <%= file.name %> </h1>
+        <h1 class="title"><span class="boldText">Move file:</span> <%= file.name %> </h1>
         <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
           <label class="updateFileLabel" for="folder_select">Select folder</label>
           <select id="folder_select" name="folder_id">

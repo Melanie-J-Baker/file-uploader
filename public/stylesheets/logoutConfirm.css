@@ -9,8 +9,8 @@
     padding: 15px 40px;
     font-size: 3.5rem;
     margin: 20px 0px;
-}
-
-.backLink {
-    margin: 50px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }

@@ -1,11 +1,18 @@
 .title {
-    margin: 30px 20px;
-    font-size: 3.5rem;
-    border: 4px solid var(--highlight2);
-    padding: 20px;
+    margin: 10px;
+    font-size: 1.8rem;
+    border: 2px solid var(--highlight2);
+    padding: 10px;
     width: 90%;
     text-align: center;
     border-radius: 15px;
+}
+
+.folderName {
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 10px;
+    text-align: center;
 }
 
 .folderOptions {
@@ -13,16 +20,19 @@
     flex-direction: row;
     justify-content: center;
     align-content: center;
+    border-bottom: 2px solid var(--highlight1);
+    width: 90%;
+    padding: 20px 0px;
 }
 
 .folderOption {
     background-color: var(--dark);
-    margin: 10px;
-    font-size: 2.3rem;
+    font-size: 1rem;
     border-radius: 15px;
-    padding: 15px 30px;
+    padding: 7px 14px;
     text-align: center;
     text-wrap: nowrap;
+    margin: 0px 5px;
 } 
 
 .folderOption:hover {
@@ -30,11 +40,12 @@
 }
 
 .filesTitle {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     padding: 10px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
     text-align: center;
+    margin-top: 20px;
 }
 
 .files {
@@ -45,31 +56,32 @@
 }
 
 .file {
-    font-size: 2rem;
     background-color: white;
     color: var(--dark);
-    margin: 20px;
-    padding: 20px;
+    margin: 10px;
+    padding: 20px 10px 10px 10px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.fileName {
-    font-size: 2.5rem;
+.fileListDetail {
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 1.2rem;
 }
 
-.fileListDetail {
-    margin: 10px;
-    width: 100%;
+span.boldText {
+    font-size: 1.2rem;
 }
 
 .fileLink {
-    font-size: 2.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     width: 100%;
     color: var(--highlight1);
+    text-decoration: underline;
 }
 
 .fileLink:hover {
@@ -77,21 +89,18 @@
     color: var(--highlight2);
 }
 
-.fileLinkBtnDiv {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .fileLinkBtn {
     background-color: var(--dark);
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     border-radius: 15px;
-    padding: 15px 20px;
+    padding: 10px 20px;
     text-align: center;
     margin: 10px;
     text-wrap: nowrap;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
 .fileLinkBtn:hover {
@@ -106,7 +115,7 @@
 }
 
 .noFilesText {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .noFilesLink {
@@ -115,19 +124,5 @@
 
 .noFilesLink:hover {
     color: var(--highlight1);
-    cursor: pointer;
-}
-
-.backLink {
-    background-color: var(--dark);
-    border-radius: 15px;
-    padding: 15px 30px;
-    margin: 20px;
-    font-size: 2.3rem;
-    text-align: center;
-    text-wrap: nowrap;
-}
-
-.backLink:hover {
     cursor: pointer;
 }

@@ -37,7 +37,7 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
         const file_id = parseInt(req.params.id);
         const file = await db.getFileByID(file_id);
         const folder = await db.getFolderByID(file.folder_id);
-        const url = `${process.env.PUBLIC_URL}/fileDownload?id=${file_id}`;
+        const url = `${process.env.PUBLIC_URL}/uploads/file/${file_id}/download`;
         res.render("fileDetails", {
             file: file,
             folder: folder,
@@ -72,6 +72,8 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 // Handle File create on POST
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
+        const user_id = parseInt(req.params.id);
+        const folders = await db.getAllFolders(user_id);
         const filenameExists = await db.getFileByName(req.file.originalname);
         if (!filenameExists) {
             const b64 = Buffer.from(req.file.buffer).toString("base64");
@@ -88,6 +90,7 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
             res.redirect(`/uploads/file/${newFile.id}`);
         } else {
             res.render("fileUploadForm", {
+                folders: folders,
                 message: "That filename is already in use",
             })
         }

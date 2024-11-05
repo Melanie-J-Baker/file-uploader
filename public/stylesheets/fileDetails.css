@@ -1,66 +1,68 @@
 .title {
-    margin-top: 30px 20px 20px 20px;
-    font-size: 3.5rem;
-    border: 4px solid var(--highlight2);
-    padding: 20px;
-    width: 90%;
+    margin: 10px;
+    font-size: 1.8rem;
+    border: 2px solid var(--highlight2);
+    padding: 10px;
     text-align: center;
     border-radius: 15px;
 }
 
 .filename {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    width: 90%;
+    font-size: 1.6rem;
     text-align: center;
+    font-weight: 800;
 }
 
 .fileImage {
     width: 90%;
     height: 60%;
-    border: 4px solid var(--highlight2);
-    margin: 20px 0px;
+    border: 3px solid var(--highlight2);
+    margin: 10px 0px;
+}
+
+span.boldText {
+    font-size: 1.5rem;
 }
 
 .fileDetail {
-    font-size: 2rem;
-    margin: 20px;
-    width: 90%;
+    font-size: 1.5rem;
+    margin: 10px;
     text-align: center;
 }
 
 .downloadLinkDiv {
     background-color: white;
-    padding: 20px 20px;
-    margin: 30px;
-    width: 90%;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 .downloadLinkTitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    margin-bottom: 0;
 }
 
 .downloadLinkText {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
 }
 
 .downloadLinkBtn {
     border: none;
     border-radius: 15px;
-    padding: 15px 40px;
+    padding: 10px 20px;
     background-color: var(--highlight1);
     color: var(--dark);
-    margin: 20px 20px 20px 20px;
-    font-size: 2.5rem;
+    margin: 10px;
+    font-size: 1.5rem;
     text-wrap: nowrap;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
 .downloadLinkBtn:hover {
@@ -74,30 +76,20 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
 }
 
 .updateFile, .deleteFile {
     background-color: var(--dark);
-    margin: 20px;
-    font-size: 3rem;
+    margin: 10px;
+    font-size: 1.5rem;
     border-radius: 15px;
-    padding: 15px 40px;
+    padding: 10px 20px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
 .updateFile:hover, .deleteFile:hover {
-    cursor: pointer;
-}
-
-.backLink {
-    background-color: var(--dark);
-    border-radius: 15px;
-    padding: 15px 40px;
-    margin: 20px;
-    font-size: 3rem;
-    text-wrap: nowrap;
-}
-
-.backLink:hover {
     cursor: pointer;
 }
