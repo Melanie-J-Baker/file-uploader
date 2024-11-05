@@ -37,9 +37,11 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
         const file_id = parseInt(req.params.id);
         const file = await db.getFileByID(file_id);
         const folder = await db.getFolderByID(file.folder_id);
+        const url = `${process.env.PUBLIC_URL}/fileDownload?id=${file_id}`;
         res.render("fileDetails", {
             file: file,
             folder: folder,
+            url: url,
         });
     } catch (err) {
         console.error(err);

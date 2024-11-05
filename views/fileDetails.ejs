@@ -11,12 +11,14 @@
       <div class="fileDetails">
         <h1 class="title">File details</h1>
         <h2 class="filename"><%= file.name %></h2>
-
         <img src="<%= file.url %>" class="fileImage" alt="File preview">
         <p class="fileDetail"><b>Folder:</b> <%= folder.name %></p>
         <p class="fileDetail"><b>Size:</b> <%= file.size_mb %> mb</p>
         <p class="fileDetail"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
-        <button type="button" class="downloadBtn">Download file</button>
+        <div class="downloadLinkDiv">
+          <p class="downloadLinkText">File URL: <span id="fileUrl"><%= url %></span></p>
+          <button class="downloadLinkBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
         <div class="fileOptions">
           <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Move file</a>
           <a href="/uploads/file/<%= file.id %>/delete" class="deleteFile">Delete file</a>
@@ -32,3 +34,14 @@
     <%- include('pageNotFound') %>
   <% } %>
 </html>
+
+<script>
+  function copyToClipboard() {
+      const url = document.getElementById("fileUrl").innerText;
+      navigator.clipboard.writeText(url).then(() => {
+          alert("File URL copied to clipboard");
+      }).catch((err) => {
+          console.error("Error copying to clipboard: ", err);
+      });
+  }
+</script>
