@@ -113,6 +113,11 @@ exports.user_login_post = (req, res, next) => {
     })(req, res, next);
 };
 
+// Logout confirmation on GET
+exports.user_logout_confirm_get = (req, res, next) => {
+    res.render("logoutConfirm");
+} 
+
 // Handle User log out on GET
 exports.user_logout_get = (req, res, next) => {
     req.logout((err) => {

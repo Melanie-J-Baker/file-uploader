@@ -11,8 +11,8 @@
     font-size: 7rem;
     text-align: center;
     margin: 100px 20px 50px 20px;
-    padding: 10px;
-    border: 2px solid var(--highlight2);
+    padding: 30px;
+    border: 4px solid var(--highlight1);
     border-radius: 15px;
 }
 
@@ -29,15 +29,16 @@
     text-align: center;
 }
 
-.welcomeLinkDiv {
+.backLinkDiv {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-bottom: 50px;
 }
 
-.welcomeLink {
+.backLink {
     background-color: var(--dark);
     border-radius: 15px;
     padding: 15px 40px;
@@ -45,6 +46,6 @@
     margin: 100px 20px;
 }
 
-.welcomeLink:hover {
+.backLink:hover {
     cursor: pointer;
 }

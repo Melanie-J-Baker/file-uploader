@@ -1,5 +1,7 @@
-<h1><%= error.message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
 <%- include('navbar') %>
-<a href="/uploads/" class="welcomeLink">Return to welcome page</a>
+<div class="errorPage">
+    <h1 class="errorTitle"><%= error.message %></h1>
+    <h2 class="errorStatus"><%= error.status %></h2>
+    <pre><%= error.stack %></pre>
+    <a href="/uploads/" class="backLink">Return to welcome page</a>
+</div>

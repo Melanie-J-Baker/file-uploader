@@ -21,15 +21,9 @@
             <% files.map((file) => { %>
               <div class="file" id="<%= file.id %>">
                 <a href="/uploads/file/<%= file.id %>" class="fileLink fileListDetail"><%= file.name %></a>
-                <div class="fileDivBottom">
-                  <div class="fileListDetails">
-                    <p class="fileListDetail">Size: <%= file.size_mb %> mb</p>
-                    <p class="fileListDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>
-                  </div>
-                  <div class="fileLinkBtnDiv">
-                    <a href="/uploads/file/<%= file.id %>" class="fileLinkBtn">See details</a>
-                  </div>
-                </div>
+                <p class="fileListDetail">Size: <%= file.size_mb %> mb</p>
+                <p class="fileListDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>
+                <a href="/uploads/file/<%= file.id %>" class="fileLinkBtn">See details</a>
               </div>
             <% }) %>
           </div>

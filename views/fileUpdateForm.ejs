@@ -4,29 +4,28 @@
     <head>
       <title>Move file</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/fileUpdateForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Move file: <%= file.name %> </h1>
-      <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
-        <div>
+      <div class="fileUpdate">
+        <h1 class="title">Move file: <%= file.name %> </h1>
+        <form id="updateFile" action="/uploads/file/<%= file.id %>/update" method="post">
           <label class="updateFileLabel" for="folder_select">Select folder</label>
-          <select id="folder_select" name="folder_select">
-            <ul>
-              <% folders.map((folder) => { %>
-                <% if (folder.id === file.folder_id) { %>
-                  <li><option value="<%= folder.id %>" selected><%= folder.name %></option></li>
-                <% } else { %>
-                  <li><option value="<%= folder.id %>"><%= folder.name %></option></li>
-                <% } %>
-              <% }) %>
-            </ul>
+          <select id="folder_select" name="folder_id">
+            <% folders.map((folder) => { %>
+              <% if (folder.id === file.folder_id) { %>
+                <option value="<%= folder.id %>" selected><%= folder.name %></option>
+              <% } else { %>
+                <option value="<%= folder.id %>"><%= folder.name %></option>
+              <% } %>
+            <% }) %>
           </select>
-        </div>
           <button type="submit" class="updateFileBtn">Move File</button>
-      </form>
-      <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
-      <p class="message"><%= message %></p>
+          <p class="message"><%= message %></p>
+        </form>
+        <a href="/uploads/file/<%= file.id %>" class="cancelBtn">Cancel</a>
+      </div>
     </body>
     <% } else { %>
       <%- include('pageNotFound') %>

@@ -3,10 +3,13 @@
   <head>
     <title>File deleted</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/fileDeleted.css' />
   </head>
   <body>
     <%- include('navbar') %>
-    <h3>File successfully deleted</h3>
-    <a href="/uploads/user/<%= currentUser %>/home" class="welcomeLink">Go back</a>
+    <div class="fileDeleted">
+      <h3 class="title">File successfully deleted</h3>
+      <a href="/uploads/user/<%= currentUser %>/home" class="backLink">Go back</a>
+    </div>
   </body>
 </html>

@@ -16,9 +16,9 @@
             <input id="name" name="name" type="text" class="createFolderInput" required autocomplete>
           </div>
             <button type="submit" class="createFolderBtn">Create Folder</button>
+            <p class="message"><%= message %></p>
         </form>
         <a href="/uploads/user/<%= currentUser %>/home" class="cancelBtn">Cancel</a>
-        <p class="message"><%= message %></p>
       </div>
     </body>
   <% } else { %>

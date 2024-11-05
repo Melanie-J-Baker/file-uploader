@@ -26,13 +26,16 @@ router.get("/user/create", user_controller.user_create_get);
 router.post("/user/create", user_controller.user_create_post);
 
 // GET Login form
-router.get('/user/login', user_controller.user_login_get);
+router.get("/user/login", user_controller.user_login_get);
 
 // Handle User login on POST
-router.post('/user/login', user_controller.user_login_post);
+router.post("/user/login", user_controller.user_login_post);
+
+// Logout confirmation on GET
+router.get("/user/logout/confirm", user_controller.user_logout_confirm_get);
 
 // Handle User log out on GET
-router.get('/user/logout', user_controller.user_logout_get);
+router.get("/user/logout", user_controller.user_logout_get);
 
 // Details of a single user
 router.get("/user/:id", user_controller.user_detail);

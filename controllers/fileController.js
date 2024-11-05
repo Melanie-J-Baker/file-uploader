@@ -37,9 +37,9 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
         const file_id = parseInt(req.params.id);
         const file = await db.getFileByID(file_id);
         const folder = await db.getFolderByID(file.folder_id);
-        const user_id = folder.user_id;
         res.render("fileDetails", {
             file: file,
+            folder: folder,
         });
     } catch (err) {
         console.error(err);
@@ -121,13 +121,13 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
 exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
         const file_id = parseInt(req.params.id);
-        const oldFile = getFileByID(file_id);
-        const folder = await db.getFolderByID(file.folder_id);
+        const oldFile = await db.getFileByID(file_id);
+        const folder = await db.getFolderByID(oldFile.folder_id);
         const user = await db.getUserByID(folder.user_id);
         if (req.body.folder_id) {
             const file = {
                 id: file_id,
-                folder_id: req.body.folder_id,
+                folder_id: parseInt(req.body.folder_id),
             };
             const newFile = await db.updateFile(file);
             res.redirect(`/uploads/file/${newFile.id}`);

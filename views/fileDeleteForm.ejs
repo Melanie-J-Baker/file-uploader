@@ -4,16 +4,19 @@
     <head>
       <title>Delete file</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/fileDeleteForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Delete file</h1>
-      <%= file.name %>
-      <p>Size: <%= file.size_mb %> mb</p>
-      <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
-          <button type="submit" class="deleteFileBtn">Delete File</button>
-      </form>
-      <a href="/uploads/file/<%= file.id %>" class="cancel">Cancel</a>
+      <div class="fileDelete">
+        <h1 class="title">Delete file: <%= file.name %></h1>
+        <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
+        <p class="fileDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>
+        <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
+            <button type="submit" class="deleteFileBtn">Delete File</button>
+        </form>
+        <a href="/uploads/file/<%= file.id %>" class="cancelBtn">Cancel</a>
+      </div>
     </body>
   <% } else { %>
     <%- include('pageNotFound') %>

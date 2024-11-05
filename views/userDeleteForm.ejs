@@ -10,7 +10,7 @@
       <%- include('navbar') %>
       <div class="deleteUser">
         <h1 class="title">Delete user: <%= currentUser.username %></h1>
-        <p class="confirmText">Are you sure you want to delete ths account?</p>
+        <p class="confirmText">Are you sure you want to delete this account?</p>
         <form id="deleteUser" action="/uploads/user/<%= currentUser.id %>/delete" method="post">
             <button type="submit" class="deleteUserBtn">Delete User</button>
         </form>

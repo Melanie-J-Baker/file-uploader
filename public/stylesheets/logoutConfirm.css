@@ -1,4 +1,4 @@
-.folderDeleted {
+.logoutConfirm {
     margin: 180px 30px 30px 30px;
     display: flex;
     flex-direction: column;
@@ -10,4 +10,16 @@
 .title {
     font-size: 4rem;
     text-align: center;
+}
+
+.logoutBtn {
+    background-color: var(--dark);
+    border-radius: 15px;
+    padding: 15px 40px;
+    font-size: 3.5rem;
+    margin: 20px 0px;
+}
+
+.backLink {
+    margin: 50px;
 }

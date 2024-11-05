@@ -1,4 +1,4 @@
-.fileUploadForm {
+.fileUpdate {
     margin: 180px 30px 30px 30px;
     display: flex;
     flex-direction: column;
@@ -7,40 +7,31 @@
     background-color: var(--light);
 }
 
-.uploadFileTitle {
-    font-size: 4rem;
-    text-align: center;
-    margin: 100px 20px;
+.title {
+    font-size: 3rem;
     padding: 20px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
+    text-align: center;
+    margin: 100px 20px 20px 20px;
 }
 
-#uploadFile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.inputDiv {
-    width: 100%;
+#updateFile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-.uploadFileLabel {
+.updateFileLabel {
+    margin: 50px 20px;
     font-size: 3rem;
-    font-weight: 800;
+    width: 100%;
+    text-align: center;
 }
 
-.selectFolderLabel {
-    margin-bottom: 50px;
-}
-
-#folder_id {
+#folder_select {
     height: 100px;
     appearance: none;
     -webkit-appearance: none;
@@ -53,44 +44,19 @@
     background-position-y: 5px;
     border: 1px solid var(--dark);
     border-radius: 2px;
-    padding: 0px 20px
+    width: 80%;
+    font-size: 3rem;
+    padding: 0px 20px;
 }
 
 option {
-    font-size: 1rem;
     color: var(--dark)
 }
 
-.fileInputDiv {
-    margin-top: 50px;
-}
-
-.uploadFileInput {
-    width: 90%;
-    height: 70px;
-    font-size: 2.5rem;
-}
-
-#file {
-    margin-top: 50px;
-    font-size: 3rem;
-    height: 100px;
-}
-
-input::file-selector-button {
-    padding: 15px 30px;
-    border: none;
-    color: var(--light);
-    background-color: var(--dark);
-    border-radius: 15px;
-    margin-right: 20px;
-
-}
-
-.uploadFileBtn {
+.updateFileBtn {
     background-color: var(--dark);
     color: var(--highlight2);
-    margin: 50px 0px;
+    margin: 100px 0px;
     font-size: 3rem;
     border-radius: 15px;
     padding: 15px 30px;
@@ -98,7 +64,7 @@ input::file-selector-button {
     text-wrap: nowrap;
 }
 
-.uploadFileBtn:hover {
+.updateFileBtn:hover {
     color: var(--highlight1);
     cursor: pointer;
 }
@@ -108,7 +74,7 @@ input::file-selector-button {
     border-radius: 15px;
     padding: 15px 40px;
     font-size: 2.5rem;
-    margin-bottom: 150px;
+    margin: 50px 0px;
 }
 
 .cancelBtn:hover {

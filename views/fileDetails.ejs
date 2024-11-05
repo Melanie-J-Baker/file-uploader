@@ -11,12 +11,14 @@
       <div class="fileDetails">
         <h1 class="title">File details</h1>
         <h2 class="filename"><%= file.name %></h2>
+
         <img src="<%= file.url %>" class="fileImage" alt="File preview">
-        <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
-        <p class="fileDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>
+        <p class="fileDetail"><b>Folder:</b> <%= folder.name %></p>
+        <p class="fileDetail"><b>Size:</b> <%= file.size_mb %> mb</p>
+        <p class="fileDetail"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
         <button type="button" class="downloadBtn">Download file</button>
         <div class="fileOptions">
-          <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Update file</a>
+          <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Move file</a>
           <a href="/uploads/file/<%= file.id %>/delete" class="deleteFile">Delete file</a>
         </div>
         <% if (file.folder_id) { %>

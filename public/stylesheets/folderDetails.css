@@ -45,6 +45,7 @@
     padding: 10px;
     border: 2px solid var(--highlight2);
     border-radius: 15px;
+    text-align: center;
 }
 
 .files {
@@ -55,7 +56,7 @@
 }
 
 .file {
-    font-size: 1.8rem;
+    font-size: 2rem;
     background-color: white;
     color: var(--dark);
     margin: 20px;
@@ -66,17 +67,8 @@
     width: 100%;
 }
 
-.fileDivBottom {
-    display: flex;
-    flex-direction: row;
-}
-
-.fileListDetails {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 70%;
+.fileName {
+    font-size: 2.5rem;
 }
 
 .fileListDetail {
@@ -85,13 +77,15 @@
 }
 
 .fileLink {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     width: 100%;
+    color: var(--highlight1);
 }
 
 .fileLink:hover {
     cursor: pointer;
+    color: var(--highlight2);
 }
 
 .fileLinkBtnDiv {

@@ -1,4 +1,4 @@
-.folderDeleted {
+.errorPage {
     margin: 180px 30px 30px 30px;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,14 @@
     background-color: var(--light);
 }
 
-.title {
+.errorTitle {
     font-size: 4rem;
-    text-align: center;
+}
+
+.errorStatus {
+    font-size: 3rem;
+}
+
+pre {
+    font-size: 2.5rem;
 }

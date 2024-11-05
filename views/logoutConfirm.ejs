@@ -2,14 +2,17 @@
 <html>
   <% if (currentUser) { %>
     <head>
-      <title>Log out</title>
+      <title>Log out confirmation</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/logoutConfirm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <h1>Are you sure you want to log out?</h1>
-      <button type="button">Log out</button>
-      <a href="/uploads/user/<%= currentUser.id %>/home" class="homeLink">Go back</a>
+      <div class="logoutConfirm">
+        <h1 class="title">Are you sure you want to log out?</h1>
+        <a href="/uploads/user/logout" class="logoutBtn">Log out</button>
+        <a href="/uploads/user/<%= currentUser.id %>/home" class="backLink">Go back</a>
+      </div>
     </body>
   <% } else { %>
     <%- include('pageNotFound') %>

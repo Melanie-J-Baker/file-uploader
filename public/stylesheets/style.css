@@ -67,7 +67,7 @@ ul {
   padding: 0;
 }
 
-.welcomeLink {
+.backLink {
   background-color: var(--dark);
   color: var(--light);
   margin: 20px;
@@ -76,7 +76,7 @@ ul {
   padding: 15px 40px;
 }
 
-.welcomeLink:hover {
+.backLink:hover {
   color: var(--highlight1);
   cursor: pointer;
 }
