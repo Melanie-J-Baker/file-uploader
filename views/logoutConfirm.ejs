@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <% if (currentUser) { %>
     <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Log out confirmation</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <link rel='stylesheet' href='/stylesheets/logoutConfirm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <div class="logoutConfirm">
+      <div class="pageContainer">
         <h1 class="title">Are you sure you want to log out?</h1>
         <a href="/uploads/user/logout" class="logoutBtn">Log out</button>
         <a href="/uploads/user/<%= currentUser.id %>/home" class="backLink">Go back</a>

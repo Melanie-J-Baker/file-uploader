@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <% if (currentUser) { %>
     <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Rename folder</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <link rel='stylesheet' href='/stylesheets/folderUpdateForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <div class="updateFolder">
+      <div class="pageContainer">
         <h1 class="title">Rename folder: <%=folder.name %></h1>
         <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
           <div class="inputDiv">

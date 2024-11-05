@@ -177,3 +177,20 @@ exports.file_delete_post = asyncHandler(async(req, res, next) => {
         });
     }
 });
+
+// Download File on GET
+exports.file_download_get = asyncHandler(async(req, res, next) => {
+    let response;
+    try {
+        response = await cloudinary.search
+            .expression(`public_id=${req.params.id}`)
+            .execute();
+    } catch (error) {
+        console.error(err);
+        res.status(400).render("error", {
+            error: err,
+        });
+        return;
+    }
+    return res.status(200).render("downloadFile", { data: response });
+})

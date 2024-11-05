@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File deleted</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/fileDeleted.css' />
   </head>
   <body>
     <%- include('navbar') %>
-    <div class="fileDeleted">
+    <div class="pageContainer">
       <h3 class="title">File successfully deleted</h3>
       <a href="/uploads/user/<%= currentUser %>/home" class="backLink">Go back</a>
     </div>

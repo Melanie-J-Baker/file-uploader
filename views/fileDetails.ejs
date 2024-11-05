@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <% if (currentUser) { %>
     <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title><%= file.name %></title>
       <link rel="stylesheet" href="/stylesheets/style.css" />
       <link rel="stylesheet" href="/stylesheets/fileDetails.css" />
@@ -9,7 +11,7 @@
     </head>
     <body>
       <%- include('navbar') %>
-      <div class="fileDetails">
+      <div class="pageContainer">
         <h1 class="title">File details</h1>
         <h2 class="filename"><%= file.name %></h2>
         <img src="<%= file.url %>" class="fileImage" alt="File preview">
@@ -17,7 +19,8 @@
         <p class="fileDetail"><b>Size:</b> <%= file.size_mb %> mb</p>
         <p class="fileDetail"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
         <div class="downloadLinkDiv">
-          <p class="downloadLinkText">File URL: <span id="fileUrl"><%= url %></span></p>
+          <p class="downloadLinkTitle">Copy URL to share this file:</h3>
+          <p class="downloadLinkText"><%= url %></p>
           <button class="downloadLinkBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
         </div>
         <div class="fileOptions">

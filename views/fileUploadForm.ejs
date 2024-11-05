@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <% if (currentUser) { %>
     <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Upload file</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <link rel='stylesheet' href='/stylesheets/fileUploadForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <div class="fileUploadForm">
+      <div class="pageContainer">
         <h1 class="uploadFileTitle">Upload file</h1>
         <form id="uploadFile" action="/uploads/user/file/create" method="post" enctype="multipart/form-data">
           <div class="inputDiv">

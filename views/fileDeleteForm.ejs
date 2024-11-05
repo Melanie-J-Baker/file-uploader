@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <% if (currentUser) { %>
     <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Delete file</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <link rel='stylesheet' href='/stylesheets/fileDeleteForm.css' />
     </head>
     <body>
       <%- include('navbar') %>
-      <div class="fileDelete">
+      <div class="pageContainer">
         <h1 class="title">Delete file: <%= file.name %></h1>
         <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
         <p class="fileDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>

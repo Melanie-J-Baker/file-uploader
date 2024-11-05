@@ -7,9 +7,7 @@ const folder_controller = require("../controllers/folderController");
 const file_controller = require("../controllers/fileController");
 
 const storage = new Multer.memoryStorage();
-const upload = Multer({
-  storage,
-});
+const upload = Multer({ storage });
 
 // USER ROUTES
 
@@ -106,5 +104,8 @@ router.get("/file/:id/delete", file_controller.file_delete_get);
 
 // Handle File delete on POST
 router.post("/file/:id/delete", file_controller.file_delete_post);
+
+// Download file on GET
+router.get("/file/:id/download", file_controller.file_download_get);
 
 module.exports = router;

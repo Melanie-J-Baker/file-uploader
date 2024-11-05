@@ -1,20 +1,10 @@
-.homePage {
-    margin: 180px 30px 30px 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--light);
-    padding: 50px;
-}
-
 .homeTitle {
-    font-size: 4rem;
+    font-size: 2rem;
+    width: 100%;
     text-align: center;
     border: 2px solid var(--highlight2);
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
-    margin: 20px;
 }
 
 .homeLinkDiv {

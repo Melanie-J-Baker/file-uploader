@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <% if (currentUser) { %>
     <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title><%= folder.name %></title>
       <link rel="stylesheet" href="/stylesheets/style.css" />
       <link rel="stylesheet" href="/stylesheets/folderDetails.css" />
     </head>
     <body>
       <%- include('navbar') %>
-      <div class="folderDetails">
+      <div class="pageContainer">
         <h1 class="title"><%= folder.name %></h1>
         <div class="folderOptions">
           <a href="/uploads/user/<%= currentUser.id %>/file/create" class="folderOption">Upload file</a>

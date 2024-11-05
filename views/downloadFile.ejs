@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<% if (currentUser) { %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Download File</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/stylesheets/downloadFile.css' />
+    </head>
+    <body>
+        <div class="pageContainer">
+            <h1 class="title">Download File</h1>
+            <% if (data.resources && data.resources.length > 0) { %>
+                <% data.resources.forEach(resource => { %>
+                    <div>
+                        <h2 class="resourceId"><b>File ID:</b> <%= resource.public_id %></h2>
+                        <p class ="resourceFormat"><b>Format:</b> <%= resource.format %></p>
+                        <a href="<%= resource.url %>" download>Download</a>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="downloadError">No file found with this ID.</p>
+            <% } %>
+        </div>
+    <% } else { %>
+        <%- include('pageNotFound') %>
+    <% } %>
+</body>
+</html>
