@@ -5,6 +5,7 @@
       <title><%= file.name %></title>
       <link rel="stylesheet" href="/stylesheets/style.css" />
       <link rel="stylesheet" href="/stylesheets/fileDetails.css" />
+      <script src="/javascripts/copy.js" defer></script>
     </head>
     <body>
       <%- include('navbar') %>
@@ -35,13 +36,3 @@
   <% } %>
 </html>
 
-<script>
-  function copyToClipboard() {
-      const url = document.getElementById("fileUrl").innerText;
-      navigator.clipboard.writeText(url).then(() => {
-          alert("File URL copied to clipboard");
-      }).catch((err) => {
-          console.error("Error copying to clipboard: ", err);
-      });
-  }
-</script>
