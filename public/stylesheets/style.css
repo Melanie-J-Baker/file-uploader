@@ -29,22 +29,15 @@ body {
   background-color: var(--light);
 }
 
-a {
+a, a:visited {
+  color: var(--light);
   text-decoration: none;
-  color: var(--light);
 }
 
-a:hover {
-  color: var(--highlight2);
+a:hover, a:active {
+  color: var(--highlight1);
 }
 
-a:active {
-  color: var(--highlight2);
-}
-
-a:visited {
-  color: var(--light);
-}
 
 .navLink {
   color: var(--light);

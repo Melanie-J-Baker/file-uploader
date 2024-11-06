@@ -12,22 +12,27 @@
       <%- include('navbar') %>
       <div class="pageContainer">
         <h1 class="uploadFileTitle">Upload file</h1>
-        <form id="uploadFile" action="/uploads/user/<%= currentUser.id %>/file/create" method="post" enctype="multipart/form-data">
-          <div class="inputDiv">
-            <label class="uploadFileLabel selectFolderLabel" for="folder_id">Select folder</label>
-            <select id="folder_id" name="folder_id" class="uploadFileInput" required>
-              <% folders.map((folder) => { %>
-                <option value="<%= folder.id %>"><%= folder.name %></option>
-              <% }) %>
-            </select>
-          </div>
-          <div class="inputDiv fileInputDiv">
-            <label class="uploadFileLabel" for="file">Select file</label>
-            <input id="file" name="file" type="file" class="uploadFileInput" required />
-          </div>
-          <button type="submit" class="uploadFileBtn">Upload File</button>
-          <p class="message"><%= message %></p>
-        </form>
+        <% if (folders.length !== 0) { %>
+          <form id="uploadFile" action="/uploads/user/<%= currentUser.id %>/file/create" method="post" enctype="multipart/form-data">
+            <div class="inputDiv">
+              <label class="uploadFileLabel selectFolderLabel" for="folder_id">Select folder</label>
+              <select id="folder_id" name="folder_id" class="uploadFileInput" required>
+                <% folders.map((folder) => { %>
+                  <option value="<%= folder.id %>"><%= folder.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="inputDiv fileInputDiv">
+              <label class="uploadFileLabel" for="file">Select file</label>
+              <input id="file" name="file" type="file" class="uploadFileInput" required />
+            </div>
+            <button type="submit" class="uploadFileBtn">Upload File</button>
+            <p class="message"><%= message %></p>
+          </form>
+        <% } else { %>
+          <h2 class="noFoldersText">You do not have any folders. Please create a folder before uploading your first file</h2>
+          <a href="/uploads/user/<%= currentUser.id %>/folder/create" class="createFolderLink">Create folder</a>
+        <% } %>
         <a href="/uploads/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
       </div>
     </body>
