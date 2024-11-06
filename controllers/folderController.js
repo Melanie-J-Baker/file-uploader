@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+require("../helpers/renderErrorPage");
 
 // List of all folders for a user
 exports.folders_list = asyncHandler(async(req, res, next) => {    
@@ -10,10 +11,7 @@ exports.folders_list = asyncHandler(async(req, res, next) => {
         console.log("Folders: ", folders);
         res.json(folders);
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        })
+        renderErrorPage(res, err);
     }
 });
 
@@ -27,10 +25,7 @@ exports.folder_detail = asyncHandler(async(req, res, next) => {
             files: folder.files,
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-          });
+        renderErrorPage(res, err);
     }
 });
 
@@ -75,10 +70,7 @@ exports.folder_create_post = [
                 })
             }
         } catch (err) {
-            console.error(err);
-            res.status(500).render("error", {
-                error: err,
-            });
+            renderErrorPage(res, err);
         }
     })
 ];
@@ -93,10 +85,7 @@ exports.folder_update_get = asyncHandler(async(req, res, next) => {
             message: "",
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -135,10 +124,7 @@ exports.folder_update_post = [
                 res.redirect(`/uploads/folder/${folder_id}`);
             }
         } catch (err) {
-            console.error(err);
-            res.status(500).render("error", {
-                error: err,
-            });
+            renderErrorPage(res, err);
         }
     })
 ];
@@ -152,10 +138,7 @@ exports.folder_delete_get = asyncHandler(async(req, res, next) => {
             folder: folder,
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -166,9 +149,6 @@ exports.folder_delete_post = asyncHandler(async(req, res, next) => {
         await db.deleteFolder(folder_id);
         res.render("folderDeleted");
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });

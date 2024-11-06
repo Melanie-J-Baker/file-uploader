@@ -2,8 +2,7 @@ const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const cloudinary = require("cloudinary").v2
 const { extractPublicId } = require('cloudinary-build-url');
-
-
+require("../helpers/renderErrorPage");
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -27,10 +26,7 @@ exports.files_list = asyncHandler(async(req, res, next) => {
         console.log("Files: ", files);
         res.json(files);
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        })
+        renderErrorPage(res, err);
     }
 });
 
@@ -47,10 +43,7 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
             url: url,
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-          });
+        renderErrorPage(res, err);
     }
 });
 
@@ -64,10 +57,7 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
             message: "",
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 
 });
@@ -98,10 +88,7 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
             })
         }
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -118,10 +105,7 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
             message: "",
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -147,10 +131,7 @@ exports.file_update_post = asyncHandler(async(req, res, next) => {
             })
         }
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -163,10 +144,7 @@ exports.file_delete_get = asyncHandler(async(req, res, next) => {
             file: file,
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -177,10 +155,7 @@ exports.file_delete_post = asyncHandler(async(req, res, next) => {
         await db.deleteFile(file_id);
         res.render("fileDeleted");
     } catch (err) {
-        console.error(err);
-        res.status(500).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
     }
 });
 
@@ -196,10 +171,7 @@ exports.file_download_get = asyncHandler(async(req, res, next) => {
             .expression(`public_id=${public_id}`)
             .execute();
     } catch (err) {
-        console.error(err);
-        res.status(400).render("error", {
-            error: err,
-        });
+        renderErrorPage(res, err);
         return;
     }
     return res.status(200).render("downloadFile", { 

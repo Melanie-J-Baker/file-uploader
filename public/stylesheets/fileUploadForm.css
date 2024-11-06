@@ -99,6 +99,7 @@ input::file-selector-button {
 .noFoldersText {
     font-size: 1.5rem;
     text-align: center;
+    margin: 20px 0px;
 }
 
 .createFolderLink {
