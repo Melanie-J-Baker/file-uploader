@@ -38,6 +38,7 @@ span.boldText {
     justify-content: center;
     align-items: center;
     margin: 10px;
+    max-width: 100%;
 }
 
 .downloadLinkTitle {
@@ -46,8 +47,9 @@ span.boldText {
 }
 
 .downloadLinkText {
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
+    max-width: 100%;
 }
 
 .downloadLinkBtn {
@@ -78,18 +80,19 @@ span.boldText {
     align-items: center;
 }
 
-.updateFile, .deleteFile {
+.updateFile, .deleteFile, .downloadFile {
     background-color: var(--dark);
-    margin: 10px;
-    font-size: 1.5rem;
+    margin: 5px;
+    font-size: 1.2rem;
     border-radius: 15px;
     padding: 10px 20px;
     border-width: 2px;
     border-style: outset;
     border-color: buttonborder;
     border-image: initial;
+    text-align: center;
 }
 
-.updateFile:hover, .deleteFile:hover {
+.updateFile:hover, .deleteFile:hover.downloadFile {
     cursor: pointer;
 }

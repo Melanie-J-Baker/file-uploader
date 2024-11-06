@@ -91,7 +91,7 @@ router.get("/file/:id", file_controller.file_detail);
 router.get("/user/:id/file/create", file_controller.file_create_get);
 
 // Handle File upload on POST
-router.post("/user/file/create", upload.single("file"), file_controller.file_create_post);
+router.post("/user/:id/file/create", upload.single("file"), file_controller.file_create_post);
 
 // GET File update form
 router.get("/file/:id/update", file_controller.file_update_get);

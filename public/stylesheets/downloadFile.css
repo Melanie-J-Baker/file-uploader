@@ -6,3 +6,61 @@
     border: 2px solid var(--highlight2);
     border-radius: 15px;
 }
+
+span.boldText {
+    font-size: 2rem;
+}
+
+.resource {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.resourceSize, .resourceFormat, .resourceUploadTime {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 10px;
+    width: 95%;
+}
+
+b {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.downloadBtn {
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    background-color: var(--highlight1);
+    color: var(--dark);
+    margin: 10px 10px 30px 10px;
+    font-size: 2rem;
+    text-wrap: nowrap;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+}
+
+.downloadBtn:hover {
+    background-color: var(--highlight2);
+    border: 2px solid var(--dark);
+    cursor: pointer;
+}
+
+.downloadBtn:visited {
+    background-color: var(--highlight1);
+    color: var(--dark);
+}
+
+.downloadBtn:active {
+    color: var(--dark);
+}
+
+.downloadError {
+    font-size: 2rem;
+    text-align: center;
+}

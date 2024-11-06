@@ -1,6 +1,9 @@
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const cloudinary = require("cloudinary").v2
+const { extractPublicId } = require('cloudinary-build-url');
+
+
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -184,16 +187,23 @@ exports.file_delete_post = asyncHandler(async(req, res, next) => {
 // Download File on GET
 exports.file_download_get = asyncHandler(async(req, res, next) => {
     let response;
+    let file;
     try {
+        const file_id = parseInt(req.params.id);
+        file = await db.getFileByID(file_id);
+        const public_id = extractPublicId(file.url);
         response = await cloudinary.search
-            .expression(`public_id=${req.params.id}`)
+            .expression(`public_id=${public_id}`)
             .execute();
-    } catch (error) {
+    } catch (err) {
         console.error(err);
         res.status(400).render("error", {
             error: err,
         });
         return;
     }
-    return res.status(200).render("downloadFile", { data: response });
-})
+    return res.status(200).render("downloadFile", { 
+        data: response,
+        file: file,
+    });
+});

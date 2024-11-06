@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<% if (currentUser) { %>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +8,21 @@
         <link rel='stylesheet' href='/stylesheets/downloadFile.css' />
     </head>
     <body>
+        <%- include('navbar') %>
         <div class="pageContainer">
-            <h1 class="title">Download File</h1>
+            <h1 class="title"><span class="boldText">Download file: </span><%= file.name %></h1>
             <% if (data.resources && data.resources.length > 0) { %>
                 <% data.resources.forEach(resource => { %>
-                    <div>
-                        <h2 class="resourceId"><b>File ID:</b> <%= resource.public_id %></h2>
-                        <p class ="resourceFormat"><b>Format:</b> <%= resource.format %></p>
-                        <a href="<%= resource.url %>" download>Download</a>
+                    <div class="resource">
+                        <h2 class="resourceSize"><b>Size:</b> <%= file.size_mb %> mb</h2>
+                        <p class="resourceFormat"><b>Format:</b> <%= resource.format %></p>
+                        <p class="resourceUploadTime"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
+                        <a href="<%= resource.url.replace('/upload/', '/upload/fl_attachment/') %>" class="downloadBtn" download>Download</a>
                     </div>
                 <% }); %>
             <% } else { %>
                 <p class="downloadError">No file found with this ID.</p>
             <% } %>
         </div>
-    <% } else { %>
-        <%- include('pageNotFound') %>
-    <% } %>
-</body>
+    </body>
 </html>

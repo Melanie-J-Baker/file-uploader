@@ -24,6 +24,7 @@
           <button class="downloadLinkBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
         </div>
         <div class="fileOptions">
+          <a href="/uploads/file/<%= file.id %>/download" class="downloadFile">Download file</a>
           <a href="/uploads/file/<%= file.id %>/update" class="updateFile">Move file</a>
           <a href="/uploads/file/<%= file.id %>/delete" class="deleteFile">Delete file</a>
         </div>
