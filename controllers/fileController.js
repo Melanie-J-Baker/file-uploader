@@ -2,7 +2,7 @@ const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const cloudinary = require("cloudinary").v2
 const { extractPublicId } = require('cloudinary-build-url');
-require("../helpers/renderErrorPage");
+const renderErrorPage = require("../helpers/renderErrorPage");
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -18,42 +18,34 @@ async function handleUpload(file) {
     return res;
 }
 
-// List of all files for a folder
+// List of all files for a folder (GET)
 exports.files_list = asyncHandler(async(req, res, next) => {
     try {
-        const folder_id = parseInt(req.params.id);
-        const files = await db.getAllFilesInFolder(folder_id);
-        console.log("Files: ", files);
+        const files = await db.getAllFilesInFolder(parseInt(req.params.id));
         res.json(files);
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// Details of a single file
+// Display details of a single file (GET)
 exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
-        const file_id = parseInt(req.params.id);
-        const file = await db.getFileByID(file_id);
+        const file = await db.getFileByID(parseInt(req.params.id));
         const folder = await db.getFolderByID(file.folder_id);
         const url = `${process.env.PUBLIC_URL}/uploads/file/${file_id}/download`;
-        res.render("fileDetails", {
-            file: file,
-            folder: folder,
-            url: url,
-        });
+        res.render("fileDetails", { file, folder, url });
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// GET File upload form
+// Display file upload form (GET)
 exports.file_create_get = asyncHandler(async(req, res, next) => {
     try {
-        const user_id = parseInt(req.params.id);
-        const folders = await db.getAllFolders(user_id);
+        const folders = await db.getAllFolders(parseInt(req.params.id));
         res.render("fileUploadForm", {
-            folders: folders,
+            folders,
             message: "",
         });
     } catch (err) {
@@ -62,45 +54,41 @@ exports.file_create_get = asyncHandler(async(req, res, next) => {
 
 });
 
-// Handle File create on POST
+// Handle File create (POST)
 exports.file_create_post = asyncHandler(async(req, res, next) => {
     try {
-        const user_id = parseInt(req.params.id);
-        const folders = await db.getAllFolders(user_id);
-        const filenameExists = await db.getFileByName(req.file.originalname);
-        if (!filenameExists) {
-            const b64 = Buffer.from(req.file.buffer).toString("base64");
-            let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+        const folders = await db.getAllFolders(parseInt(req.params.id));
+        const existingFile = await db.getFileByName(req.file.originalname);
+        if (existingFile) {
+            return res.render("fileUploadForm", {
+                folders,
+                message: "That filename is already in use",
+            })
+        } else {
+            const dataURI = `data:${req.file.mimetype};base64,${Buffer.from(req.file.buffer).toString("base64")}`;
             const cldRes = await handleUpload(dataURI);
-            const file = {
+            const file = await db.createFile({
                 name: req.file.originalname,
                 url: cldRes.secure_url,
                 size_mb: req.file.size / 1000000,
                 upload_time: new Date(Date.now()),
                 folder_id: parseInt(req.body.folder_id),
-            };
-            const newFile = await db.createFile(file);
-            res.redirect(`/uploads/file/${newFile.id}`);
-        } else {
-            res.render("fileUploadForm", {
-                folders: folders,
-                message: "That filename is already in use",
-            })
+            });
+            res.redirect(`/uploads/file/${file.id}`);
         }
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// GET File update form
+// Display file update form (GET)
 exports.file_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const file_id = parseInt(req.params.id);
-        const file = await db.getFileByID(file_id);
+        const file = await db.getFileByID(parseInt(req.params.id));
         const folder = await db.getFolderByID(file.folder_id);
         const user = await db.getUserByID(folder.user_id);
         res.render("fileUpdateForm", {
-            file: file,
+            file,
             folders: user.folders,
             message: "",
         });
@@ -109,73 +97,57 @@ exports.file_update_get = asyncHandler(async(req, res, next) => {
     }
 });
 
-// Handle File update on POST
+// Handle File update (POST)
 exports.file_update_post = asyncHandler(async(req, res, next) => {
     try {
-        const file_id = parseInt(req.params.id);
-        const oldFile = await db.getFileByID(file_id);
-        const folder = await db.getFolderByID(oldFile.folder_id);
-        const user = await db.getUserByID(folder.user_id);
-        if (req.body.folder_id) {
-            const file = {
-                id: file_id,
-                folder_id: parseInt(req.body.folder_id),
-            };
-            const newFile = await db.updateFile(file);
-            res.redirect(`/uploads/file/${newFile.id}`);
-        } else {
-            res.render('fileUpdateForm', {
+        const folder_id = parseInt(req.body.folder_id);
+        const file = { id: parseInt(req.params.id), folder_id};
+        if (!folder_id) {
+            const oldFile = await db.getFileByID(parseInt(req.params.id));
+            const user = await db.getUserByID(oldFile.user_id);
+            return res.render('fileUpdateForm', {
                 file: oldFile,
                 folders: user.folders,
-                message: "Folder must be provided",
+                message: "Folder is required",
             })
         }
+        await db.updateFile(file);
+        res.redirect(`/uploads/file/${file.id}`);
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// GET File delete form
+// Display file delete confirmation form (GET)
 exports.file_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const file_id = parseInt(req.params.id);
-        const file = await db.getFileByID(file_id);
-        res.render("fileDeleteForm", {
-            file: file,
-        });
+        const file = await db.getFileByID(parseInt(req.params.id));
+        res.render("fileDeleteForm", { file });
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// Handle File delete on POST
+// Handle File delete (POST)
 exports.file_delete_post = asyncHandler(async(req, res, next) => {
     try {
-        const file_id = parseInt(req.params.id);
-        await db.deleteFile(file_id);
+        await db.deleteFile(parseInt(req.params.id));
         res.render("fileDeleted");
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// Download File on GET
+// Download file (GET)
 exports.file_download_get = asyncHandler(async(req, res, next) => {
-    let response;
-    let file;
     try {
-        const file_id = parseInt(req.params.id);
-        file = await db.getFileByID(file_id);
+        const file = await db.getFileByID(parseInt(req.params.id));
         const public_id = extractPublicId(file.url);
-        response = await cloudinary.search
+        const cloudData = await cloudinary.search
             .expression(`public_id=${public_id}`)
             .execute();
+        res.status(200).render("downloadFile", { data: cloudData, file });
     } catch (err) {
         renderErrorPage(res, err);
-        return;
     }
-    return res.status(200).render("downloadFile", { 
-        data: response,
-        file: file,
-    });
 });

@@ -1,27 +1,24 @@
 const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
-require("../helpers/renderErrorPage");
+const renderErrorPage = require("../helpers/renderErrorPage");
 
-// List of all folders for a user
+// List of all folders for a user (GET)
 exports.folders_list = asyncHandler(async(req, res, next) => {    
     try {
-        const user_id = parseInt(req.params.id);
-        const folders = await db.getAllFolders(user_id);
-        console.log("Folders: ", folders);
+        const folders = await db.getAllFolders(parseInt(req.params.id));
         res.json(folders);
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// Details of a single folder
+// Details of a single folder (GET)
 exports.folder_detail = asyncHandler(async(req, res, next) => {
     try {
-        const folder_id = parseInt(req.params.id);
-        const folder = await db.getFolderByID(folder_id);
+        const folder = await db.getFolderByID(parseInt(req.params.id));
         res.render("folderDetails", {
-            folder: folder,
+            folder,
             files: folder.files,
         });
     } catch (err) {
@@ -29,14 +26,10 @@ exports.folder_detail = asyncHandler(async(req, res, next) => {
     }
 });
 
-// GET Folder create form
-exports.folder_create_get = asyncHandler(async(req, res, next) => {
-    res.render("folderCreateForm", {
-        message: "",
-    });
-});
+// Display Folder create form (GET)
+exports.folder_create_get = asyncHandler(async(req, res, next) => res.render("folderCreateForm", { message: "" }));
 
-// Handle Folder create on POST
+// Handle Folder create (POST)
 exports.folder_create_post = [
     body("name")
         .trim()
@@ -48,40 +41,34 @@ exports.folder_create_post = [
         // Extract validation errors from a request
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const errorsString = errors.array().toString();
-            res.render("folderCreateForm", {
-                message: errorsString,
+            res.render("folderCreateForm", { 
+                message: errors.array().map(err => err.msg).join(", ") 
             })
         }
         try {
             const user_id = parseInt(req.params.id);
             const folderExists = await db.getFolderByName(req.body.name);
-            if (!folderExists) {
-                const folder = {
-                    name: req.body.name,
-                    user_id: user_id,
-                    files: [],
-                }
-                const newFolder = await db.createFolder(folder);
-                res.redirect(`/uploads/folder/${newFolder.id}`)
-            } else {
-                return res.render("folderCreateForm", {
-                    message: "A folder with that name already exists",
-                })
+            if (folderExists) {
+                return res.render("folderCreateForm", { message: "A folder with that name already exists" })
             }
+            const newFolder = await db.createFolder({
+                name: req.body.name,
+                user_id: user_id,
+                files: [],
+            });
+            res.redirect(`/uploads/folder/${newFolder.id}`)
         } catch (err) {
             renderErrorPage(res, err);
         }
     })
 ];
 
-// GET Folder update form
+// Display Folder update form (GET)
 exports.folder_update_get = asyncHandler(async(req, res, next) => {
     try {
-        const folder_id = parseInt(req.params.id);
-        const folder = await db.getFolderByID(folder_id);
+        const folder = await db.getFolderByID(parseInt(req.params.id));
         res.render("folderUpdateForm", {
-            folder: folder,
+            folder,
             message: "",
         });
     } catch (err) {
@@ -89,7 +76,7 @@ exports.folder_update_get = asyncHandler(async(req, res, next) => {
     }
 });
 
-// Handle Folder update on POST
+// Handle Folder update (POST)
 exports.folder_update_post = [
     body("name")
         .trim()
@@ -98,55 +85,48 @@ exports.folder_update_post = [
         .withMessage("Name for folder must be provided"),
     // Process request after validation and sanitisation
     asyncHandler(async(req, res, next) => {
-        try {
-            const folder_id = parseInt(req.params.id);
-            const folder = await db.getFolderByID(folder_id);
-            const folderExists = await db.getFolderByName(req.body.name);
-            // Extract validation errors from a request
-            const errors = validationResult(req);
+        const folder = await db.getFolderByID(parseInt(req.params.id));
+        // Extract validation errors from a request
+        const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                const errorsString = errors.array().toString();
                 res.render("folderUpdateForm", {
-                    folder: folder,
-                    message: errorsString,
+                    folder,
+                    message: errors.array().map(err => err.msg).join(", "),
                 })
             }
-            if (folderExists && folderExists.id !== req.folder_id) {
+        try {
+            const existingFolder = await db.getFolderByName(req.body.name);
+            const folder_id = parseInt(req.params.id);
+            if (existingFolder && existingFolder.id !== folder_id) {
                 return res.render("folderUpdateForm", {
                     message: "A folder with that name already exists",
                 })
-            } else {
-                const newFolder = {
-                    name: req.body.name,
-                    id: folder_id,
-                };
-                await db.updateFolder(newFolder)
-                res.redirect(`/uploads/folder/${folder_id}`);
             }
+            await db.updateFolder({                
+                id: folder_id,
+                name: req.body.name,
+            })
+            res.redirect(`/uploads/folder/${folder_id}`);
         } catch (err) {
             renderErrorPage(res, err);
         }
     })
 ];
 
-// GET Folder delete form
+// Display Folder delete confirmation form (GET)
 exports.folder_delete_get = asyncHandler(async(req, res, next) => {
     try {
-        const folder_id = parseInt(req.params.id);
-        const folder = await db.getFolderByID(folder_id);
-        res.render("folderDeleteForm", {
-            folder: folder,
-        });
+        const folder = await db.getFolderByID(parseInt(req.params.id));
+        res.render("folderDeleteForm", { folder });
     } catch (err) {
         renderErrorPage(res, err);
     }
 });
 
-// Handle Folder delete on POST
+// Handle Folder deletion (POST)
 exports.folder_delete_post = asyncHandler(async(req, res, next) => {
     try {
-        const folder_id = parseInt(req.params.id);
-        await db.deleteFolder(folder_id);
+        await db.deleteFolder(parseInt(req.params.id));
         res.render("folderDeleted");
     } catch (err) {
         renderErrorPage(res, err);

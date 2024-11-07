@@ -3,8 +3,8 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const passport = require("passport");
+const renderErrorPage = require("../helpers/renderErrorPage");
 require("../auth/auth");
-require("../helpers/renderErrorPage");
 
 // Helper: Hash password
 const hashPassword = async (password) => {
