@@ -1,16 +1,3 @@
-.title {
-    font-size: 2rem;
-    text-align: center;
-    margin: 20px;
-    padding: 20px;
-    border: 2px solid var(--highlight2);
-    border-radius: 15px;
-}
-
-span.boldText {
-    font-size: 2rem;
-}
-
 .resource {
     display: flex;
     flex-direction: column;
@@ -32,17 +19,13 @@ b {
 
 .downloadBtn {
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     background-color: var(--highlight1);
     color: var(--dark);
     margin: 10px 10px 30px 10px;
     font-size: 2rem;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 
 .downloadBtn:hover {

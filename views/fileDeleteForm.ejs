@@ -11,9 +11,15 @@
     <body>
       <%- include('navbar') %>
       <div class="pageContainer">
-        <h1 class="title"><span class="boldText">Delete file:</span> <%= file.name %></h1>
-        <p class="fileDetail">Size: <%= file.size_mb %> mb</p>
-        <p class="fileDetail">Uploaded: <%= file.upload_time.toUTCString() %></p>
+        <h1 class="title">Delete file</h1>
+        <% if (file.name.length > 29) { %>
+          <p class="fileName"><%= file.name.slice(0, 24) %>...</p>
+        <% } else { %>
+          <p class="fileName"><%= file.name.slice(0, -4) %></p>
+        <% } %>
+        <p class="fileDetail"><span class="boldText">Type: </span><%= file.name.slice(-4) %></p>
+        <p class="fileDetail"><span class="boldText">Size:</span> <%= file.size_mb %> mb</p>
+        <p class="fileDetail"><span class="boldText">Uploaded:</span> <%= file.upload_time.toUTCString() %></p>
         <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
             <button type="submit" class="deleteFileBtn">Delete File</button>
         </form>

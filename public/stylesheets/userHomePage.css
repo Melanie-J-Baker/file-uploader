@@ -1,13 +1,3 @@
-.homeTitle {
-    font-size: 2rem;
-    width: 100%;
-    text-align: center;
-    border: 2px solid var(--highlight2);
-    padding: 10px;
-    margin: 10px;
-    border-radius: 15px;
-}
-
 .homeLinkDiv {
     display: flex;
     flex-direction: row;
@@ -20,41 +10,37 @@
 
 .homeLink {
     background-color: var(--dark);
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     font-size: 1.5rem;
     margin: 10px;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 
 .homeLink:hover, .createFolderLink:hover {
     cursor: pointer;
 }
 
+.noFolders {
+    font-size: 1.5rem;
+    padding-top: 20px;
+}
+
 .createFolderLink {
     background-color: var(--dark);
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     font-size: 1.5rem;
     margin: 20px;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 
 .foldersTitle {
-    font-size: 2rem;
-    padding: 10px;
-    border: 2px solid var(--highlight2);
-    border-radius: 15px;
+    font-size: 1.8rem;
+    padding: 10px 20px;
+    border: 3px solid var(--highlight2);
+    border-radius: 20px;
     margin-top: 20px;
-
 }
 
 .folders {
@@ -65,28 +51,34 @@
 .folder {
     background-color: white;
     width: 100%;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    padding: 20px 10px;
+}
+
+.folderInnerDiv {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
 }
 
 .folderName {
     color: var(--dark);
     font-size: 1.5rem;
-    padding-left: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.fileCount {
+    font-size: 1.2rem;
 }
 
 .folderLink {
     background-color: var(--dark);
     padding: 10px 20px;
-    font-size: 1.5rem;
-    margin: 10px;
+    font-size: 1.3rem;
     text-wrap: nowrap;
-    border-radius: 15px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
+    border-radius: 20px;
 }

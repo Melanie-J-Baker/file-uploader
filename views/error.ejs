@@ -10,7 +10,7 @@
     <body>
         <%- include('navbar') %>
         <div class="pageContainer">
-            <h1 class="errorTitle"><%= error.message %></h1>
+            <h1 class="title" id="errorTitle"><%= error.message %></h1>
             <h2 class="errorStatus"><%= error.status %></h2>
             <pre><%= error.stack %></pre>
             <a href="/uploads/" class="backLink">Return to welcome page</a>

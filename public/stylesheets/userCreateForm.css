@@ -1,20 +1,3 @@
-.title {
-    font-size: 2rem;
-    text-align: center;
-    margin: 10px 10px 30px 10px;
-    padding: 10px;
-    border: 2px solid var(--highlight2);
-    border-radius: 15px;
-}
-
-#createUser {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
 .inputsDiv {
     width: 100%;
     display: flex;
@@ -39,7 +22,7 @@
     color: var(--highlight2);
     margin: 20px 0px;
     font-size: 1.5rem;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     text-align: center;
 }

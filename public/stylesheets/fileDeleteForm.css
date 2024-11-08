@@ -1,14 +1,8 @@
-.title {
-    font-size: 2rem;
-    padding: 10px;
-    border: 2px solid var(--highlight2);
-    border-radius: 15px;
-    text-align: center;
-    margin: 10px;
-}
-
-span.boldText {
-    font-size: 2rem;
+.fileName {
+    margin: 10px 0px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    max-width: 100%;
 }
 
 .fileDetail {
@@ -22,15 +16,11 @@ span.boldText {
     color: var(--highlight2);
     margin-top: 10px;
     margin-bottom: 20px;
-    font-size: 1.8rem;
-    border-radius: 15px;
+    font-size: 1.5rem;
+    border-radius: 20px;
     padding: 10px 20px;
     text-align: center;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 
 .deleteFileBtn:hover {

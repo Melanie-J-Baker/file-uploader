@@ -11,18 +11,30 @@
     <body>
       <%- include('navbar') %>
       <div class="pageContainer">
-        <h1 class="homeTitle"><%= currentUser.username %>'s Home Page</h1>
+        <h1 class="title"><%= currentUser.username %>'s Home Page</h1>
         <div class="homeLinkDiv">
           <a href="/uploads/user/<%= currentUser.id %>/update" class="homeLink">Update account</a>
           <a href="/uploads/user/logout/confirm" class="homeLink">Log out</a>
         </div>
         <h3 class="foldersTitle">All folders</h3>
+        <% if (!folders.length) { %>
+          <p class="noFolders">No folders</p>
+        <% } %>
         <a href="/uploads/user/<%= currentUser.id %>/folder/create" class="createFolderLink">Create folder</a>
         <div class="folders">
-          <% currentUser.folders.map((folder) => { %>
+          <% folders.map((folder) => { %>
             <div class="folder" id="<%= folder.id %>">
-              <p class="folderName"><%= folder.name %></p>
-              <a href="/uploads/folder/<%= folder.id %>" class="folderLink">Go to folder</a>
+              <div class="folderInnerDiv">
+                <p class="folderName"><%= folder.name %></p>
+                <% if (folder.files.length == 1) { %>
+                  <p class="fileCount">1 file</p>
+                <% } else { %>
+                  <p class="fileCount"><%= folder.files.length %> files %></p>
+                <% } %>
+              </div>
+              <div class="folderInnerDiv">
+                <a href="/uploads/folder/<%= folder.id %>" class="folderLink">Go to folder</a>
+              </div>
             </div>
           <% }) %>
         </div>

@@ -1,35 +1,18 @@
-.title {
-    margin: 10px;
-    font-size: 1.8rem;
-    border: 2px solid var(--highlight2);
-    padding: 10px;
-    width: 90%;
-    text-align: center;
-    border-radius: 15px;
-}
-
-.folderName {
-    font-size: 2rem;
-    font-weight: 800;
-    padding: 10px;
-    text-align: center;
-}
-
 .folderOptions {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    border-bottom: 2px solid var(--highlight1);
-    width: 90%;
+    border-bottom: 4px solid var(--highlight1);
     padding: 20px 0px;
+    margin-bottom: 10px;
 }
 
 .folderOption {
     background-color: var(--dark);
-    font-size: 1rem;
-    border-radius: 15px;
-    padding: 7px 14px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    padding: 10px 20px;
     text-align: center;
     text-wrap: nowrap;
     margin: 0px 5px;
@@ -40,12 +23,12 @@
 }
 
 .filesTitle {
-    font-size: 1.5rem;
-    padding: 10px;
-    border: 2px solid var(--highlight2);
-    border-radius: 15px;
+    font-size: 2rem;
+    padding: 10px 20px;
+    border: 3px solid var(--highlight2);
+    border-radius: 20px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .files {
@@ -60,7 +43,7 @@
     color: var(--dark);
     margin: 10px;
     padding: 20px 10px 10px 10px;
-    border-radius: 15px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -72,8 +55,8 @@
     font-size: 1.2rem;
 }
 
-span.boldText {
-    font-size: 1.2rem;
+b {
+    font-size: 2rem;
 }
 
 .fileLink {
@@ -89,21 +72,17 @@ span.boldText {
     color: var(--highlight2);
 }
 
-.fileLinkBtn {
+.fileLinkBtn, .noFilesLink {
     background-color: var(--dark);
     font-size: 1.5rem;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     text-align: center;
     margin: 10px;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 
-.fileLinkBtn:hover {
+.fileLinkBtn:hover, .noFilesLink:hover {
     cursor: pointer;
 }
 
@@ -116,13 +95,5 @@ span.boldText {
 
 .noFilesText {
     font-size: 1.5rem;
-}
-
-.noFilesLink {
-    color: var(--highlight2);
-}
-
-.noFilesLink:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+    margin: 20px;
 }

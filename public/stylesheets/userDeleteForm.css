@@ -9,14 +9,10 @@
     color: var(--highlight2);
     margin: 20px;
     font-size: 2rem;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     text-align: center;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
 
 .deleteUserBtn:hover {

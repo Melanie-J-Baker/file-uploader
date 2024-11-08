@@ -118,8 +118,7 @@ exports.user_logout_get = (req, res, next) => {
 // Details of a single user (GET)
 exports.user_detail = asyncHandler(async(req, res, next) => {
     try {
-        const user_id = parseInt(req.params.id);
-        const userDetails = await db.getUserByID(user_id);
+        const userDetails = await db.getUserByID(parseInt(req.params.id));
         res.json(userDetails);
     } catch (err) {
         renderErrorPage(res, err);
@@ -127,7 +126,14 @@ exports.user_detail = asyncHandler(async(req, res, next) => {
 });
 
 // Display User Home Page (GET)
-exports.user_home_get = asyncHandler(async(req, res, next) => res.render("userHomePage"));
+exports.user_home_get = asyncHandler(async(req, res, next) => {
+    try {
+        const folders = await db.getAllFolders(parseInt(req.params.id));
+        res.render("userHomePage", { folders });
+    } catch (err) {
+        renderErrorPage(res, err);
+    }
+});
 
 // Display User update form (GET)
 exports.user_update_get = asyncHandler(async(req, res, next) => res.render("userUpdateForm", { message: "" }));

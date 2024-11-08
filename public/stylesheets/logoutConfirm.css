@@ -1,8 +1,3 @@
-.title {
-    font-size: 2rem;
-    text-align: center;
-}
-
 .logoutBtns {
     display: flex;
     flex-direction: row;
@@ -12,12 +7,8 @@
 
 .logoutBtn {
     background-color: var(--dark);
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px 20px;
     font-size: 1.5rem;
     margin: 20px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }

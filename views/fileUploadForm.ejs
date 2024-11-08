@@ -11,7 +11,7 @@
     <body>
       <%- include('navbar') %>
       <div class="pageContainer">
-        <h1 class="uploadFileTitle">Upload file</h1>
+        <h1 class="title">Upload file</h1>
         <% if (folders.length !== 0) { %>
           <form id="uploadFile" action="/uploads/user/<%= currentUser.id %>/file/create" method="post" enctype="multipart/form-data">
             <div class="inputDiv">

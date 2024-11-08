@@ -14,13 +14,17 @@
       <div class="pageContainer">
         <h1 class="title">File details</h1>
         <h2 class="filename"><%= file.name %></h2>
-        <img src="<%= file.url %>" class="fileImage" alt="File preview">
+        <% if (isImage && file.url.indexOf(".pdf") == -1) { %>
+          <img src="<%= file.url %>" class="fileImage" alt="File preview">
+        <% } else { %>
+          <iframe src="<%= file.url %>" title="Preview of <%= file.name %>" class="filePreview"></iframe>
+        <% } %>
         <p class="fileDetail"><span class="boldText">Folder:</span> <%= folder.name %></p>
         <p class="fileDetail"><span class="boldText">Size:</span> <%= file.size_mb %> mb</p>
         <p class="fileDetail"><span class="boldText">Uploaded:</span> <%= file.upload_time.toUTCString() %></p>
         <div class="downloadLinkDiv">
           <p class="downloadLinkTitle">Copy URL to share this file:</h3>
-          <p class="downloadLinkText"><%= url %></p>
+          <p class="downloadLinkText" id="fileUrl"><%= url %></p>
           <button class="downloadLinkBtn" onclick="copyToClipboard()">Copy to Clipboard</button>
         </div>
         <div class="fileOptions">

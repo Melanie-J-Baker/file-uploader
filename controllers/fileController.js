@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const cloudinary = require("cloudinary").v2
 const { extractPublicId } = require('cloudinary-build-url');
 const renderErrorPage = require("../helpers/renderErrorPage");
+const isFileImage = require("../helpers/isFileImage.js")
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -33,8 +34,9 @@ exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
         const file = await db.getFileByID(parseInt(req.params.id));
         const folder = await db.getFolderByID(file.folder_id);
-        const url = `${process.env.PUBLIC_URL}/uploads/file/${file_id}/download`;
-        res.render("fileDetails", { file, folder, url });
+        const url = `${process.env.PUBLIC_URL}/uploads/file/${parseInt(req.params.id)}/download`;
+        const isImage = isFileImage(url);
+        res.render("fileDetails", { file, folder, url, isImage });
     } catch (err) {
         renderErrorPage(res, err);
     }
