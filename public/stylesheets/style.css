@@ -18,20 +18,19 @@
 }
 
 body {
-  background-image: url('../images/background_portrait.jpg');
-  background-size: cover;
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 60px);
 }
 
 .pageContainer {
-  margin: 70px 10px 10px 10px;
+  margin-top: 60px;
+  /*margin: 70px 10px 10px 10px;*/
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--light);
-  min-height: calc(100% - 10px);
+  min-height: 100%
 }
 
 .title {
