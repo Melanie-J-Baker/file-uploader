@@ -3,7 +3,8 @@ const asyncHandler = require("express-async-handler");
 const cloudinary = require("cloudinary").v2
 const { extractPublicId } = require('cloudinary-build-url');
 const renderErrorPage = require("../helpers/renderErrorPage");
-const isFileImage = require("../helpers/isFileImage.js")
+const isFileImage = require("../helpers/isFileImage.js");
+const formatBytes = require("../helpers/formatBytes.js");
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -69,10 +70,11 @@ exports.file_create_post = asyncHandler(async(req, res, next) => {
         } else {
             const dataURI = `data:${req.file.mimetype};base64,${Buffer.from(req.file.buffer).toString("base64")}`;
             const cldRes = await handleUpload(dataURI);
+            const formattedSize = formatBytes(req.file.size);
             const file = await db.createFile({
                 name: req.file.originalname,
                 url: cldRes.secure_url,
-                size_mb: req.file.size / 1000000,
+                size: formattedSize,
                 upload_time: new Date(Date.now()),
                 folder_id: parseInt(req.body.folder_id),
             });

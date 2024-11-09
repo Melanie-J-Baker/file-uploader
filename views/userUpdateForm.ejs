@@ -20,7 +20,9 @@
             <label class="updateUserLabel" for="confirmNewPassword">Confirm password</label>
             <input id="confirmNewPassword" name="confirmNewPassword" type="password" class="updateUserInput" autocomplete >
             <button type="submit" class="updateUserBtn">Update User</button>
-            <p class="message"><%= message %></p>
+            <% if (message) { %>
+              <p class="message"><%= message %></p>
+            <% } %>
         </form>
         <a href="/uploads/user/<%= currentUser.id %>/delete" class="deleteUserLink">Delete Account</a>
         <a href="/uploads/user/<%=currentUser.id %>/home" class="cancelBtn">Cancel</a>

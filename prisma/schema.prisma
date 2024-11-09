@@ -32,7 +32,7 @@ model files {
   id Int @id @default(autoincrement())
   name  String  @unique
   url  String  @unique
-  size_mb  Int  @default(0)
+  size  String  @default("0 bytes")
   upload_time DateTime @default(now())
   folder folders @relation(fields: [folder_id], references: [id], onDelete: Cascade)
   folder_id Int

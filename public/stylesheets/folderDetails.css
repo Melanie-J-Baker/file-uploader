@@ -25,10 +25,8 @@
 .filesTitle {
     font-size: 2rem;
     padding: 10px 20px;
-    border: 3px solid var(--highlight2);
-    border-radius: 20px;
+    background-color: var(--highlight2);
     text-align: center;
-    margin-top: 10px;
 }
 
 .files {
@@ -59,7 +57,7 @@ b {
     font-size: 2rem;
 }
 
-.fileLink {
+a.fileLink {
     font-size: 1.3rem;
     font-weight: bold;
     width: 100%;
@@ -95,5 +93,6 @@ b {
 
 .noFilesText {
     font-size: 1.5rem;
-    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }

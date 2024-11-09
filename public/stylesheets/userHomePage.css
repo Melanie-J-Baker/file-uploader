@@ -38,9 +38,9 @@
 .foldersTitle {
     font-size: 1.8rem;
     padding: 10px 20px;
-    border: 3px solid var(--highlight2);
-    border-radius: 20px;
+    background-color: var(--highlight2);
     margin-top: 20px;
+    text-align: center;
 }
 
 .folders {

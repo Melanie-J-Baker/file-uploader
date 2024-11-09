@@ -16,7 +16,9 @@
           <label class="updateFolderLabel" for="name">Name</label>
           <input id="name" name="name" type="text" class="updateFolderInput" value="<%= folder.name %>" required autocomplete>
           <button type="submit" class="updateFolderBtn">Rename Folder</button>
-          <p class="message"><%= message %></p>
+          <% if (message) { %>
+            <p class="message"><%= message %></p>
+          <% } %>
         </form>
         <a href="/uploads/folder/<%= folder.id %>" class="cancelBtn">Cancel</a>
       </div>

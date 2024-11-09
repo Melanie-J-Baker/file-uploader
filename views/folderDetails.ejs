@@ -11,7 +11,7 @@
     <body>
       <%- include('navbar') %>
       <div class="pageContainer">
-        <h1 class="title">Folder: <%= folder.name %></h1>
+        <h1 class="title"><span class="boldText">Folder:</span> <%= folder.name %></h1>
         <a href="/uploads/user/<%= currentUser.id %>/file/create" class="folderOption">Upload file</a>
         <div class="folderOptions">
           <a href="/uploads/folder/<%= folder.id %>/update" class="folderOption">Rename folder</a>
@@ -23,7 +23,7 @@
             <% files.map((file) => { %>
               <div class="file" id="<%= file.id %>">
                 <a href="/uploads/file/<%= file.id %>" class="fileLink fileListDetail"><%= file.name %></a>
-                <p class="fileListDetail"><span class="boldText">Size:</span> <%= file.size_mb %> mb</p>
+                <p class="fileListDetail"><span class="boldText">Size:</span> <%= file.size %></p>
                 <p class="fileListDetail"><span class="boldText">Uploaded:</span> <%= file.upload_time.toUTCString() %></p>
                 <a href="/uploads/file/<%= file.id %>" class="fileLinkBtn">See details</a>
               </div>
@@ -32,7 +32,6 @@
         <% } else { %>
           <div class="noFiles">
             <h1 class="noFilesText">No files</h1>
-            <a href="/uploads/user/<%= currentUser.id %>/file/create" class="noFilesLink">Upload a file</a>
           </div>
         <% } %>
         <a href="/uploads/user/<%= currentUser %>/home" class="backLink">Back to home</a>

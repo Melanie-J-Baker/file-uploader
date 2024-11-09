@@ -21,7 +21,9 @@
           <input id="confirmPassword" name="confirmPassword" type="password" class="createUserInput" required>
         </div>
           <button type="submit" class="createUserBtn">Create Account</button>
-          <p class="message"><%= message %></p>
+          <% if (message) { %>
+            <p class="message"><%= message %></p>
+          <% } %>
       </form>
       <div class="loginLinkDiv">
         <p class="loginLinkText">Already a user? </p>

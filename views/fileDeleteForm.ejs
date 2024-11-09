@@ -18,7 +18,7 @@
           <p class="fileName"><%= file.name.slice(0, -4) %></p>
         <% } %>
         <p class="fileDetail"><span class="boldText">Type: </span><%= file.name.slice(-4) %></p>
-        <p class="fileDetail"><span class="boldText">Size:</span> <%= file.size_mb %> mb</p>
+        <p class="fileDetail"><span class="boldText">Size:</span> <%= file.size %></p>
         <p class="fileDetail"><span class="boldText">Uploaded:</span> <%= file.upload_time.toUTCString() %></p>
         <form id="deleteFile" action="/uploads/file/<%= file.id %>/delete" method="post">
             <button type="submit" class="deleteFileBtn">Delete File</button>

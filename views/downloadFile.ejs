@@ -14,7 +14,7 @@
             <% if (data.resources && data.resources.length > 0) { %>
                 <% data.resources.forEach(resource => { %>
                     <div class="resource">
-                        <h2 class="resourceSize"><b>Size:</b> <%= file.size_mb %> mb</h2>
+                        <h2 class="resourceSize"><b>Size:</b> <%= file.size %></h2>
                         <p class="resourceFormat"><b>Format:</b> <%= resource.format %></p>
                         <p class="resourceUploadTime"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
                         <a href="<%= resource.url.replace('/upload/', '/upload/fl_attachment/') %>" class="downloadBtn" download>Download</a>

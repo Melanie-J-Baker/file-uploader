@@ -19,7 +19,9 @@
           <input id="password" name="password" type="password" class="loginInput" required autocomplete>
         </div>
         <button type="submit" class="loginBtn">Log in</button>
-        <p class="message"><%= message %></p>
+        <% if (message) { %>
+          <p class="message"><%= message %></p>
+        <% } %>
       </form>
       <a href="/uploads/" class="cancelBtn">Cancel</a>
     </div>

@@ -24,19 +24,17 @@ body {
 
 .pageContainer {
   margin-top: 60px;
-  /*margin: 70px 10px 10px 10px;*/
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--light);
-  min-height: 100%
+  min-height: 100%;
 }
 
 .title {
   width: 100%;
-  border: 3px solid var(--highlight2);
-  border-radius: 20px;
+  background-color: var(--highlight2);
   padding: 10px;
   font-size: 2rem;
   text-align: center;
@@ -125,6 +123,7 @@ ul {
 .message {
   font-style: italic;
   text-align: center;
+  margin: 20px 0px;
 }
 
 .boldText {

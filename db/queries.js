@@ -185,7 +185,7 @@ async function createFile(file) {
         data: {
             name: file.name,
             url: file.url,
-            size_mb: file.size_mb,
+            size: file.size,
             upload_time: file.upload_time,
             folder: { connect: { id: file.folder_id }},
         },
