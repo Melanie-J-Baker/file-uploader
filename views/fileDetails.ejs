@@ -14,10 +14,14 @@
       <div class="pageContainer">
         <h1 class="title">File details</h1>
         <h2 class="filename"><%= file.name %></h2>
-        <% if (isImage && file.name.indexOf(".pdf") == -1 && file.name.indexOf(".txt") == -1) { %>
+        <% if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(format)) { %>
           <img src="<%= file.url %>" class="fileImage" alt="File preview">
+        <% } else if (['mp4', 'webm', 'ogg'].includes(format)) { %>
+          <video src="<%= file.url %>" alt="<%= file.name %> video preview" controls="true" class="fileVideo"></video>
+        <% } else if (['pdf'].includes(format)) { %>
+          <iframe src="<%= file.url %>" class="filePDF" title="<%= file.name %> preview"></iframe>
         <% } else { %>
-          <embed src="<%= file.url %>" title="Preview of <%= file.name %>" class="filePreview"></embed>
+          <p class="noPreview">No preview available for this file</p>
         <% } %>
         <p class="fileDetail"><span class="boldText">Folder:</span> <%= folder.name %></p>
         <p class="fileDetail"><span class="boldText">Size:</span> <%= file.size %></p>

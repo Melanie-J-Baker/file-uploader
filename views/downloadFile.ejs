@@ -14,6 +14,15 @@
             <% if (data.resources && data.resources.length > 0) { %>
                 <% data.resources.forEach(resource => { %>
                     <div class="resource">
+                        <% if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(resource.format)) { %>
+                            <img src="<%= file.url %>" class="fileImage" alt="File preview">
+                        <% } else if (['mp4', 'webm', 'ogg'].includes(resource.format)) { %>
+                            <video src="<%= file.url %>" alt="<%= file.name %> video preview" controls="true" class="fileVideo"></video>
+                        <% } else if (['pdf'].includes(resource.format)) { %>
+                            <iframe src="<%= file.url %>" class="filePDF" title="<%= file.name %> preview"></iframe>
+                        <% } else { %>
+                            <p class="noPreview">No preview available for this file</p>
+                        <% } %>
                         <h2 class="resourceSize"><b>Size:</b> <%= file.size %></h2>
                         <p class="resourceFormat"><b>Format:</b> <%= resource.format %></p>
                         <p class="resourceUploadTime"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
@@ -22,6 +31,11 @@
                 <% }); %>
             <% } else { %>
                 <p class="downloadError">No file found with this ID.</p>
+            <% } %>
+            <% if (currentUser) { %>
+                <a href="/uploads/file/<%= file.id %>" class="backLink">Go to file details</a>
+            <% } else { %>
+                <a href="/uploads" class="backLink">Go to welcome page</a>
             <% } %>
         </div>
     </body>

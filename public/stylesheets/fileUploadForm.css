@@ -89,3 +89,14 @@ input::file-selector-button {
     margin: 20px;
     text-wrap: nowrap;
 }
+
+.addFolderText {
+    font-size: 1.3rem;
+    margin-top: 20px;
+}
+
+#addFolderLink {
+    color: var(--highlight1);
+    font-size: 1.3rem;
+    text-decoration: underline;
+}

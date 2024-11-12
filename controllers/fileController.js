@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 const cloudinary = require("cloudinary").v2
 const { extractPublicId } = require('cloudinary-build-url');
 const renderErrorPage = require("../helpers/renderErrorPage");
-const isFileImage = require("../helpers/isFileImage.js");
 const formatBytes = require("../helpers/formatBytes.js");
 
 cloudinary.config({
@@ -33,11 +32,18 @@ exports.files_list = asyncHandler(async(req, res, next) => {
 // Display details of a single file (GET)
 exports.file_detail = asyncHandler(async(req, res, next) => {
     try {
+        let format = "";
         const file = await db.getFileByID(parseInt(req.params.id));
+        const public_id = extractPublicId(file.url);
+        const cloudData = await cloudinary.search
+            .expression(`public_id=${public_id}`)
+            .execute();
+        if (cloudData.resources.length) {
+            format = cloudData.resources[0].format;
+        }
         const folder = await db.getFolderByID(file.folder_id);
         const url = `${process.env.PUBLIC_URL}/uploads/file/${parseInt(req.params.id)}/download`;
-        const isImage = isFileImage(url);
-        res.render("fileDetails", { file, folder, url, isImage });
+        res.render("fileDetails", { file, folder, url, format });
     } catch (err) {
         renderErrorPage(res, err);
     }
