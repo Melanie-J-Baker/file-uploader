@@ -1,51 +1,54 @@
 .updateFileLabel {
-    margin: 20px;
-    font-size: 1.5rem;
-    width: 100%;
-    text-align: center;
+  margin: 20px;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
 }
 
 #folder_select {
-    height: 50px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: white;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-    background-repeat: no-repeat;
-    background-size: 37.5px;
-    background-position-x: 100%;
-    background-position-y: 5px;
-    border: 1px solid var(--dark);
-    border-radius: 2px;
-    width: 80%;
-    font-size: 1.5rem;
-    padding: 0px 10px;
+  height: 50px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 37.5px;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  border: 1px solid var(--dark);
+  border-radius: 2px;
+  width: 80%;
+  font-size: 1.5rem;
+  padding: 0px 10px;
 }
 
 option {
-    color: var(--dark);
-    font-size: 1.5rem;
+  color: var(--dark);
+  font-size: 1.5rem;
 }
 
 .updateFileBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin: 20px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin: 20px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .updateFileBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 980px) {
-    .updateFileLabel, #folder_select, option, .updateFileBtn {
-        font-size: 2rem;
-    }
+  .updateFileLabel,
+  #folder_select,
+  option,
+  .updateFileBtn {
+    font-size: 2rem;
+  }
 }

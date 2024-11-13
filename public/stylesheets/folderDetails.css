@@ -1,125 +1,133 @@
 .folderOptionsDiv {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 4px solid var(--highlight1);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 4px solid var(--highlight1);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .folderOptions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .folderOption {
-    background-color: var(--dark);
-    font-size: 1.3rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
-    margin: 10px 5px;
-    max-width: 30vw;
-} 
+  background-color: var(--dark);
+  font-size: 1.3rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
+  margin: 10px 5px;
+  max-width: 30vw;
+}
 
 .folderOption:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .filesTitle {
-    font-size: 2rem;
-    padding: 10px 20px;
-    background-color: var(--highlight2);
-    text-align: center;
-    margin-bottom: 20px;
+  font-size: 2rem;
+  padding: 10px 20px;
+  background-color: var(--highlight2);
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .files {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
 }
 
 .file {
-    background-color: white;
-    color: var(--dark);
-    margin: 10px;
-    padding: 20px 10px 10px 10px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  background-color: white;
+  color: var(--dark);
+  margin: 10px;
+  padding: 20px 10px 10px 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .fileListDetail {
-    margin-bottom: 10px;
-    width: 100%;
-    font-size: 1.2rem;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 1.2rem;
 }
 
 b {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 a.fileLink {
-    font-size: 1.3rem;
-    font-weight: bold;
-    width: 100%;
-    color: var(--highlight1);
-    text-decoration: underline;
+  font-size: 1.3rem;
+  font-weight: bold;
+  width: 100%;
+  color: var(--highlight1);
+  text-decoration: underline;
 }
 
 .fileLink:hover {
-    cursor: pointer;
-    color: var(--highlight2);
+  cursor: pointer;
+  color: var(--highlight2);
 }
 
-.fileLinkBtn, .noFilesLink {
-    background-color: var(--dark);
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    margin: 10px;
-    text-wrap: nowrap;
+.fileLinkBtn,
+.noFilesLink {
+  background-color: var(--dark);
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 10px;
+  text-wrap: nowrap;
 }
 
-.fileLinkBtn:hover, .noFilesLink:hover {
-    cursor: pointer;
+.fileLinkBtn:hover,
+.noFilesLink:hover {
+  cursor: pointer;
 }
 
 .noFiles {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .noFilesText {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 700px) {
-    .folderOptionsDiv {
-        display: flex;
-        flex-direction: row;
-    }
+  .folderOptionsDiv {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 @media screen and (min-width: 980px) {
-    .folderOption, .fileListDetail, a.fileLink, .fileLinkBtn, .noFilesLink, .noFilesText {
-        font-size: 2rem;
-    }
-    
-    .filesTitle, b {
-        font-size: 2.5rem;
-    }
+  .folderOption,
+  .fileListDetail,
+  a.fileLink,
+  .fileLinkBtn,
+  .noFilesLink,
+  .noFilesText {
+    font-size: 2rem;
+  }
+
+  .filesTitle,
+  b {
+    font-size: 2.5rem;
+  }
 }

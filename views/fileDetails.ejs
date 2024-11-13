@@ -10,15 +10,15 @@
       <script src="/javascripts/copy.js" defer></script>
     </head>
     <body>
-      <%- include('navbar') %>
+      <%- include("navbar") %>
       <div class="pageContainer">
         <h1 class="title">File details</h1>
         <h2 class="filename"><%= file.name %></h2>
-        <% if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(format)) { %>
+        <% if (["jpg", "jpeg", "png", "gif", "webp"].includes(format)) { %>
           <img src="<%= file.url %>" class="fileImage" alt="File preview">
-        <% } else if (['mp4', 'webm', 'ogg'].includes(format)) { %>
+        <% } else if (["mp4", "webm", "ogg"].includes(format)) { %>
           <video src="<%= file.url %>" alt="<%= file.name %> video preview" controls="true" class="fileVideo"></video>
-        <% } else if (['pdf'].includes(format)) { %>
+        <% } else if (["pdf"].includes(format)) { %>
           <iframe src="<%= file.url %>" class="filePDF" title="<%= file.name %> preview"></iframe>
         <% } else { %>
           <p class="noPreview">Preview currently unavailable</p>
@@ -44,7 +44,7 @@
       </div>
     </body>
   <% } else { %>
-    <%- include('pageNotFound') %>
+    <%- include("pageNotFound") %>
   <% } %>
 </html>
 

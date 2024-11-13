@@ -1,44 +1,44 @@
 #welcomeTitle {
-    font-size: 4rem;
-    margin-top: 50px;
-    margin-bottom: 30px;
+  font-size: 4rem;
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 .welcomeHeading {
-    font-size: 2rem;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px
+  font-size: 2rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .welcomeText {
-    font-size: 1.5rem;
-    font-style: italic;
-    width: 100%;
-    text-align: center;
+  font-size: 1.5rem;
+  font-style: italic;
+  width: 100%;
+  text-align: center;
 }
 
 .backLinkDiv {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0px;
 }
 
 @media screen and (min-width: 980px) {
-    .welcomeText {
-        font-size: 2rem;
-        margin-bottom: 50px
-    }
+  .welcomeText {
+    font-size: 2rem;
+    margin-bottom: 50px;
+  }
 
-    .welcomeHeading {
-        font-size: 2.5rem;
-        margin: 50px 0px;
-    }
+  .welcomeHeading {
+    font-size: 2.5rem;
+    margin: 50px 0px;
+  }
 
-    #welcomeTitle {
-        font-size: 5rem;
-    }
+  #welcomeTitle {
+    font-size: 5rem;
+  }
 }

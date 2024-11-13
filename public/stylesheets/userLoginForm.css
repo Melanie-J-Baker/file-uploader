@@ -1,33 +1,34 @@
 .formInputsDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .loginLabel {
-    font-size: 1.5rem;
-    margin: 20px 10px;
+  font-size: 1.5rem;
+  margin: 20px 10px;
 }
 
 .loginInput {
-    font-size: 1.5rem;
-    padding: 10px;
-
+  font-size: 1.5rem;
+  padding: 10px;
 }
 
 .loginBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin: 20px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin: 20px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 @media screen and (min-width: 980px) {
-    .loginLabel, .loginInput, .loginBtn {
-        font-size: 2rem;
-    }
+  .loginLabel,
+  .loginInput,
+  .loginBtn {
+    font-size: 2rem;
+  }
 }

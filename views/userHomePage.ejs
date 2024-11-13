@@ -4,14 +4,14 @@
     <head>
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title><%= currentUser.username %>'s Home Page</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
-      <link rel='stylesheet' href='/stylesheets/userHomePage.css' />
+      <title><%= currentUser.username %>"s Home Page</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/userHomePage.css" />
     </head>
     <body>
-      <%- include('navbar') %>
+      <%- include("navbar") %>
       <div class="pageContainer">
-        <h1 class="title"><%= currentUser.username %>'s Home Page</h1>
+        <h1 class="title"><%= currentUser.username %>"s Home Page</h1>
         <div class="homeLinkDiv">
           <a href="/uploads/user/<%= currentUser.id %>/update" class="homeLink">Update account</a>
           <a href="/uploads/user/logout/confirm" class="homeLink">Log out</a>
@@ -41,6 +41,6 @@
       </div>
     </body>
   <% } else { %>
-    <%- include('pageNotFound') %>
+    <%- include("pageNotFound") %>
   <% } %>
 </html>

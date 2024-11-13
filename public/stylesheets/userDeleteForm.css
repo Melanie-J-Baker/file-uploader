@@ -1,27 +1,28 @@
 .confirmText {
-    font-size: 2rem;
-    padding: 20px;
-    text-align: center;
+  font-size: 2rem;
+  padding: 20px;
+  text-align: center;
 }
 
 .deleteUserBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin: 20px;
-    font-size: 2rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin: 20px;
+  font-size: 2rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .deleteUserBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 980px) {
-    .confirmText, .deleteUserBtn {
-        font-size: 3rem;
-    }
+  .confirmText,
+  .deleteUserBtn {
+    font-size: 3rem;
+  }
 }

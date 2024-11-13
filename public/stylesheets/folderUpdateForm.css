@@ -1,31 +1,33 @@
 .updateFolderLabel {
-    font-size: 1.5rem;
-    margin: 20px;
+  font-size: 1.5rem;
+  margin: 20px;
 }
 
 .updateFolderInput {
-    font-size: 1.5rem;
-    padding: 10px;
+  font-size: 1.5rem;
+  padding: 10px;
 }
 
 .updateFolderBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin: 20px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin: 20px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
-    
+
 .updateFolderBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 980px) {
-    .updateFolderLabel, .updateFolderInput, .updateFolderBtn {
-        font-size: 2rem;
-    }
+  .updateFolderLabel,
+  .updateFolderInput,
+  .updateFolderBtn {
+    font-size: 2rem;
+  }
 }

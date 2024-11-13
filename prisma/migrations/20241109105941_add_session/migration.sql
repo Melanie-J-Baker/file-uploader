@@ -6,7 +6,7 @@
 */
 -- AlterTable
 ALTER TABLE "files" DROP COLUMN "size_mb",
-ADD COLUMN     "size" TEXT NOT NULL DEFAULT '0 bytes';
+ADD COLUMN     "size" TEXT NOT NULL DEFAULT "0 bytes";
 
 -- CreateTable
 CREATE TABLE "Session" (

@@ -5,13 +5,13 @@
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Update account details</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
-      <link rel='stylesheet' href='/stylesheets/userUpdateForm.css' />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/userUpdateForm.css" />
     </head>
     <body>
-      <%- include('navbar') %>
+      <%- include("navbar") %>
       <div class="pageContainer">
-        <h1 class="title">Update <%= currentUser.username %>'s account</h1>
+        <h1 class="title">Update <%= currentUser.username %>"s account</h1>
         <form id="updateUser" action="/uploads/user/<%= currentUser.id %>/update" method="post">
             <label class="updateUserLabel" for="newUsername">New Username</label>
             <input id="newUsername" name="newUsername" type="text" class="updateUserInput" required autocomplete>
@@ -29,6 +29,6 @@
       </div>
     </body>
   <% } else { %>
-    <%- include('pageNotFound') %>
+    <%- include("pageNotFound") %>
   <% } %>
 </html>

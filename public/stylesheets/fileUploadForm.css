@@ -1,118 +1,124 @@
 .inputDiv {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .uploadFileLabel {
-    font-size: 1.5rem;
-    margin: 20px;
+  font-size: 1.5rem;
+  margin: 20px;
 }
 
 .selectFolderLabel {
-    margin: 20px;
+  margin: 20px;
 }
 
 #folder_id {
-    height: 50px;
-    width: 95%;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: white;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-    background-repeat: no-repeat;
-    background-size: 37.5px;
-    background-position-x: 100%;
-    background-position-y: 5px;
-    border: 1px solid var(--dark);
-    padding: 10px;
-    font-size: 1.5rem;
+  height: 50px;
+  width: 95%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 37.5px;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  border: 1px solid var(--dark);
+  padding: 10px;
+  font-size: 1.5rem;
 }
 
 option {
-    font-size: 1.5rem;
-    color: var(--dark)
+  font-size: 1.5rem;
+  color: var(--dark);
 }
 
 .fileInputDiv {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .uploadFileInput {
-    height: 70px;
-    width: 95%;
+  height: 70px;
+  width: 95%;
 }
 
 #file {
-    margin: 20px 10px;
-    font-size: 1.5rem;
+  margin: 20px 10px;
+  font-size: 1.5rem;
 }
 
 input::file-selector-button {
-    padding: 10px 20px;
-    border: none;
-    color: var(--light);
-    background-color: var(--dark);
-    border-radius: 20px;
-    margin-right: 10px;
-    font-size: 1.7rem;
+  padding: 10px 20px;
+  border: none;
+  color: var(--light);
+  background-color: var(--dark);
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 1.7rem;
 }
 
 .uploadFileBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .uploadFileBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
-
 .noFoldersText {
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 20px 0px;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 20px 0px;
 }
 
 .createFolderLink {
-    background-color: var(--dark);
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 1.5rem;
-    margin: 20px;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  margin: 20px;
+  text-wrap: nowrap;
 }
 
 .addFolderText {
-    font-size: 1.3rem;
-    margin-top: 20px;
+  font-size: 1.3rem;
+  margin-top: 20px;
 }
 
 #addFolderLink {
-    color: var(--highlight1);
-    font-size: 1.3rem;
-    text-decoration: underline;
+  color: var(--highlight1);
+  font-size: 1.3rem;
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 980px) {
-    .addFolderText, #addFolderLink {
-        font-size: 1.7rem;
-    }
+  .addFolderText,
+  #addFolderLink {
+    font-size: 1.7rem;
+  }
 
-    .uploadFileLabel, #folder_id, option, #file, .uploadFileBtn, .noFoldersText, .createFolderLink{
-        font-size: 2rem;
-    }
+  .uploadFileLabel,
+  #folder_id,
+  option,
+  #file,
+  .uploadFileBtn,
+  .noFoldersText,
+  .createFolderLink {
+    font-size: 2rem;
+  }
 
-    #folder_id {
-        width: 60%;
-    }
+  #folder_id {
+    width: 60%;
+  }
 }

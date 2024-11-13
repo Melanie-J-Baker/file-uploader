@@ -1,33 +1,35 @@
 .createFolderLabel {
-    font-size: 1.5rem;
-    margin: 20px;
+  font-size: 1.5rem;
+  margin: 20px;
 }
 
 .createFolderInput {
-    font-size: 1.5rem;
-    padding: 10px;
-    width: 90%;
-    margin-bottom: 20px;
+  font-size: 1.5rem;
+  padding: 10px;
+  width: 90%;
+  margin-bottom: 20px;
 }
 
 .createFolderBtn {
-    background-color: var(--dark);
-    color: var(--highlight1);
-    margin: 20px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight1);
+  margin: 20px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
-    
+
 .createFolderBtn:hover {
-    color: var(--highlight2);
-    cursor: pointer;
+  color: var(--highlight2);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 980px) {
-    .createFolderLabel, .createFolderInput, .createFolderBtn{
-        font-size: 2rem;
-    }
+  .createFolderLabel,
+  .createFolderInput,
+  .createFolderBtn {
+    font-size: 2rem;
+  }
 }

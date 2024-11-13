@@ -1,5 +1,5 @@
 @font-face {
-  font-family:"Spline Sans";
+  font-family: "Spline Sans";
   src: url("../fonts/SplineSans-VariableFont_wght.ttf") format("truetype");
 }
 
@@ -11,7 +11,11 @@
 }
 
 * {
-  font: 14px "Spline Sans", Helvetica, Arial, sans-serif;
+  font:
+    14px "Spline Sans",
+    Helvetica,
+    Arial,
+    sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -49,15 +53,16 @@ form {
   width: 100%;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: var(--light);
   text-decoration: none;
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
   color: var(--highlight1);
 }
-
 
 .navLink {
   color: var(--light);
@@ -152,8 +157,12 @@ button {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media screen and (min-width: 700px) and (orientation: landscape) {
@@ -190,7 +199,8 @@ button {
     text-align: center;
   }
 
-  .backLink, .cancelBtn {
+  .backLink,
+  .cancelBtn {
     font-size: 2rem;
   }
 

@@ -1,21 +1,23 @@
 .deleteFolderBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin: 20px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin: 20px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .deleteFolderBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 980px) {
-    .createFolderLabel, .createFolderInput, .createFolderBtn {
-        font-size: 2rem;
-    }
+  .createFolderLabel,
+  .createFolderInput,
+  .createFolderBtn {
+    font-size: 2rem;
+  }
 }

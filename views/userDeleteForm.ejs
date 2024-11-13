@@ -5,13 +5,13 @@
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Delete user</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
-      <link rel='stylesheet' href='/stylesheets/userDeleteForm.css' />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/userDeleteForm.css" />
     </head>
     <body>
-      <%- include('navbar') %>
+      <%- include("navbar") %>
       <div class="pageContainer">
-        <h1 class="title">Delete <%= currentUser.username %>'s account</h1>
+        <h1 class="title">Delete <%= currentUser.username %>"s account</h1>
         <p class="confirmText">Are you sure you want to delete this account?</p>
         <form id="deleteUser" action="/uploads/user/<%= currentUser.id %>/delete" method="post">
             <button type="submit" class="deleteUserBtn">Delete account</button>
@@ -20,6 +20,6 @@
       </div>
     </body>
   <% } else { %>
-    <%- include('pageNotFound') %>
+    <%- include("pageNotFound") %>
   <% } %>
 </html>

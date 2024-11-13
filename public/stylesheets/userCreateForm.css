@@ -1,62 +1,65 @@
 .inputsDiv {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .createUserLabel {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .createUserInput {
-    width: 90%;
-    font-size: 1.5rem;
-    padding: 5px;
-    margin: 10px 0px;
+  width: 90%;
+  font-size: 1.5rem;
+  padding: 5px;
+  margin: 10px 0px;
 }
 
 .createUserBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin: 20px 0px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin: 20px 0px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 .createUserBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
 .loginLinkDiv {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .loginLinkText {
-    font-size: 1.3rem;
-    margin-right: 5px;
+  font-size: 1.3rem;
+  margin-right: 5px;
 }
 
 #loginLink {
-    color: var(--dark);
-    text-decoration: underline;
-    font-size: 1.3rem;
+  color: var(--dark);
+  text-decoration: underline;
+  font-size: 1.3rem;
 }
 
 @media screen and (min-width: 980px) {
-    .createUserLabel, .createUserInput, .createUserBtn, .loginLinkText, #loginLink {
-        font-size: 2rem;
-    }
+  .createUserLabel,
+  .createUserInput,
+  .createUserBtn,
+  .loginLinkText,
+  #loginLink {
+    font-size: 2rem;
+  }
 
-    .loginLinkDiv {
-        margin: 30px 0px;
-    }
+  .loginLinkDiv {
+    margin: 30px 0px;
+  }
 }
-

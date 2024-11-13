@@ -1,35 +1,36 @@
 .fileName {
-    margin: 10px 0px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    max-width: 100%;
+  margin: 10px 0px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  max-width: 100%;
 }
 
 .fileDetail {
-    font-size: 1.5rem;
-    padding: 10px;
-    text-align: center;
+  font-size: 1.5rem;
+  padding: 10px;
+  text-align: center;
 }
 
 .deleteFileBtn {
-    background-color: var(--dark);
-    color: var(--highlight2);
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    text-wrap: nowrap;
+  background-color: var(--dark);
+  color: var(--highlight2);
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .deleteFileBtn:hover {
-    color: var(--highlight1);
-    cursor: pointer;
+  color: var(--highlight1);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 980px) {
-    .deleteFileBtn, .fileName {
-        font-size: 2rem;
-    }
+  .deleteFileBtn,
+  .fileName {
+    font-size: 2rem;
+  }
 }

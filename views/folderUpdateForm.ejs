@@ -5,11 +5,11 @@
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Rename folder</title>
-      <link rel='stylesheet' href='/stylesheets/style.css' />
-      <link rel='stylesheet' href='/stylesheets/folderUpdateForm.css' />
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" href="/stylesheets/folderUpdateForm.css" />
     </head>
     <body>
-      <%- include('navbar') %>
+      <%- include("navbar") %>
       <div class="pageContainer">
         <h1 class="title"><span class="boldText">Rename folder:</span> <%=folder.name %></h1>
         <form id="updateFolder" action="/uploads/folder/<%= folder.id %>/update" method="post">
@@ -24,6 +24,6 @@
       </div>
     </body>
   <% } else { %>
-    <%- include('pageNotFound') %>
+    <%- include("pageNotFound") %>
   <% } %>
 </html>
