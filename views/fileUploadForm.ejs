@@ -7,6 +7,7 @@
       <title>Upload file</title>
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <link rel='stylesheet' href='/stylesheets/fileUploadForm.css' />
+      <script src="/javascripts/setIsLoading.js" defer></script>
     </head>
     <body>
       <%- include('navbar') %>
@@ -27,8 +28,8 @@
               <label class="uploadFileLabel" for="file">Select file</label>
               <input id="file" name="file" type="file" class="uploadFileInput" required />
             </div>
-            <button type="submit" class="uploadFileBtn">Upload File</button>
-            <p class="loading">Loading...</p>
+            <button type="submit" class="uploadFileBtn" onClick="setIsLoading()">Upload File</button>
+            <div id="loading"></div>
             <% if (message) { %>
               <p class="message"><%= message %></p>
             <% } %>

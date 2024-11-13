@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Download File</title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel='stylesheet' href='/stylesheets/downloadFile.css' />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/downloadFile.css" />
+        <script src="/javascripts/setIsLoading.js" defer></script>
     </head>
     <body>
         <%- include('navbar') %>
@@ -27,6 +28,7 @@
                         <p class="resourceFormat"><b>Format:</b> <%= resource.format %></p>
                         <p class="resourceUploadTime"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
                         <a href="<%= resource.url.replace('/upload/', '/upload/fl_attachment/') %>" class="downloadBtn" download>Download</a>
+                        <p id="loading"></p>
                     </div>
                 <% }); %>
             <% } else { %>
