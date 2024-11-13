@@ -8,6 +8,7 @@
 
 .uploadFileLabel {
     font-size: 1.5rem;
+    margin: 20px;
 }
 
 .selectFolderLabel {
@@ -56,8 +57,8 @@ input::file-selector-button {
     color: var(--light);
     background-color: var(--dark);
     border-radius: 20px;
-    margin-right: 5px;
-
+    margin-right: 10px;
+    font-size: 1.7rem;
 }
 
 .uploadFileBtn {
@@ -100,4 +101,18 @@ input::file-selector-button {
     color: var(--highlight1);
     font-size: 1.3rem;
     text-decoration: underline;
+}
+
+@media screen and (min-width: 980px) {
+    .addFolderText, #addFolderLink {
+        font-size: 1.7rem;
+    }
+
+    .uploadFileLabel, #folder_id, option, #file, .uploadFileBtn, .noFoldersText, .createFolderLink{
+        font-size: 2rem;
+    }
+
+    #folder_id {
+        width: 60%;
+    }
 }

@@ -12,3 +12,9 @@
     font-size: 1.5rem;
     margin: 20px;
 }
+
+@media screen and (min-width: 980px) {
+    .logoutBtn {
+        font-size: 2rem;
+    }
+}

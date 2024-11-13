@@ -17,13 +17,15 @@
     padding: 10px 20px;
     text-align: center;
     text-wrap: nowrap;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
 }
     
 .updateFolderBtn:hover {
     color: var(--highlight1);
     cursor: pointer;
+}
+
+@media screen and (min-width: 980px) {
+    .updateFolderLabel, .updateFolderInput, .updateFolderBtn {
+        font-size: 2rem;
+    }
 }

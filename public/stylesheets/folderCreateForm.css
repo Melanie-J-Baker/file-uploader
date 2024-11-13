@@ -25,3 +25,9 @@
     color: var(--highlight2);
     cursor: pointer;
 }
+
+@media screen and (min-width: 980px) {
+    .createFolderLabel, .createFolderInput, .createFolderBtn{
+        font-size: 2rem;
+    }
+}

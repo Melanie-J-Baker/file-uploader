@@ -22,13 +22,16 @@
                   <option value="<%= folder.id %>"><%= folder.name %></option>
                 <% }) %>
               </select>
-              <p class="addFolderText">Or <a href="/uploads/user/<%= currentUser.id %>/folder/create" id="addFolderLink">add new folder here</a></p>
+              <p class="addFolderText">Or <a href="/uploads/user/<%= currentUser.id %>/folder/create" id="addFolderLink">create new folder</a></p>
             </div>
             <div class="inputDiv fileInputDiv">
               <label class="uploadFileLabel" for="file">Select file</label>
               <input id="file" name="file" type="file" class="uploadFileInput" required />
             </div>
-            <button type="submit" class="uploadFileBtn" onClick="setIsLoading()">Upload File</button>
+            <div class="uploadFileBtns">
+              <button type="submit" class="uploadFileBtn" onClick="setIsLoading()">Upload File</button>
+              <a href="/uploads/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+            </div>
             <div id="loading"></div>
             <% if (message) { %>
               <p class="message"><%= message %></p>
@@ -36,9 +39,12 @@
           </form>
         <% } else { %>
           <h2 class="noFoldersText">You do not have any folders. Please create a folder before uploading your first file</h2>
-          <a href="/uploads/user/<%= currentUser.id %>/folder/create" class="createFolderLink">Add folder</a>
+          <div class="uploadFileBtns">
+            <a href="/uploads/user/<%= currentUser.id %>/folder/create" class="createFolderLink">Add folder</a>
+            <a href="/uploads/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+          </div>
         <% } %>
-        <a href="/uploads/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+        
       </div>
     </body>
   <% } else { %>

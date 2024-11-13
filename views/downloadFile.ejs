@@ -26,18 +26,24 @@
                         <% } %>
                         <h2 class="resourceSize"><b>Size:</b> <%= file.size %></h2>
                         <p class="resourceFormat"><b>Format:</b> <%= resource.format %></p>
-                        <p class="resourceUploadTime"><b>Uploaded:</b> <%= file.upload_time.toUTCString() %></p>
-                        <a href="<%= resource.url.replace('/upload/', '/upload/fl_attachment/') %>" class="downloadBtn" download>Download</a>
+                        <div class="downloadFileBtns">
+                            <a href="<%= resource.url.replace('/upload/', '/upload/fl_attachment/') %>" class="downloadBtn" download>Download</a>
+                            <% if (currentUser) { %>
+                                <a href="/uploads/file/<%= file.id %>" class="backLink">File details</a>
+                            <% } else { %>
+                                <a href="/uploads" class="backLink">Go to welcome</a>
+                            <% } %>
+                        </div>
                         <p id="loading"></p>
                     </div>
                 <% }); %>
             <% } else { %>
                 <p class="downloadError">No file found with this ID.</p>
-            <% } %>
-            <% if (currentUser) { %>
-                <a href="/uploads/file/<%= file.id %>" class="backLink">Go to file details</a>
-            <% } else { %>
-                <a href="/uploads" class="backLink">Go to welcome page</a>
+                <% if (currentUser) { %>
+                    <a href="/uploads/file/<%= file.id %>" class="backLink">Go to file details</a>
+                <% } else { %>
+                    <a href="/uploads" class="backLink">Go to welcome page</a>
+                <% } %>
             <% } %>
         </div>
     </body>

@@ -16,7 +16,7 @@
         <form id="deleteUser" action="/uploads/user/<%= currentUser.id %>/delete" method="post">
             <button type="submit" class="deleteUserBtn">Delete account</button>
         </form>
-        <a href="/uploads/user/<%= currentUser %>/home" class="cancelBtn">Cancel</a>
+        <a href="/uploads/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
       </div>
     </body>
   <% } else { %>

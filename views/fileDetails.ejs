@@ -21,7 +21,7 @@
         <% } else if (['pdf'].includes(format)) { %>
           <iframe src="<%= file.url %>" class="filePDF" title="<%= file.name %> preview"></iframe>
         <% } else { %>
-          <p class="noPreview">No preview available for this file</p>
+          <p class="noPreview">Preview currently unavailable</p>
         <% } %>
         <p class="fileDetail"><span class="boldText">Folder:</span> <%= folder.name %></p>
         <p class="fileDetail"><span class="boldText">Size:</span> <%= file.size %></p>

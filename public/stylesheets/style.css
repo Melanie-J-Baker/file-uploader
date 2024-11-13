@@ -38,7 +38,7 @@ body {
   padding: 10px;
   font-size: 2rem;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 form {
@@ -101,6 +101,7 @@ ul {
   font-size: 1.5rem;
   border-radius: 20px;
   padding: 10px 20px;
+  text-align: center;
 }
 
 .backLink:hover {
@@ -135,6 +136,10 @@ label {
   font-weight: 600;
 }
 
+button {
+  border: none;
+}
+
 #loading {
   display: none;
   margin: 10px;
@@ -152,11 +157,44 @@ label {
 }
 
 @media screen and (min-width: 700px) and (orientation: landscape) {
-  body {
-    background-image: url('../images/background_landscape.jpg');
+  .navLink {
+    font-size: 1.5rem;
+  }
+
+  .message {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    margin-bottom: 30px;
   }
 }
 
-/*@media screen and (min-width: 980px) {
+@media screen and (min-width: 980px) {
+  .pageContainer {
+    margin-top: 100px;
+    padding: 30px;
+  }
 
-}*/
+  nav {
+    height: 100px;
+  }
+
+  .navLink {
+    font-size: 2rem;
+  }
+
+  .title {
+    padding: 10px;
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .backLink, .cancelBtn {
+    font-size: 2rem;
+  }
+
+  .message {
+    font-size: 2rem;
+  }
+}

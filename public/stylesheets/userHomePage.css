@@ -82,3 +82,16 @@
     text-wrap: nowrap;
     border-radius: 20px;
 }
+
+@media screen and (min-width: 980px) {
+    .fileCount {
+        font-size: 1.7rem;
+    }
+    .homeLink, .noFolders, .createFolderLink, .folderName, .folderLink {
+        font-size: 2rem;
+    }
+
+    .foldersTitle {
+        font-size: 3rem;
+    }
+}

@@ -37,3 +37,9 @@
 .deleteUserLink:hover {
     cursor: pointer;
 }
+
+@media screen and (min-width: 980px) {
+    .updateUserLabel, .updateUserInput, .updateUserBtn, .deleteUserLink {
+        font-size: 2rem;
+    }
+}

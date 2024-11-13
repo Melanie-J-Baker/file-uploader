@@ -1,11 +1,19 @@
+.folderOptionsDiv {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 4px solid var(--highlight1);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
 .folderOptions {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-content: center;
-    border-bottom: 4px solid var(--highlight1);
-    padding: 20px 0px;
-    margin-bottom: 10px;
+    align-items: center;
 }
 
 .folderOption {
@@ -15,7 +23,8 @@
     padding: 10px 20px;
     text-align: center;
     text-wrap: nowrap;
-    margin: 0px 5px;
+    margin: 10px 5px;
+    max-width: 30vw;
 } 
 
 .folderOption:hover {
@@ -27,6 +36,7 @@
     padding: 10px 20px;
     background-color: var(--highlight2);
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .files {
@@ -95,4 +105,21 @@ a.fileLink {
     font-size: 1.5rem;
     margin-top: 20px;
     margin-bottom: 10px;
+}
+
+@media screen and (min-width: 700px) {
+    .folderOptionsDiv {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 980px) {
+    .folderOption, .fileListDetail, a.fileLink, .fileLinkBtn, .noFilesLink, .noFilesText {
+        font-size: 2rem;
+    }
+    
+    .filesTitle, b {
+        font-size: 2.5rem;
+    }
 }

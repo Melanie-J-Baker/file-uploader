@@ -3,15 +3,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .fileImage, .fileVideo {
-    width: 100%;
+    width: 70%;
     margin: 20px 0px;
 }
 
 iframe {
-    width: 100%;
+    width: 70%;
     height: 50vh;
     margin: 10px 0px;
     border: none;
@@ -35,6 +36,11 @@ b {
     font-weight: 800;
 }
 
+.downloadFileBtns {
+    display: flex;
+    flex-direction: column;
+}
+
 .downloadBtn {
     border: none;
     border-radius: 20px;
@@ -42,7 +48,7 @@ b {
     background-color: var(--highlight1);
     color: var(--dark);
     margin: 10px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-wrap: nowrap;
 }
 
@@ -62,6 +68,18 @@ b {
 }
 
 .downloadError {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
+}
+
+@media screen and (min-width: 980px) {
+    .downloadFileBtns {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 980px) {
+    .resourceSize, .resourceFormat, .resourceUploadTime, b, .downloadBtn, .downloadError {
+        font-size: 2rem;
+    }
 }

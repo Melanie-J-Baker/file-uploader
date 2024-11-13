@@ -25,3 +25,9 @@
     padding: 10px 20px;
     text-align: center;
 }
+
+@media screen and (min-width: 980px) {
+    .loginLabel, .loginInput, .loginBtn {
+        font-size: 2rem;
+    }
+}

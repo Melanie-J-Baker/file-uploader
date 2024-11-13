@@ -50,3 +50,13 @@
     font-size: 1.3rem;
 }
 
+@media screen and (min-width: 980px) {
+    .createUserLabel, .createUserInput, .createUserBtn, .loginLinkText, #loginLink {
+        font-size: 2rem;
+    }
+
+    .loginLinkDiv {
+        margin: 30px 0px;
+    }
+}
+

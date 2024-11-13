@@ -43,3 +43,9 @@ option {
     color: var(--highlight1);
     cursor: pointer;
 }
+
+@media screen and (min-width: 980px) {
+    .updateFileLabel, #folder_select, option, .updateFileBtn {
+        font-size: 2rem;
+    }
+}
