@@ -2,7 +2,7 @@
   "name": "file-uploader",
   "version": "0.0.0",
   "engines": {
-    "node": ">=20.18.0"
+    "node": "16.x"
   },
   "private": true,
   "scripts": {
