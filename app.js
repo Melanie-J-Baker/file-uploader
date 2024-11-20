@@ -9,6 +9,9 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
 const passport = require("passport");
 require("./auth/auth");
+const compression = require("compression");
+const helmet = require("helmet");
+const RateLimit = require("express-rate-limit");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -20,12 +23,26 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(compression());
+app.use(helmet());
+app.disable('x-powered-by');
+
+const limiter = RateLimit({  // Set up rate limiter: max 20 reqs/min
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 20,
+});
+
+app.use(limiter);
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(
   expressSession({
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, //ms
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      httpOnly: true, // Prevent client-side JS access
+      sameSite: "strict", // Prevent CSRF
     },
     secret: process.env.SESSION_SECRET,
     resave: true,
@@ -45,19 +62,24 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"), {
+  maxAge: "1d", // Cache files for 1 day
+  setHeaders: (res, path) => {
+    res.set("x-content-type-options", "nosniff");
+  },
+}));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/uploads", uploadsRouter);
 
 // Catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // Error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

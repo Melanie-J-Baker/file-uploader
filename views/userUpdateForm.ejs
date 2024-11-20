@@ -11,7 +11,7 @@
     <body>
       <%- include("navbar") %>
       <div class="pageContainer">
-        <h1 class="title">Update <%= currentUser.username %>"s account</h1>
+        <h1 class="title">Update <%= currentUser.username %>'s account</h1>
         <form id="updateUser" action="/uploads/user/<%= currentUser.id %>/update" method="post">
             <label class="updateUserLabel" for="newUsername">New Username</label>
             <input id="newUsername" name="newUsername" type="text" class="updateUserInput" required autocomplete>
