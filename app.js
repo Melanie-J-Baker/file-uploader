@@ -80,13 +80,21 @@ app.use((req, res, next) => {
 
 // Error handler
 app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err); // Delegate to the default Express error handler
+  }
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // Render the error page
-  res.status(err.status || 500);
-  res.render("error");
+  try {
+    // Render the error page
+    res.status(err.status || 500);
+    res.render("error");
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = app;
