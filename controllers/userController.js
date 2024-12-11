@@ -12,11 +12,11 @@ const hashPassword = async (password) => {
 };
 
 // Display Welcome Page (GET)
-exports.index = asyncHandler(async (req, res, next) => {
+exports.index = (req, res, next) => {
   res.render("index", {
     title: "File Uploader",
   });
-});
+};
 
 // List of all users (GET)
 exports.user_list = asyncHandler(async (req, res, next) => {
@@ -29,11 +29,11 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 });
 
 // Display user create form (GET)
-exports.user_create_get = asyncHandler(async (req, res, next) => {
+exports.user_create_get = (req, res, next) => {
   res.render("userCreateForm", {
     message: "",
   });
-});
+};
 
 // Handle User create (POST)
 exports.user_create_post = [
@@ -89,11 +89,11 @@ exports.user_create_post = [
 ];
 
 // Display login form (GET)
-exports.user_login_get = asyncHandler(async (req, res, next) => {
+exports.user_login_get = (req, res, next) => {
   res.render("userLoginForm", {
     message: "",
   });
-});
+};
 
 // Handle login (POST)
 exports.user_login_post = (req, res, next) => {
@@ -143,9 +143,9 @@ exports.user_home_get = asyncHandler(async (req, res, next) => {
 });
 
 // Display User update form (GET)
-exports.user_update_get = asyncHandler(async (req, res, next) =>
-  res.render("userUpdateForm", { message: "" }),
-);
+exports.user_update_get = (req, res, next) => {
+  res.render("userUpdateForm", { message: "" });
+};
 
 // Handle User update (POST)
 exports.user_update_post = [
@@ -198,9 +198,9 @@ exports.user_update_post = [
 ];
 
 // Display User delete confirmation (GET)
-exports.user_delete_get = asyncHandler(async (req, res, next) =>
-  res.render("userDeleteForm"),
-);
+exports.user_delete_get = (req, res, next) => {
+  res.render("userDeleteForm");
+};
 
 // Handle User delete (POST)
 exports.user_delete_post = asyncHandler(async (req, res, next) => {

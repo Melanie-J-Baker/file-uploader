@@ -27,9 +27,9 @@ exports.folder_detail = asyncHandler(async (req, res, next) => {
 });
 
 // Display Folder create form (GET)
-exports.folder_create_get = asyncHandler(async (req, res, next) =>
-  res.render("folderCreateForm", { message: "" }),
-);
+exports.folder_create_get = (req, res, next) => {
+  res.render("folderCreateForm", { message: "" });
+}
 
 // Handle Folder create (POST)
 exports.folder_create_post = [
