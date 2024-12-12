@@ -113,7 +113,8 @@ exports.file_update_post = asyncHandler(async (req, res, next) => {
     const file = { id: parseInt(req.params.id), folder_id };
     if (!folder_id) {
       const oldFile = await db.getFileByID(parseInt(req.params.id));
-      const user = await db.getUserByID(oldFile.user_id);
+      const folder = await db.getFolderByID(oldFile.folder_id);
+      const user = await db.getUserByID(folder.user_id);
       return res.render("fileUpdateForm", {
         file: oldFile,
         folders: user.folders,
